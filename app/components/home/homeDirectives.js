@@ -231,6 +231,7 @@ app.directive('analysisPanel', ['userFactory', 'homeFactory', function (userFact
 
 app.directive('streamTweetList', ['socket', function (socket) {
   return {
+    replace: true,
     link: function (scope, element, attrs) {
       scope.$watch('streamtweets', function () {
         if (scope['streamtweets'].length > 0) {
