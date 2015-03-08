@@ -45,6 +45,54 @@
 
 		<div class="error" ng-show="twitterDataError">{{ twitterDataError }}</div>
 
+		<div class="column left" ng-controller="streamCtrl">
+
+			<!--<div data-tweet-list="usertweets" class="ng-Fade">
+				<p><img src="/assets/images/loading.gif" /></p>
+			</div>-->
+
+			<div class="stream" style="min-height: 500px" data-stream-tweet-list="streamTweets" class="ngFade"></div>
+
+		</div>
+
+		<div class="column right hidden-xs" ng-controller="userAnalysisCtrl">
+
+			<h3>Trending in the UK</h3>
+			<div class="panel trends" ng-controller="trendCtrl">
+				<div class="error" ng-show="trendsError">{{ trendsError }}</div>
+				<div class="trend" ng-repeat="trend in trends | filter: selectTrends">
+					<a href="{{ trend.url }}">{{ trend.name }}</a>
+				</div>
+			</div>
+
+			<!--<div class="panel visible-xs-block">
+				<h3>{{ user.name }}</h3>
+				<div class="user-info"><img src="{{ user.profile_image_url_https }}" /></div>
+				<div class="user-info">{{ user.screen_name }}</div>
+				<div class="user-info">{{ user.location }}</div>
+				<div class="user-info">Followers: {{ user.followers_count }}</div>
+			</div>
+
+			<analysis-panel></analysis-panel>
+
+			<div class="panel site-info hidden-xs">
+				<span><a href="http://js.systemick-web-development.co.uk" target="_blank">&copy; Systemick {{ currentYear }}</a></span>
+				<span><a href="" ng-click="toggleContact()">Contact</a></span>
+				<span><a href="" ng-click="toggleAbout()">About</a></span>
+				<span><a href="#/logout">Logout</a></span>
+			</div>-->
+
+
+		</div>
+
+		<div class="clearfix"></div>
+
+	</div>
+
+	<!--<div id="page" class="home" ng-hide="authorised">
+
+		<div class="error" ng-show="twitterDataError">{{ twitterDataError }}</div>
+
 		<div class="column left" ng-controller="userAnalysisCtrl">
 
 			<h3>Your stats</h3>
@@ -99,6 +147,6 @@
 
 		<div class="clearfix"></div>
 
-	</div>
+	</div>-->
 
 </div>

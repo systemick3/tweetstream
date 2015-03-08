@@ -25,7 +25,10 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
 
     userFactory.userSessionData().then(function (data) {
 
+      data = data.data;
+
       $window.sessionStorage.user_id = data.data.user_id;
+      //console.log(data.data)
       $window.sessionStorage.screen_name = data.data.screen_name;
       $scope.user = data.data;
       $scope.tweetapp.user = data.data;
@@ -79,21 +82,23 @@ app.controller('streamCtrl', ['$scope', 'socket', 'homeFactory', function ($scop
     else {
       oldTweets = $scope.streamtweets;
     }
+
     // Make the new tweet the 1st item in the array
     $scope.streamtweets = homeFactory.processTweets(data.concat(oldTweets));
+    console.log($scope.streamtweets);
   });
 
   $scope.$on('socket:error', function (ev, data) {
     $scope.streamError = 'Unable to stream latest tweets from Twitter. Please try again later.'
   });
 
-  homeFactory.getTrends()
-    .success(function (data) {
-      $scope.trends = data.data[0].trends;
-    })
-    .error(function (err) {
-      $scope.trendsError = 'Unable to get latest trends from Twitter. Please try again later.';
-    });
+  // homeFactory.getTrends()
+  //   .success(function (data) {
+  //     $scope.trends = data.data[0].trends;
+  //   })
+  //   .error(function (err) {
+  //     $scope.trendsError = 'Unable to get latest trends from Twitter. Please try again later.';
+  //   });
 
   $scope.selectTrends = function (trend) {
     return trend.name.length <= 30;
@@ -153,6 +158,10 @@ app.controller('userTweetsCtrl', ['$scope', 'userFactory', 'homeFactory', 'tConf
     };
 
   });
+
+}]);
+
+app.controller('headerCtrl', ['$scope', '$window', '$location', function ($scope, $window, $location) {
 
 }]);
 

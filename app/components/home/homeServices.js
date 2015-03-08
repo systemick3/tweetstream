@@ -70,10 +70,10 @@ app.factory("homeFactory", ['$http', 'tConfig', function ($http, tConfig) {
       return $http.get(sentimentUrl);
     },
 
-    getTrends: function () {
-      var trendsUrl = apiData.server + apiData.trends.url;
-      return $http.get(trendsUrl);
-    },
+    // getTrends: function () {
+    //   var trendsUrl = apiData.server + apiData.trends.url;
+    //   return $http.get(trendsUrl);
+    // },
 
     processTweets: function (tweets) {
       for (var i=0; i<tweets.length; i++) {

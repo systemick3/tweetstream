@@ -1,6 +1,7 @@
 @import 'init';
 
 html, body {
+  background-color: white;
   color: $dark-grey;
   font-family: $base-font-family; /* 1 */
   font-size: 100% * ($base-font-size / 24px); /* 3 */
@@ -9,8 +10,6 @@ html, body {
 }
 
 body {
-  position: absolute;
-  top: -5%;
   width: 100%
 }
 
@@ -20,8 +19,13 @@ h3,
 h4,
 h5,
 h6 {
-  color: $orange;
-  font-family: $montserrat;
+  color: $navy-blue;
+  font-family: $heading-font-family;
+  font-weight:bold;
+}
+
+h4.show-panel {
+  font-size: 1em;
 }
 
 p {
@@ -29,15 +33,20 @@ p {
 }
 
 a {
-  color: $green;
+  color: $dark-blue;
   font-weight: bold;
 }
 
 a:hover,
 a:visited {
-  color:$green;
+  color:$dark-blue;
   font-weight: bold;
   text-decoration: none;
+}
+
+a.show-link, a.show-link:hover, a.show-link:visited {
+  color: $green;
+  text-decoration:none;
 }
 
 input.form-control,
@@ -50,10 +59,172 @@ iframe {
 }
 
 button.btn-primary {
-  background-color: $green;
-  border-color: $green;
+  background-color: $blue;
+  border-color: $blue;
   font-size: 100%;
   font-weight: bold;
+}
+
+header {
+  @include header-background();
+
+  background-color: $blue;
+  border-bottom: 3px solid $navy-blue;
+  color: white;
+  font-size: 80%;
+  font-weight: bold;
+  padding-top: 1%;
+
+  a, a:hover, a:visited {
+    color: white;
+  }
+
+  .logo {
+    float: left;
+    font-family: $logo-font;
+    font-size: $small-logo-font-size;
+    padding-left: 1%;
+  }
+
+  i {
+    bottom: 5px;
+    position: relative;
+  }
+
+  .hamburger {
+    background-color: $light-blue;
+    border: solid 2px $dark-blue;
+    border-radius: 2px;
+    float: right;
+    height: 3.5em;
+    margin-left: 3%;
+    margin-top: 1%;
+    width: 3em;
+
+    div {
+      background-color: white;
+      border-radius: 4px;
+      height: 6px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 5px;
+      width: 80%;
+    }
+  }
+
+  .profile-image {
+    float: right;
+    padding-top: 1%;
+  }
+
+  .user-info {
+    float: right;
+    line-height: 2em;
+    margin-left: 3%;
+
+    &.last {
+      margin-left: 3%;
+    }
+
+    .bottom {
+      padding-top: 8.5%;
+    }
+  }
+
+  .left {
+    padding-right: 2%;
+  }
+
+  .navigation {
+    background-color: white;
+    border: 2px solid $grey;
+    border-radius: 2px;
+    font-size: 130%;
+    line-height: 2em;
+    padding: 0.5em 0 0.5em 1.5em;
+    position: absolute;
+    right: 0.5em;
+    top: 3em;
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      left: -2.5em;
+      position: relative;
+
+      li {
+
+        a {
+          color: $blue;
+        }
+      }
+    }
+  }
+
+}
+
+.column {
+
+  .left {
+    width: 100%;
+  }
+}
+
+#page {
+  margin-top: 2%;
+
+  .column {
+
+    h3 {
+      margin-top: 0;
+    }
+
+    &.left {
+      padding: 0 2%;
+    }
+
+    &.right {
+
+      h3 {
+        margin-left: 3%;
+      }
+
+      div.user-info {
+        padding-left: 3%;
+      }
+
+    }
+
+  }
+}
+
+.panel {
+  @include panel-border-radius(5px);
+
+  background-color: white;
+  border: solid 1px $light-grey;
+  padding: 1%;
+
+  &.analysis {
+    padding-left: 3%;
+
+    h4 {
+      margin-bottom: 1%;
+    }
+  }
+}
+
+.chart-link {
+  margin: 5% 0;
+}
+
+.site-info {
+  font-size: 70%;
+  line-height: 170%;
+
+  span {
+    margin-right: 0.5em;
+  }
 }
 
 .ngFade.ng-enter { 
@@ -72,7 +243,7 @@ button.btn-primary {
   }
 }
 
-.modal-chart {
+.modal-chart, .modal-contact, .modal-about {
   position:absolute;
   z-index:9999;
   top:0;
@@ -83,20 +254,21 @@ button.btn-primary {
   opacity: 0.9;
 
   .dialog {
-    z-index:10000;
-    position: absolute;
-    width: 90%;
+    background-color: #eee;
+    box-shadow: 4px 4px 80px #000;
     height: 90%;
-    top: 1%;
     left: 50%;
+    opacity: 1.0;
+    padding: 2% 1%;
+    position: absolute;
+    top: 1%;
     transform: translate(-50%, 0);
     -webkit-transform: translate(-50%, 0);
     -moz-transform: translate(-50%, 0);
-    background-color: #eee;
-    box-shadow: 4px 4px 80px #000;
-    padding: 2% 1%;
+    width: 90%;
+    z-index:10000;
 
-    #chartContainer {
+    #analysisChartContainer, #followersChartContainer {
 
       ul {
         list-style-type: none;
@@ -104,11 +276,14 @@ button.btn-primary {
         li {
           display: inline;
           float: left;
+          margin-right: 2%;
 
           span {
             display: block;
             float: left;
             height: 1em;
+            margin-right: 0.3em;
+            margin-top: 0.2em;
             width: 1em;
           }
 
@@ -118,29 +293,42 @@ button.btn-primary {
 
     }
 
-    #myChart {
+  }
+}
 
+footer {
+  display: none;
+}
+
+.login {
+
+  footer {
+    background-color: whitesmoke;
+    border-top: solid 2px $grey;
+    bottom: 2px;
+    display: block;
+    padding: 1%;
+    position: fixed;
+    width: 100%;
+
+    .inner {
+      margin-left: auto;
+      margin-right: auto;
+      width: $page-width;
     }
   }
 }
 
 
-/* Everything wider than mobile */
 @media all and (min-width: 480px) {
 
-  body {
-    width: 100%
-  }
-
   header {
-    background-color: $light-grey;
-    margin-top: 2%;
-    padding: 5% 1% 1% 1%;
     width: 100%;
 
-    .header-block {
-      float: right;
-      margin-left: 5%;
+    .inner {
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
     }
   }
 
@@ -148,39 +336,60 @@ button.btn-primary {
     margin-left: auto;
     margin-right: auto;
     padding: 0;
-    width: $page-width;
+    max-width: $page-width;
+  }
+
+  .modal-chart {
+
+    .dialog {
+      padding: 1% 1%;
+    }
+  }
+
+}
+
+@media all and (min-width: 767px) {
+
+  header {
+
+    .inner {
+      margin-left: auto;
+      margin-right: auto;
+      width: $page-width;
+
+      .left {
+        padding-right: 0;
+      }
+    }
+
+    .logo {
+      padding-left: 0;
+      left: -1%;
+      position: relative;
+      font-size: $logo-font-size;
+    }
+  }
+
+  #page {
 
     .column {
 
       float: left;
-      min-height: 500px;
-
-      &.left,
-      &.right {
-        width: 25%;
-      }
 
       &.left {
-        border-right: $border;
-        padding-right: 1%;
-      }
-
-      &.centre {
-        padding: 0 1%;
-        width: 50%;
+        border-right: solid 2px $light-grey;
+        padding-left: 0;
+        padding-right: 2%;
+        width: 75%;
       }
 
       &.right {
-        border-left: $border;
-        padding-left: 1%;
-      }
+        padding-left: 2%;
+        width: 25%;
 
-      .panel {
-        @include panel-border-radius(10px);
-
-        background-color: $light-grey;
-        border: solid 1px $dark-grey;
-        padding: 1%;
+        h3 {
+          margin-left: 0;
+        }
       }
 
       .tweet {
@@ -195,23 +404,31 @@ button.btn-primary {
       }
 
     }
-
   }
 
-  .modal-chart {
+  .modal-about {
 
     .dialog {
-      padding: 1% 1%;
+      width: 60%;
     }
-  }
-
-  footer {
-    background-color: $light-grey;
-    padding: 1%;
   }
 
 }
 
-@media all and (min-width: 480px) and (max-width: 959px) {
+@media all and (min-width: 768px) and (max-width: 959px) {
+
+  #page {
+
+    .column {
+
+      &.left {
+        padding-left: 2%;
+      }
+
+      &.right {
+        padding-right: 2%;
+      }
+    }
+  }
 
 }

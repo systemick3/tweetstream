@@ -1,10 +1,15 @@
-$magnolia: #f2f2f2;
-$white: #fff;
-
-$orange: #ff6600;
+$magnolia: #ECF0F1;
+$grey: #aaa;
 $light-grey: #ddd;
-$dark-grey: #aaa;
-$green: #80bd01;
+$dark-grey: #5E6D70;
+$navy-blue: #0F2D38;
+$blue: #3498BB;
+$dark-blue: #2980B9;
+$purple: #BB3399;
+$black: #1B1D1E;
+$green: #86935B;
+$dark-green: #143c4a;
+$light-blue: #40BFEB;
 
 $base-font-size:   24px; // The font size set on the root html element.
 $base-line-height: 34px; // This line-height determines the basic unit of vertical rhythm.
@@ -15,17 +20,33 @@ $h3-font-size: 1.17 * $base-font-size;
 $h4-font-size: 1    * $base-font-size;
 $h5-font-size: 0.83 * $base-font-size;
 $h6-font-size: 0.67 * $base-font-size;
+$logo-font-size: 2 * $base-font-size;
+$small-logo-font-size: 1.5 * $base-font-size;
 
-// page width
-$page-width: 990px;
+@font-face {
+  font-family: Quadranta;
+  src: url("/assets/images/Quadranta-Regular.otf") format("opentype");
+}
 
-$arvo:  Arvo, "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
-$quattro: "Quattrocento Sans", Arial, Helvetica, "Nimbus Sans L", sans-serif;
+@font-face {
+  font-family: Juice;
+  src: url("/assets/fonts/JUICE_Regular.ttf") format("truetype");
+}
 
-$neuton:  Neuton, "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
-$montserrat: Montserrat, Arial, Helvetica, "Nimbus Sans L", sans-serif;
+@font-face {
+  font-family: Piron;
+  src: url("/assets/fonts/TFPironv2-stencil.otf") format("opentype");
+}
+
+$logo-font: Piron, Arial, Helvetica, "Nimbus Sans L", sans-serif;
+
+$page-width: 900px;
+
 $raleway: Raleway, Arial, Helvetica, "Nimbus Sans L", sans-serif;
+$ubuntu: Ubuntu, Arial, Helvetica, "Nimbus Sans L", sans-serif;
+
 $base-font-family: $raleway; // The font family set on the html element.
+$heading-font-family: $raleway;
 
 $border: solid 1px $light-grey;
 
@@ -34,4 +55,11 @@ $border: solid 1px $light-grey;
      -moz-border-radius: $radius;
       -ms-border-radius: $radius;
           border-radius: $radius;
+}
+
+@mixin header-background() {
+  background: -webkit-linear-gradient($blue, $dark-blue); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient($blue, $dark-blue); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient($blue, $dark-blue); /* For Firefox 3.6 to 15 */
+  background: linear-gradient($blue, $dark-blue); /* Standard syntax */
 }
