@@ -37,38 +37,36 @@
 
       <div class="inner">
 
-        <div class="column left">
+        <div class="user-heading">
           <div class="user-info last hidden-xs" ng-show="tweetapp.authorised">
             <div class="top">{{ user.screen_name }}</div>
-            <div class="bottom">Followers: {{ user.followers_count }}</div>
+            <!--<div class="bottom">Followers: {{ user.followers_count }}</div>-->
           </div>
           <div class="user-info hidden-xs" ng-show="tweetapp.authorised">
             <div class="top">{{ user.name }}</div>
-            <div class="bottom">{{ user.location }}</div>
+            <!--<div class="bottom">{{ user.location }}</div>-->
           </div>
-          <div class="logo">
-            <span>Tweet Report<span>
+          <!--<div class="logo">
+            <span>Tweet Pop<span>
             <i class="fa fa-comment "></i>
-          </div>
+          </div>-->
           <div class="profile-image hidden-xs" ng-show="tweetapp.authorised">
-            <img src="{{ user.profile_image_url_https }}" />
+            <img src="{{ user.profile_image_url_https }}" width="30" height="30" />
           </div>
           <div class="hamburger visible-xs-block" ng-show="tweetapp.authorised" ng-click="toggleMenu()">
             <div></div>
             <div></div>
             <div></div>
           </div>
+
+          <div class="clearfix"></div>
         </div>
 
-        <div class="column right" ng-show="tweetapp.authorised">
-          <!-- <div class="user-info last">
-            <div class="top">{{ user.screen_name }}</div>
-            <div class="bottom">Followers: {{ user.followers_count }}</div>
-          </div>
-          <div class="user-info">
-            <div class="top">{{ user.name }}</div>
-            <div class="bottom">{{ user.location }}</div>
-          </div> -->
+        <div class="dashboard" ng-show="tweetapp.authorised">
+          <div class="colour-panel blue"></div>
+          <div class="colour-panel green"></div>
+          <div class="colour-panel orange"></div>
+          <div class="colour-panel red"></div>
         </div>
 
       </div>
@@ -135,6 +133,7 @@
   <script src="components/home/homeServices.js"></script>
   <script src="components/home/homeDirectives.js"></script>
   <script src="components/stream/streamServices.js"></script>
+  <script src="components/stream/streamControllers.js"></script>
   <script src="components/trend/trendServices.js"></script>
   <script src="components/trend/trendDirectives.js"></script>
   <script src="components/trend/trendControllers.js"></script>
