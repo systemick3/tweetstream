@@ -66,14 +66,14 @@ button.btn-primary {
 }
 
 header {
-  @include header-background();
+  //@include header-background();
 
-  background-color: $blue;
-  border-bottom: 3px solid $navy-blue;
-  color: white;
+  background-color: white;
+  //border-bottom: 3px solid $pale-grey;
+  color: $dark-grey;
   font-size: 80%;
   font-weight: bold;
-  padding-top: 1%;
+  //padding-top: 1%;
 
   a, a:hover, a:visited {
     color: white;
@@ -89,6 +89,31 @@ header {
   i {
     bottom: 5px;
     position: relative;
+  }
+
+  .colour-panel {
+    @include panel-border-radius(5px);
+
+    float: left;
+    margin-right: 1%;
+    padding: 1%;
+    width: 20%;
+
+    &.blue {
+      background-color: $blue;
+    }
+
+    &.green {
+      background-color: $green;
+    }
+
+    &.orange {
+      background-color: $orange;
+    }
+
+    &.red {
+      background-color: $red;
+    }
   }
 
   .hamburger {
@@ -112,23 +137,34 @@ header {
     }
   }
 
-  .profile-image {
-    float: right;
-    padding-top: 1%;
+  .user-heading {
+    @include header-background();
+
+    background-color: $off-white;
+    border-bottom: 3px solid $pale-grey;
+
+    .profile-image {
+      float: right;
+      padding-top: 1%;
+    }
+
+    .user-info {
+      float: right;
+      line-height: 2em;
+      margin-left: 3%;
+
+      &.last {
+        margin-left: 3%;
+      }
+
+      .bottom {
+        padding-top: 8.5%;
+      }
+    }
   }
 
-  .user-info {
-    float: right;
-    line-height: 2em;
-    margin-left: 3%;
-
-    &.last {
-      margin-left: 3%;
-    }
-
-    .bottom {
-      padding-top: 8.5%;
-    }
+  .dashboard {
+    background-color: white;
   }
 
   .left {

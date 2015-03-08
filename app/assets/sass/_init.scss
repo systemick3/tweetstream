@@ -11,6 +11,13 @@ $green: #86935B;
 $dark-green: #143c4a;
 $light-blue: #40BFEB;
 
+$off-white: #F7F7F7;
+$pale-grey: #EEE;
+$black: #323232;
+$green: #5EB75A;
+$orange: #F0AA4F;
+$red: #D7534A;
+
 $base-font-size:   24px; // The font size set on the root html element.
 $base-line-height: 34px; // This line-height determines the basic unit of vertical rhythm.
 
@@ -58,8 +65,8 @@ $border: solid 1px $light-grey;
 }
 
 @mixin header-background() {
-  background: -webkit-linear-gradient($blue, $dark-blue); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient($blue, $dark-blue); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient($blue, $dark-blue); /* For Firefox 3.6 to 15 */
-  background: linear-gradient($blue, $dark-blue); /* Standard syntax */
+  background: -webkit-linear-gradient($off-white, $pale-grey); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient($off-white, $pale-grey); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient($off-white, $pale-grey); /* For Firefox 3.6 to 15 */
+  background: linear-gradient($off-white, $pale-grey); /* Standard syntax */
 }

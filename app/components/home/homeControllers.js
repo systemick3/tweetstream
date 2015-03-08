@@ -36,11 +36,15 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
       $rootScope.user = $scope.user;
       $scope.tweets_for = 'user ' + $scope.user.screen_name;
 
+      console.log('ROOTSCOPE');
+      console.log($rootScope);
+
       // Get the full user data from Twitter
       userFactory.userTwitterData(data.data.user_id)
         .success(function (data) {
           var mongo_id = $scope.user._id;
           $scope.user = data;
+          $rootScope.user = $scope.user;
           $scope.user._id = mongo_id;
           console.log($scope.user);
 
