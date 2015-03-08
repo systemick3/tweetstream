@@ -1,38 +1,39 @@
 var app = angular.module('twitterapp');
 
-app.controller('streamCtrl', ['$scope', 'socket', 'homeFactory', function ($scope, socket, homeFactory) {
+app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', 'streamFactory', function ($scope, $rootScope, socket, userFactory, streamFactory) {
   var oldTweets = [],
     MAX_TWEETS = 20;
 
-  $scope.streamtweets = [];
+  userFactory.userSessionData().then(function (response) {
 
-  socket.on('tweets', function (data) {
-    console.log('DATA');
-    console.log(data);
+    $scope.streamtweets = [];
 
-    // Display a maximum of 12 tweets
-    if ($scope.streamtweets.length >= 12) {
-      // If we already have 12 tweets lose the oldest
-      $scope.streamtweets.pop();
-      oldTweets = $scope.streamtweets;
-    }
-    else {
-      oldTweets = $scope.streamtweets;
-    }
+    socket.on('tweets', function (data) {
+      console.log('DATA');
+      console.log(data);
 
-    // Make the new tweet the 1st item in the array
-    $scope.streamtweets = homeFactory.processTweets(data.slice(0, 1).concat(oldTweets));
+      // Display a maximum of 12 tweets
+      if ($scope.streamtweets.length >= 12) {
+        // If we already have 12 tweets lose the oldest
+        $scope.streamtweets.pop();
+        oldTweets = $scope.streamtweets;
+      }
+      else {
+        oldTweets = $scope.streamtweets;
+      }
 
-    console.log('STREAM TWEETS')
-    console.log($scope.streamtweets);
+      // Make the new tweet the 1st item in the array
+      $scope.streamtweets = streamFactory.processTweets(data.slice(0, 1).concat(oldTweets));
+      $rootScope.streamtweets = scope.streamtweets;
+
+      console.log('STREAM TWEETS')
+      console.log($scope.streamtweets);
+    });
+
+    $scope.$on('socket:error', function (ev, data) {
+      $scope.streamError = 'Unable to stream latest tweets from Twitter. Please try again later.'
+    });
+
   });
-
-  $scope.$on('socket:error', function (ev, data) {
-    $scope.streamError = 'Unable to stream latest tweets from Twitter. Please try again later.'
-  });
-
-  $scope.selectTrends = function (trend) {
-    return trend.name.length <= 30;
-  };
 
 }]);
