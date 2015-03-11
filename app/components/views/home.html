@@ -54,18 +54,19 @@
 			<h3>Tweets</h3>
 
 			<div class="stream" style="min-height: 500px" data-stream-tweet-list="streamTweets" class="ngFade">
-				<img src="/assets/images/loading.gif" /> <span>Loading more tweets ... </span>
+				<div ng-hide="streamPaused"><img src="/assets/images/loading.gif" /> <span>Loading tweets ... </span></div>
+				<div ng-show="streamPaused">Stream is currently paused</span></div>
 			</div>
 
 		</div>
 
-		<div class="column right hidden-xs" ng-controller="userAnalysisCtrl">
+		<div class="column right hidden-xs">
 
-			<h3>Trending in the UK</h3>
+			<h3>Trending</h3>
 			<div class="panel trends" ng-controller="trendCtrl">
 				<div class="error" ng-show="trendsError">{{ trendsError }}</div>
 				<div class="trend" ng-repeat="trend in trends | filter: selectTrends">
-					<a href="{{ trend.url }}">{{ trend.name }}</a>
+					<a href="" ng-click="addFilter(trend.name)">{{ trend.name }}</a>
 				</div>
 			</div>
 
@@ -145,7 +146,6 @@
 				</div>
 			</div>
 			<div class="error" ng-show="streamError">{{ streamError }}</div>
-			<!-- streamTweets directive -->
 			<div class="stream" style="min-height: 500px" data-stream-tweet-list="streamTweets" class="ngFade"></div>
 		</div>
 

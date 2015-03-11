@@ -72,61 +72,6 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
 
 }]);
 
-app.controller('userAnalysisCtrl', ['$scope', 'userFactory', 'homeFactory', function ($scope, userFactory, homeFactory) {
-  var userId;
-
-  userFactory.userSessionData().then(function (data) {
-    userId = $scope.user.user_id;
-
-    homeFactory.getUserAnalysis(userId).then(function (data) {
-      var test;
-      $scope.userAnalysis = data.data;
-    });
-  }, function (err) {
-    $scope.analysisError = 'Unable to download analysis data. Please try again later';
-  });
-}]);
-
-app.controller('userTweetsCtrl', ['$scope', 'userFactory', 'homeFactory', 'tConfig', function ($scope, userFactory, homeFactory, tConfig) {
-  var userId;
-  userFactory.userSessionData().then(function (data) {
-    $scope.usertweets = null;
-    $scope.tweetsLoaded = false;
-    $scope.allTweetsLoaded = false;
-    homeFactory.getUserTweets($scope.user)
-      .success(function (data) {
-        $scope.tweetsLoaded = true;
-        $scope.usertweets = homeFactory.processTweets(data);
-      })
-      .error(function (error) {
-        $scope.status = 'Unable to load tweets for user: ' + error.message;
-      });
-
-    ////////////////// Functions used by the home page /////////////////////////
-
-    // Add more tweets to the end of the list
-    $scope.getMoreTweets = function () {
-      $scope.tweetsLoaded = false;
-      var maxId = $scope.usertweets[$scope.usertweets.length - 1].id_str;
-      homeFactory.getUserTweets($scope.user, maxId)
-        .success(function (data) {
-          var newTweets = homeFactory.processTweets(data.slice(1));
-          $scope.usertweets = $scope.usertweets.concat(newTweets);
-          $scope.tweetsLoaded = true;
-
-          if (newTweets.length < tConfig.numUserTweets) {
-            $scope.allTweetsLoaded = true;
-          }
-        })
-        .error(function (err) {
-          $scope.moreTweetsError = 'Unable to download more tweets. Please try again later.';
-        });
-    };
-
-  });
-
-}]);
-
 app.controller('headerCtrl', ['$scope', '$window', '$location', function ($scope, $window, $location) {
 
 }]);

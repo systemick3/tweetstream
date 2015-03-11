@@ -63,8 +63,17 @@
         </div>
 
         <div class="dashboard" ng-show="tweetapp.authorised">
-          <div class="colour-panel blue"></div>
-          <div class="colour-panel green"></div>
+          <div class="colour-panel blue">
+            Stream is currently {{ streamState }}
+            <button ng-click="toggleStreamPaused()">{{ buttonText }}</button>
+          </div>
+          <div class="colour-panel green">
+            Click on a trend to only see tweets tagged with that hastag.
+            {{ streamFilterText }}
+            <div ng-repeat="streamFilter in streamFilters">
+              <a href="" ng-click="removeFilter(streamFilter)">{{ streamFilter }}</a>
+            </div>
+          </div>
           <div class="colour-panel orange"></div>
           <div class="colour-panel red"></div>
         </div>
