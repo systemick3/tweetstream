@@ -75,7 +75,8 @@
             </div>
           </div>
           <div class="colour-panel orange" ng-controller="tweetCtrl">
-            <form name="newTweetForm" method="post" novalidate ng-submit="sendNewTweet(newTweet)">
+            <tweet-form></tweet-form>
+            <!--<form name="newTweetForm" method="post" novalidate ng-submit="sendNewTweet(newTweet)">
               <div class="form-group">
                 <label>Tweet</label>
                 <textarea class="form-control" name="newTweet" ng-model="newTweet.message" required /></textarea>
@@ -84,7 +85,7 @@
               <div class="form-group">
                 <button type="submit" ng-disabled="newTweetForm.$invalid" class="btn btn-primary">Send tweet</button>
               </div>
-            </form>
+            </form>-->
           </div>
           <div class="colour-panel red"></div>
         </div>
@@ -160,6 +161,7 @@
   <script src="components/trend/trendControllers.js"></script>
   <script src="components/tweet/tweetControllers.js"></script>
   <script src="components/tweet/tweetServices.js"></script>
+  <script src="components/tweet/tweetDirectives.js"></script>
   <!--<script src="components/contact/contactServices.js"></script>
   <script src="components/contact/contactDirectives.js"></script>
   <script src="components/contact/contactControllers.js"></script>
