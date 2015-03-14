@@ -21,8 +21,8 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
     var getFilteredTweets = function (tweets, filters, results) {
       for (i = 0; i < filters.length; i++) {
         for (j = 0; j < tweets.length; j++) {
-          console.log('IN LOOP');
-          console.log(tweets[j])
+          //console.log('IN LOOP');
+          //console.log(tweets[j])
           if (tweets[j].text.indexOf(filters[i]) > -1) {
             results.push(tweets[j]);
             return results;
@@ -36,8 +36,8 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
     $scope.streamtweets = [];
 
     socket.on('tweets', function (data) {
-      console.log('DATA');
-      console.log(data);
+      //console.log('DATA');
+      //console.log(data);
 
       if (!$rootScope.streamPaused) {
 

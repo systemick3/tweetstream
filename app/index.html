@@ -74,7 +74,18 @@
               <a href="" ng-click="removeFilter(streamFilter)">{{ streamFilter }}</a>
             </div>
           </div>
-          <div class="colour-panel orange"></div>
+          <div class="colour-panel orange" ng-controller="tweetCtrl">
+            <form name="newTweetForm" method="post" novalidate ng-submit="sendNewTweet(newTweet)">
+              <div class="form-group">
+                <label>Tweet</label>
+                <textarea class="form-control" name="newTweet" ng-model="newTweet.message" required /></textarea>
+                <span class="error" ng-show="newTweetForm.message.$error.required && newTweetForm.message.$dirty">What's happening?</span>
+              </div>
+              <div class="form-group">
+                <button type="submit" ng-disabled="newTweetForm.$invalid" class="btn btn-primary">Send tweet</button>
+              </div>
+            </form>
+          </div>
           <div class="colour-panel red"></div>
         </div>
 
@@ -147,6 +158,8 @@
   <script src="components/trend/trendServices.js"></script>
   <script src="components/trend/trendDirectives.js"></script>
   <script src="components/trend/trendControllers.js"></script>
+  <script src="components/tweet/tweetControllers.js"></script>
+  <script src="components/tweet/tweetServices.js"></script>
   <!--<script src="components/contact/contactServices.js"></script>
   <script src="components/contact/contactDirectives.js"></script>
   <script src="components/contact/contactControllers.js"></script>
