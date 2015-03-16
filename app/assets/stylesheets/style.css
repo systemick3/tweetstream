@@ -8528,19 +8528,25 @@ footer {
   width: 900px;
 }
 
+/* line 362, ../sass/_systemick.scss */
+.tweet .icons .fa {
+  cursor: pointer;
+  margin-right: 8%;
+}
+
 @media all and (min-width: 480px) {
-  /* line 361, ../sass/_systemick.scss */
+  /* line 372, ../sass/_systemick.scss */
   header {
     width: 100%;
   }
-  /* line 364, ../sass/_systemick.scss */
+  /* line 375, ../sass/_systemick.scss */
   header .inner {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
   }
 
-  /* line 371, ../sass/_systemick.scss */
+  /* line 382, ../sass/_systemick.scss */
   #page {
     margin-left: auto;
     margin-right: auto;
@@ -8548,23 +8554,23 @@ footer {
     max-width: 900px;
   }
 
-  /* line 380, ../sass/_systemick.scss */
+  /* line 391, ../sass/_systemick.scss */
   .modal-chart .dialog {
     padding: 1% 1%;
   }
 }
 @media all and (min-width: 767px) {
-  /* line 391, ../sass/_systemick.scss */
+  /* line 402, ../sass/_systemick.scss */
   header .inner {
     margin-left: auto;
     margin-right: auto;
     width: 900px;
   }
-  /* line 396, ../sass/_systemick.scss */
+  /* line 407, ../sass/_systemick.scss */
   header .inner .left {
     padding-right: 0;
   }
-  /* line 401, ../sass/_systemick.scss */
+  /* line 412, ../sass/_systemick.scss */
   header .logo {
     padding-left: 0;
     left: -1%;
@@ -8572,46 +8578,46 @@ footer {
     font-size: 48px;
   }
 
-  /* line 411, ../sass/_systemick.scss */
+  /* line 422, ../sass/_systemick.scss */
   #page .column {
     float: left;
   }
-  /* line 415, ../sass/_systemick.scss */
+  /* line 426, ../sass/_systemick.scss */
   #page .column.left {
     border-right: solid 2px #dddddd;
     padding-left: 0;
     padding-right: 2%;
     width: 75%;
   }
-  /* line 422, ../sass/_systemick.scss */
+  /* line 433, ../sass/_systemick.scss */
   #page .column.right {
     padding-left: 2%;
     width: 25%;
   }
-  /* line 426, ../sass/_systemick.scss */
+  /* line 437, ../sass/_systemick.scss */
   #page .column.right h3 {
     margin-left: 0;
   }
-  /* line 433, ../sass/_systemick.scss */
+  /* line 444, ../sass/_systemick.scss */
   #page .column .tweet span {
     margin-right: 1%;
   }
-  /* line 436, ../sass/_systemick.scss */
+  /* line 447, ../sass/_systemick.scss */
   #page .column .tweet span.name {
     font-weight: bold;
   }
 
-  /* line 447, ../sass/_systemick.scss */
+  /* line 458, ../sass/_systemick.scss */
   .modal-about .dialog {
     width: 60%;
   }
 }
 @media all and (min-width: 768px) and (max-width: 959px) {
-  /* line 460, ../sass/_systemick.scss */
+  /* line 471, ../sass/_systemick.scss */
   #page .column.left {
     padding-left: 2%;
   }
-  /* line 464, ../sass/_systemick.scss */
+  /* line 475, ../sass/_systemick.scss */
   #page .column.right {
     padding-right: 2%;
   }

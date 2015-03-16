@@ -11,6 +11,10 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
     defaultStreamFilterText = 'No filter set.'
     MAX_TWEETS = 20;
 
+  $scope.streamtweets = [];
+  $rootScope.favouriteTweets = [];
+  $rootScope.favouritesExist = false;
+
   userFactory.userSessionData().then(function (response) {
 
     var shuffle = function (o) {
@@ -21,8 +25,6 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
     var getFilteredTweets = function (tweets, filters, results) {
       for (i = 0; i < filters.length; i++) {
         for (j = 0; j < tweets.length; j++) {
-          //console.log('IN LOOP');
-          //console.log(tweets[j])
           if (tweets[j].text.indexOf(filters[i]) > -1) {
             results.push(tweets[j]);
             return results;
@@ -33,11 +35,7 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
       return results;
     };
 
-    $scope.streamtweets = [];
-
     socket.on('tweets', function (data) {
-      //console.log('DATA');
-      //console.log(data);
 
       if (!$rootScope.streamPaused) {
 
@@ -50,14 +48,8 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
         }
 
         if ($rootScope.streamFilters.length) {
-          //newTweets = [];
-          
-          //newTweets = data.slice(0, 1);
-
           shuffled = shuffle($rootScope.streamFilters.slice());
-          console.log(shuffled);
           newTweets = getFilteredTweets(data, shuffled, []);
-          console.log(newTweets);
 
         } else {
           newTweets = data.slice(0, 1);
@@ -67,9 +59,6 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
         $scope.streamtweets = streamFactory.processTweets(newTweets.concat(oldTweets));
         $rootScope.streamtweets = $scope.streamtweets;
       }
-
-      //console.log('STREAM TWEETS')
-      //console.log($scope.streamtweets);
 
     });
 
@@ -92,8 +81,6 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
         $rootScope.streamState = defaultStreamState;
         $rootScope.buttonText = defaultButtonText;
       }
-      console.log('STREAM PAUSED');
-      console.log($rootScope.streamPaused);
     };
 
     // Set the stream filter
@@ -104,8 +91,6 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
       if ($rootScope.streamFilters.indexOf(filter) === -1) {
         $rootScope.streamFilters.push(filter);
         $rootScope.setFilterText();
-        console.log('ADDING FILTER');
-        console.log($rootScope.streamFilters);
       }
     };
 
@@ -118,12 +103,54 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
 
       $rootScope.setFilterText();
 
-      console.log('REMOVING FILTER ' + filter);
       console.log($rootScope.streamFilters);
     };
 
     $rootScope.setFilterText = function() {
       $rootScope.streamFilterText = $rootScope.streamFilters.length > 0 ? 'Current filters:' : defaultStreamFilterText;
+    };
+
+    $scope.favouriteTweet = function (id_str, destroy, callback) {
+      var userId = $scope.user.id_str,
+        i,
+        removeIndex = -1,
+        params = {};
+
+      params.tweetId = id_str;
+      params.userId = userId;
+
+      streamFactory.postStatusFavourite(params, destroy).then(function (data) {
+
+        if (destroy) {
+          for (i = 0; i < $rootScope.favouriteTweets.length; i++) {
+            if ($rootScope.favouriteTweets[i].id_str === id_str) {
+              removeIndex = i;
+              break;
+            }
+          }
+
+          if (removeIndex > -1) {
+            $rootScope.favouriteTweets.splice(removeIndex, 1);
+            callback(null, data);
+          }
+
+        } else {
+          for (i = 0; i < $scope.streamtweets.length; i++) {
+            if ($scope.streamtweets[i].id_str === id_str) {
+              $rootScope.favouriteTweets = $rootScope.favouriteTweets.concat(streamFactory.processTweets([$scope.streamtweets[i]]));
+              callback(null, data);
+              break;
+            }
+          }
+        }
+
+        $rootScope.favouritesExist = $scope.favouriteTweets.length > 0;
+
+      }, function (err) {
+        callback(err);
+        console.log('FAVOURITE ERROR')
+      })
+
     };
 
   });

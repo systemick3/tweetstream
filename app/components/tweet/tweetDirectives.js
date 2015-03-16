@@ -14,6 +14,12 @@ app.directive('tweetForm', [function () {
         textarea.attr('rows', '4');
       });
 
+      textarea.blur(function () {
+        if (!angular.isDefined(scope.newTweet) || !angular.isDefined(scope.newTweet.message) || scope.newTweet.message === '') {
+          textarea.attr('rows', '1');
+        }
+      });
+
       scope.$watch('formSuccess', function (newValue) {
         if (newValue === true) {
           resetForm();
@@ -25,6 +31,19 @@ app.directive('tweetForm', [function () {
         scope.newTweetForm.$setPristine();
         textarea.attr('rows', '1');
       };
+    }
+  };
+
+}]);
+
+app.directive('tweetIconPanel', [function () {
+
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: "components/tweet/views/tweetIconPanel.html",
+    link: function (scope, element, attrs) {
+      alert('adding icon panel');
     }
   };
 

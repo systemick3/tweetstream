@@ -18,11 +18,16 @@ app.factory('socket', function ($rootScope, tConfig) {
 
 });
 
-app.factory('streamFactory', [function () {
+app.factory('streamFactory', ['$http', 'tConfig', function ($http, tConfig) {
+  var favouritePromise;
 
   return {
 
     processTweets: function (tweets) {
+      if (!angular.isArray(tweets)) {
+        tweets = [tweets];
+      }
+
       for (var i=0; i<tweets.length; i++) {
         tweets[i].display_text = this.processTweetLinks(tweets[i].text);
         tweets[i].short_date = tweets[i].created_at.substring(0, 16);
@@ -38,8 +43,27 @@ app.factory('streamFactory', [function () {
       exp = /(^|\s)@(\w+)/g;
       text = text.replace(exp, "$1<a href='http://www.twitter.com/$2' target='_blank'>@$2</a>");
       return text;
+    },
+
+    postStatusFavourite: function (params, destroy) {
+      var apiData = tConfig.apiData,
+        favouriteUrl;
+
+      if (destroy) {
+        favouriteUrl = apiData.server + '/tweetapp/auth/tweet/unfavourite';
+      } else {
+        favouriteUrl = apiData.server + '/tweetapp/auth/tweet/favourite';
+      }
+
+      if (!favouritePromise) {
+        favouritePromise = $http.post(favouriteUrl, params).then(function (response) {
+          return response;
+        });
+      }
+
+      return favouritePromise;
     }
-    
+
   };
 
 }]);
