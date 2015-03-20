@@ -19,7 +19,8 @@ app.factory('socket', function ($rootScope, tConfig) {
 });
 
 app.factory('streamFactory', ['$http', 'tConfig', function ($http, tConfig) {
-  var favouritePromise;
+  var favouritePromise,
+    replyFormPromise;
 
   return {
 
@@ -45,6 +46,10 @@ app.factory('streamFactory', ['$http', 'tConfig', function ($http, tConfig) {
       return text;
     },
 
+    getScreenNames: function (text) {
+      exp = /(^|\s)@(\w+)/g;
+    },
+
     postStatusFavourite: function (params, destroy) {
       var apiData = tConfig.apiData,
         favouriteUrl;
@@ -62,6 +67,32 @@ app.factory('streamFactory', ['$http', 'tConfig', function ($http, tConfig) {
       }
 
       return favouritePromise;
+    },
+
+    getReplyForm: function () {
+      var formUrl = 'components/stream/views/replyForm.html';
+
+      if (!replyFormPromise) {
+        replyFormPromise = $http.get(formUrl).then(function (response) {
+          return response;
+        });
+      }
+
+      return replyFormPromise;
+    },
+
+    sendStatusUpdate: function (newTweet) {
+      var apiData = tConfig.apiData,
+        newTweetUrl = apiData.server + '/tweetapp/auth/tweet/reply';
+
+      return $http.post(newTweetUrl, newTweet);
+    },
+
+    sendStatusRetweet: function (retweetData) {
+      var apiData = tConfig.apiData,
+        retweetUrl = apiData.server + '/tweetapp/auth/tweet/retweet';
+
+      return $http.post(retweetUrl, retweetData);
     }
 
   };

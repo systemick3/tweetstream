@@ -1,0 +1,28 @@
+<div class="modal-retweet" ng-show="showRetweet" ng-controller="streamCtrl">
+  <div class="dialog">
+    <div class="close" ng-click="toggleRetweet()">
+      <i class="fa fa-times"></i>
+    </div>
+    <h4>Retweet this to your followers</h4>
+    <div class="retweet">
+      <div class="panel tweet">
+        <div class="name">
+          <a href="https://twitter.com/{{ retweetedTweet.user.screen_name }}">
+            <span class="name">{{ retweetedTweet.user.name }}</span>
+            <span>@{{ retweetedTweet.user.screen_name }}</span>
+          </a>
+          {{ retweetedTweet.short_date }}
+        </div>
+        <div class="text" ng-bind-html="retweetedTweet.display_text"></div>
+      </div>
+      <div class="form">
+        <form name="retweetForm" method="post" novalidate ng-submit="sendStatusRetweet(retweetedTweet.id_str)">
+          <div class="form-group">
+            <button type="button" ng-click="toggleRetweet()" class="btn btn-primary send-retweet">Cancel</button>
+            <button type="submit" class="btn btn-primary send-retweet">Retweet</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,6 +14,8 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
   $scope.streamtweets = [];
   $rootScope.favouriteTweets = [];
   $rootScope.favouritesExist = false;
+  $rootScope.showRetweet = false;
+  $rootScope.retweetedTweet = false;
 
   userFactory.userSessionData().then(function (response) {
 
@@ -71,6 +73,8 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
     $rootScope.streamState = defaultStreamState;
     $rootScope.buttonText = defaultButtonText;
 
+    $scope.replyFormSuccess = false;
+
     $rootScope.toggleStreamPaused = function() {
       $rootScope.streamPaused = !$rootScope.streamPaused;
 
@@ -108,6 +112,10 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
 
     $rootScope.setFilterText = function() {
       $rootScope.streamFilterText = $rootScope.streamFilters.length > 0 ? 'Current filters:' : defaultStreamFilterText;
+    };
+
+    $rootScope.toggleRetweet = function () {
+      $rootScope.showRetweet = !$rootScope.showRetweet;
     };
 
     $scope.favouriteTweet = function (id_str, destroy, callback) {
@@ -149,9 +157,61 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
       }, function (err) {
         callback(err);
         console.log('FAVOURITE ERROR')
-      })
+      });
 
     };
+
+    $scope.getReplyForm = function () {
+      streamFactory.getReplyForm().then(function (data) {
+        $scope.replyForm = data;
+      }, function (err) {
+        console.log('ERROR');
+      })
+    };
+
+    $scope.testSubmit = function (message) {
+      alert('Hello');
+    };
+
+    $scope.sendStatusUpdate = function (newTweet, callback) {
+      var response = {};
+
+      if (angular.isDefined(newTweet.message)) {
+        newTweet.origin = location.hostname;
+        newTweet.userId = $scope.user.id_str;
+
+        streamFactory.sendStatusUpdate(newTweet)
+          .success(function (data) {
+            if (data.msg === 'Success') {
+              $scope.replyFormSuccess = true;
+              callback({'msg': 'Success'});
+            }
+          })
+          .error(function (err) {
+            $scope.formSubmitError = true;
+            callback({'msg': 'Error'});
+          });
+      }
+
+    };
+
+    $rootScope.sendStatusRetweet = function (tweetId) {
+      var retweetData = {};
+
+      if (angular.isDefined(tweetId)) {
+        retweetData.tweetId = tweetId;
+        retweetData.userId = $scope.user.id_str;
+
+        streamFactory.sendStatusRetweet(retweetData)
+          .success(function (data) {
+            $rootScope.toggleRetweet();
+          })
+          .error(function (err) {
+            console.log('ERROR');
+            console.log(err);
+          });
+      }
+    }
 
   });
 

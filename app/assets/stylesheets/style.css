@@ -8460,7 +8460,7 @@ header .navigation ul li a {
 }
 
 /* line 282, ../sass/_systemick.scss */
-.modal-chart, .modal-contact, .modal-about {
+.modal-chart, .modal-contact, .modal-about, .modal-retweet {
   position: absolute;
   z-index: 9999;
   top: 0;
@@ -8471,7 +8471,7 @@ header .navigation ul li a {
   opacity: 0.9;
 }
 /* line 292, ../sass/_systemick.scss */
-.modal-chart .dialog, .modal-contact .dialog, .modal-about .dialog {
+.modal-chart .dialog, .modal-contact .dialog, .modal-about .dialog, .modal-retweet .dialog {
   background-color: #eee;
   box-shadow: 4px 4px 80px #000;
   height: 90%;
@@ -8487,17 +8487,17 @@ header .navigation ul li a {
   z-index: 10000;
 }
 /* line 309, ../sass/_systemick.scss */
-.modal-chart .dialog #analysisChartContainer ul, .modal-chart .dialog #followersChartContainer ul, .modal-contact .dialog #analysisChartContainer ul, .modal-contact .dialog #followersChartContainer ul, .modal-about .dialog #analysisChartContainer ul, .modal-about .dialog #followersChartContainer ul {
+.modal-chart .dialog #analysisChartContainer ul, .modal-chart .dialog #followersChartContainer ul, .modal-contact .dialog #analysisChartContainer ul, .modal-contact .dialog #followersChartContainer ul, .modal-about .dialog #analysisChartContainer ul, .modal-about .dialog #followersChartContainer ul, .modal-retweet .dialog #analysisChartContainer ul, .modal-retweet .dialog #followersChartContainer ul {
   list-style-type: none;
 }
 /* line 312, ../sass/_systemick.scss */
-.modal-chart .dialog #analysisChartContainer ul li, .modal-chart .dialog #followersChartContainer ul li, .modal-contact .dialog #analysisChartContainer ul li, .modal-contact .dialog #followersChartContainer ul li, .modal-about .dialog #analysisChartContainer ul li, .modal-about .dialog #followersChartContainer ul li {
+.modal-chart .dialog #analysisChartContainer ul li, .modal-chart .dialog #followersChartContainer ul li, .modal-contact .dialog #analysisChartContainer ul li, .modal-contact .dialog #followersChartContainer ul li, .modal-about .dialog #analysisChartContainer ul li, .modal-about .dialog #followersChartContainer ul li, .modal-retweet .dialog #analysisChartContainer ul li, .modal-retweet .dialog #followersChartContainer ul li {
   display: inline;
   float: left;
   margin-right: 2%;
 }
 /* line 317, ../sass/_systemick.scss */
-.modal-chart .dialog #analysisChartContainer ul li span, .modal-chart .dialog #followersChartContainer ul li span, .modal-contact .dialog #analysisChartContainer ul li span, .modal-contact .dialog #followersChartContainer ul li span, .modal-about .dialog #analysisChartContainer ul li span, .modal-about .dialog #followersChartContainer ul li span {
+.modal-chart .dialog #analysisChartContainer ul li span, .modal-chart .dialog #followersChartContainer ul li span, .modal-contact .dialog #analysisChartContainer ul li span, .modal-contact .dialog #followersChartContainer ul li span, .modal-about .dialog #analysisChartContainer ul li span, .modal-about .dialog #followersChartContainer ul li span, .modal-retweet .dialog #analysisChartContainer ul li span, .modal-retweet .dialog #followersChartContainer ul li span {
   display: block;
   float: left;
   height: 1em;
@@ -8608,7 +8608,7 @@ footer {
   }
 
   /* line 458, ../sass/_systemick.scss */
-  .modal-about .dialog {
+  .modal-about .dialog, modal-retweet .dialog {
     width: 60%;
   }
 }

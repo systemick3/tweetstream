@@ -28,7 +28,6 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
       data = data.data;
 
       $window.sessionStorage.user_id = data.data.user_id;
-      //console.log(data.data)
       $window.sessionStorage.screen_name = data.data.screen_name;
       $scope.user = data.data;
       $scope.tweetapp.user = data.data;
@@ -36,8 +35,6 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
       $rootScope.user = $scope.user;
       $scope.tweets_for = 'user ' + $scope.user.screen_name;
 
-      console.log('ROOTSCOPE');
-      console.log($rootScope);
 
       // Get the full user data from Twitter
       userFactory.userTwitterData(data.data.user_id)
@@ -46,7 +43,6 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
           $scope.user = data;
           $rootScope.user = $scope.user;
           $scope.user._id = mongo_id;
-          console.log($scope.user);
 
           $scope.showModal = false;
 

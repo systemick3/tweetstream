@@ -43,6 +43,12 @@
 
 	<div id="page" class="home" ng-hide="authorised">
 
+		<contact-modal></contact-modal>
+
+		<about-modal></about-modal>
+
+		<retweet-modal></retweet-modal>
+
 		<div class="error" ng-show="twitterDataError">{{ twitterDataError }}</div>
 
 		<div class="column left" ng-controller="streamCtrl">
@@ -85,6 +91,13 @@
 						<div class="text" ng-bind-html="favourite.display_text"></div>
 					</div>
 				</div>
+			</div>
+
+			<div class="panel site-info hidden-xs">
+				<span><a href="http://js.systemick-web-development.co.uk" target="_blank">&copy; Systemick {{ currentYear }}</a></span>
+				<span><a href="" ng-click="toggleContact()">Contact</a></span>
+				<span><a href="" ng-click="toggleAbout()">About</a></span>
+				<span><a href="#/logout">Logout</a></span>
 			</div>
 
 			<!--<div class="panel visible-xs-block">

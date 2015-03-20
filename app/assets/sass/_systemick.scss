@@ -279,7 +279,7 @@ header {
   }
 }
 
-.modal-chart, .modal-contact, .modal-about {
+.modal-chart, .modal-contact, .modal-about, .modal-retweet {
   position:absolute;
   z-index:9999;
   top:0;
@@ -453,7 +453,7 @@ footer {
     }
   }
 
-  .modal-about {
+  .modal-about, modal-retweet {
 
     .dialog {
       width: 60%;
