@@ -88,6 +88,13 @@ app.factory('streamFactory', ['$http', 'tConfig', function ($http, tConfig) {
       return $http.post(newTweetUrl, newTweet);
     },
 
+    removeStatus: function (tweetData) {
+      var apiData = tConfig.apiData,
+        removeTweetUrl = apiData.server + '/tweetapp/auth/tweet/destroy';
+
+      return $http.post(removeTweetUrl, tweetData);
+    },
+
     sendStatusRetweet: function (retweetData) {
       var apiData = tConfig.apiData,
         retweetUrl = apiData.server + '/tweetapp/auth/tweet/retweet';

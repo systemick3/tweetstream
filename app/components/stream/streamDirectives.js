@@ -101,15 +101,34 @@ app.directive('streamTweetList', ['socket', 'streamFactory', '$rootScope', funct
           });
 
           retweetIcon.on('click', function () {
-            var tweetId = $(this).data('id-str');
+            var div = $(this),
+              destroy = div.data('is-retweeted'),
+              tweetId = $(this).data('id-str');
 
             for (i = 0; i < scope.streamtweets.length; i++) {
               if (scope.streamtweets[i].id_str === tweetId) {
                 selectedTweet = scope.streamtweets[i];
                 $rootScope.retweetedTweet = selectedTweet;
-                scope.toggleRetweet();
+
+                if (destroy) {
+                  scope.removeStatus(div.data('retweet-id'));
+                } else {
+                  scope.toggleRetweet();
+                }
               }
             }
+
+            scope.$on('retweetSuccess', function (event, args) {
+              if (!destroy) {
+                div.css('color', 'yellow');
+                div.data('is-retweeted', true);
+                div.data('retweet-id', args.tweetId);
+              } else {
+                div.css('color', '#5E6D70');
+                div.data('is-retweeted', false);
+                div.data('retweet-id', false);
+              }
+            });
 
           });
 

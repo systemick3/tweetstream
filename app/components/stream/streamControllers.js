@@ -195,6 +195,24 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
 
     };
 
+    $scope.removeStatus = function (tweetId) {
+      var statusData = {};
+
+      if (angular.isDefined(tweetId)) {
+        statusData.tweetId = tweetId;
+        statusData.userId = $scope.user.id_str;
+
+        streamFactory.removeStatus(statusData)
+          .success(function (data) {
+            $rootScope.$broadcast('retweetSuccess', { tweetId: tweetId });
+          })
+          .error(function (err) {
+            console.log('ERROR');
+            console.log(err);
+          });
+      }
+    };
+
     $rootScope.sendStatusRetweet = function (tweetId) {
       var retweetData = {};
 
@@ -205,13 +223,14 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
         streamFactory.sendStatusRetweet(retweetData)
           .success(function (data) {
             $rootScope.toggleRetweet();
+            $rootScope.$broadcast('retweetSuccess', { tweetId: data.tweet.id_str });
           })
           .error(function (err) {
             console.log('ERROR');
             console.log(err);
           });
       }
-    }
+    };
 
   });
 
