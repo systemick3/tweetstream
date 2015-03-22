@@ -1,6 +1,6 @@
 var app = angular.module('twitterapp');
 
-app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'userFactory', 'homeFactory', 'tConfig', function ($scope, $window, $rootScope, ipCookie, userFactory, homeFactory, tConfig) {
+app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'userFactory', 'tConfig', function ($scope, $window, $rootScope, ipCookie, userFactory, tConfig) {
 
   var userId;
 
@@ -43,18 +43,6 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
           $scope.user = data;
           $rootScope.user = $scope.user;
           $scope.user._id = mongo_id;
-
-          $scope.showModal = false;
-
-          $scope.toggleModal = function() {
-            $scope.showModal = !$scope.showModal;
-          };
-
-          // Preload the chart data
-          homeFactory.getUserAnalyses($scope.user.user_id)
-            .success(function (data) {
-              // Do nothing for now
-            });
         })
         .error(function (err) {
           $scope.twitterDataError = 'Unable to retrieve data from Twitter. Please try again later.';

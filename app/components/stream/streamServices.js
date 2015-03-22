@@ -46,62 +46,6 @@ app.factory('streamFactory', ['$http', 'tConfig', function ($http, tConfig) {
       return text;
     },
 
-    getScreenNames: function (text) {
-      exp = /(^|\s)@(\w+)/g;
-    },
-
-    postStatusFavourite: function (params, destroy) {
-      var apiData = tConfig.apiData,
-        favouriteUrl;
-
-      if (destroy) {
-        favouriteUrl = apiData.server + '/tweetapp/auth/tweet/unfavourite';
-      } else {
-        favouriteUrl = apiData.server + '/tweetapp/auth/tweet/favourite';
-      }
-
-      if (!favouritePromise) {
-        favouritePromise = $http.post(favouriteUrl, params).then(function (response) {
-          return response;
-        });
-      }
-
-      return favouritePromise;
-    },
-
-    getReplyForm: function () {
-      var formUrl = 'components/stream/views/replyForm.html';
-
-      if (!replyFormPromise) {
-        replyFormPromise = $http.get(formUrl).then(function (response) {
-          return response;
-        });
-      }
-
-      return replyFormPromise;
-    },
-
-    sendStatusUpdate: function (newTweet) {
-      var apiData = tConfig.apiData,
-        newTweetUrl = apiData.server + '/tweetapp/auth/tweet/reply';
-
-      return $http.post(newTweetUrl, newTweet);
-    },
-
-    removeStatus: function (tweetData) {
-      var apiData = tConfig.apiData,
-        removeTweetUrl = apiData.server + '/tweetapp/auth/tweet/destroy';
-
-      return $http.post(removeTweetUrl, tweetData);
-    },
-
-    sendStatusRetweet: function (retweetData) {
-      var apiData = tConfig.apiData,
-        retweetUrl = apiData.server + '/tweetapp/auth/tweet/retweet';
-
-      return $http.post(retweetUrl, retweetData);
-    }
-
   };
 
 }]);

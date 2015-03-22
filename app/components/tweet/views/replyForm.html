@@ -6,6 +6,7 @@
     <span class="error" ng-show="tweetReplyForm.message.$error.required && tweetReplyForm.message.$dirty">What's happening?</span>
   </div>
   <div class="form-group">
-    <button type="button" ng-click="testSubmit" ng-disabled="tweetReplyForm.$invalid" class="btn btn-primary send-reply">Send reply</button>
+    <button type="button" class="btn btn-primary cancel-reply">Cancel</button>
+    <button type="button" ng-disabled="tweetReplyForm.$invalid" class="btn btn-primary send-reply">Send reply</button>
   </div>
 </form>
