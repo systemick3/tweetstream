@@ -8,6 +8,8 @@ app.directive('tweetForm', [function () {
     templateUrl: "components/tweet/views/tweetForm.html",
     link: function (scope, element, attrs) {
       var parentElement = element.parent(),
+        charCountDiv = parentElement.find('.char-count'),
+        tweetButton = parentElement.find('.send-tweet'),
         textarea = parentElement.find('textarea');
 
       var resetForm = function () {
@@ -24,6 +26,24 @@ app.directive('tweetForm', [function () {
         if (!angular.isDefined(scope.newTweet) || !angular.isDefined(scope.newTweet.message) || scope.newTweet.message === '') {
           textarea.attr('rows', '1');
         }
+      });
+
+      textarea.keyup(function () {
+        var charsRemaining,
+          MAX_CHARS = 140,
+          charCount = textarea.val().length;
+
+        charsRemaining = MAX_CHARS - charCount;
+        charCountDiv.text(charsRemaining);
+
+        if (charsRemaining < 0) {
+          charCountDiv.css('color', 'red');
+          tweetButton.attr('disabled', 'true');
+        } else {
+          charCountDiv.css('color', '#5E6D70');
+          tweetButton.removeAttr('disabled');
+        }
+
       });
 
       scope.$watch('formSuccess', function (newValue) {
