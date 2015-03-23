@@ -11,30 +11,39 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
   $rootScope.retweetedTweet = false;
 
   $rootScope.sendStatusUpdate = function (tweet, callback) {
-    var isRetweet = false;
+    var isReply = false;
 
     if (angular.isDefined(tweet.message)) {
       tweet.origin = location.hostname;
       tweet.userId = $scope.user.id_str;
 
       if (tweet.tweetId) {
-        isRetweet = true;
+        isReply = true;
       }
 
       tweetFactory.sendStatusUpdate(tweet)
         .success(function (data) {
+          var statusType = (isReply) ? 'Reply' : 'Tweet';
           if (data.msg === 'Success') {
-            if (isRetweet) {
-              $rootScope.replyFormSuccess = true;
+
+            if (isReply) {
+              $rootScope.$broadcast('replySuccess', { tweetId: data.tweet.id_str });
+              $rootScope.addStreamMessage({'type': 'info', 'msg': 'Reply has been sent.'});
             } else {
-              $rootScope.formSuccess = true;
+              $rootScope.$broadcast('tweetSuccess', { tweetId: data.tweet.id_str });
+              $rootScope.addStreamMessage({'type': 'info', 'msg': 'Tweet has been sent.'});
             }
-            callback({'msg': 'Success'});
+
+            if (callback) {
+              callback({'msg': 'Success'});
+            }
           }
         })
         .error(function (error) {
-          $scope.formSubmitError = true;
-          callback({'msg': 'Error'});
+          $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to send ' + (isReply) ? 'reply' : 'tweet'});
+          if (callback) {
+            callback({'msg': 'Error'});
+          }
         });
     }
 
@@ -57,8 +66,7 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
           $rootScope.$broadcast('retweetSuccess', { tweetId: data.tweet.id_str });
         })
         .error(function (err) {
-          console.log('ERROR');
-          console.log(err);
+          $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to send retweet'});
         });
     }
   };

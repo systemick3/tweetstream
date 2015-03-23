@@ -7,7 +7,8 @@ app.directive('tweetForm', [function () {
     replace: true,
     templateUrl: "components/tweet/views/tweetForm.html",
     link: function (scope, element, attrs) {
-      var parentElement = element.parent(),
+      var MAX_CHARS = 140,
+        parentElement = element.parent(),
         charCountDiv = parentElement.find('.char-count'),
         tweetButton = parentElement.find('.send-tweet'),
         textarea = parentElement.find('textarea');
@@ -16,6 +17,7 @@ app.directive('tweetForm', [function () {
         scope.newTweet.message = '';
         scope.newTweetForm.$setPristine();
         textarea.attr('rows', '1');
+        charCountDiv.text(MAX_CHARS);
       };
 
       textarea.focus(function () {
@@ -30,7 +32,6 @@ app.directive('tweetForm', [function () {
 
       textarea.keyup(function () {
         var charsRemaining,
-          MAX_CHARS = 140,
           charCount = textarea.val().length;
 
         charsRemaining = MAX_CHARS - charCount;
@@ -46,11 +47,9 @@ app.directive('tweetForm', [function () {
 
       });
 
-      scope.$watch('formSuccess', function (newValue) {
-        if (newValue === true) {
-          resetForm();
-        }
-      });
+      scope.$on('tweetSuccess', function (event, args) {
+        resetForm();
+      })
 
     }
   };
