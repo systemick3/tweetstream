@@ -1,9 +1,10 @@
 var app = angular.module('twitterapp');
 
-app.directive('streamTweetList', ['$rootScope', function ($rootScope) {
+app.directive('streamTweetList', ['$rootScope', 'userFactory', function ($rootScope, userFactory) {
   return {
     replace: true,
     link: function (scope, element, attrs) {
+      var MAX_TWEETS = 20;
 
       scope.$watch('streamtweets', function () {
         if (scope.streamtweets.length > 0) {
@@ -26,7 +27,7 @@ app.directive('streamTweetList', ['$rootScope', function ($rootScope) {
           panelDiv.slideDown('fast');
           $rootScope.$broadcast('newTweetInStream', {tweetId: newTweet.id_str});
 
-          if (scope.streamtweets.length > 10) {
+          if (scope.streamtweets.length > MAX_TWEETS) {
             element.find('.tweet:last-child').fadeOut().remove();
           }
 
@@ -34,7 +35,9 @@ app.directive('streamTweetList', ['$rootScope', function ($rootScope) {
             opacity: 1,
           }, 600);
         }
+
       });
+
     }
   };
 

@@ -3,7 +3,6 @@ var app = angular.module('twitterapp');
 app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', 'streamFactory', 'tweetFactory', function ($scope, $rootScope, socket, userFactory, streamFactory, tweetFactory) {
   var oldTweets = [],
     newTweets,
-    shuffled,
     defaultStreamState = 'not paused',
     defaultButtonText = 'Pause stream',
     defaultStreamFilterText = 'No filter set.',
@@ -39,6 +38,7 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
     };
 
     socket.on('tweets', function (data) {
+      var shuffled;
 
       if (!$rootScope.streamPaused) {
 
@@ -92,21 +92,21 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
     $rootScope.streamFilters = [];
     $rootScope.streamFilterText = defaultStreamFilterText;
 
-    $rootScope.addFilter = function(filter) {
-      if ($rootScope.streamFilters.indexOf(filter) === -1) {
-        $rootScope.streamFilters.push(filter);
+    $rootScope.setStreamFilter = function (filter) {
+      // Only one filter allowed
+      if ($rootScope.streamFilters[0] === filter) {
+        // Remove filter
+        $rootScope.streamFilters = [];
         $rootScope.setFilterText();
+      } else {
+        // Add filter if we don't already have one
+        if ($rootScope.streamFilters.length > 0) {
+          alert('Only one filter allowed. Please remove the current filter before adding another one.')
+        } else {
+          $rootScope.streamFilters = [filter];
+          $rootScope.setFilterText();
+        }
       }
-    };
-
-    $rootScope.removeFilter = function(filter) {
-      var index = $rootScope.streamFilters.indexOf(filter);
-
-      if (index > -1) {
-        $rootScope.streamFilters.splice(index, 1);
-      }
-
-      $rootScope.setFilterText();
     };
 
     $rootScope.setFilterText = function() {

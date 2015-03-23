@@ -49,6 +49,11 @@ a.show-link, a.show-link:hover, a.show-link:visited {
   text-decoration:none;
 }
 
+a.selected-filter {
+  color: $green;
+  text-decoration: underline;
+}
+
 input.form-control,
 textarea.form-control {
   font-size: 80%;
