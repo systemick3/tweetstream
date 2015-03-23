@@ -31,7 +31,7 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
         }
       }
 
-      $rootScope.addStreamMessage({'type': 'info', 'msg': 'Unable to find tweets tagged ' + filter});
+      $rootScope.addStreamMessage({'type': 'info', 'msg': 'No tweets in the last few seconds tagged ' + filter});
 
       return false;
     };
