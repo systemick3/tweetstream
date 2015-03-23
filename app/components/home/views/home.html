@@ -40,10 +40,11 @@
 
 			<h3>Tweets</h3>
 
-			<div class="stream" style="min-height: 500px" data-stream-tweet-list="streamTweets" class="ngFade">
-				<div ng-hide="streamPaused"><img src="/assets/images/loading.gif" /> <span>Loading tweets ... </span></div>
-				<div ng-show="streamPaused">Stream is currently paused</span></div>
-			</div>
+			<messages></messages>
+
+			<div class="stream-state" ng-hide="streamPaused"><img src="/assets/images/loading.gif" /> <span>Loading tweets ... </span></div>
+			<div class="stream-state" ng-show="streamPaused">Stream is currently paused</span></div>
+			<div class="stream" style="min-height: 500px" data-stream-tweet-list="streamTweets" class="ngFade"></div>
 
 		</div>
 
