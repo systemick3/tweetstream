@@ -112,6 +112,10 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
 
         replyIcon.on('click', function () {
           var formDiv,
+            textarea,
+            charCountDiv,
+            charsRemaining,
+            MAX_CHARS = 140,
             parentDiv,
             screenName,
             tweetId,
@@ -145,17 +149,40 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
 
             formDiv = parentDiv.children('.reply-form');
             formDiv.html(promise.data);
-            formDiv.find('textarea').text(screenNames.join(' '));
+            textarea = formDiv.find('textarea');
+            textarea.text(screenNames.join(' '));
+            charCountDiv = formDiv.find('.char-count');
+            charsRemaining = MAX_CHARS - textarea.val().length;
+            charCountDiv.text(charsRemaining);
             formDiv.find('.tweet-id').attr('value', selectedTweet.id_str);
             cancelButton = formDiv.find('.cancel-reply');
             replyButton = formDiv.find('.send-reply');
             formDiv.slideDown();
 
+            // Increment/decrement the char count
+            // when new chars are entered into the textarea
+            textarea.keyup(function () {
+
+              charsRemaining = MAX_CHARS - textarea.val().length;
+              charCountDiv.text(charsRemaining);
+
+              if (charsRemaining < 0) {
+                charCountDiv.css('color', 'red');
+                replyButton.attr('disabled', 'true');
+              } else {
+                charCountDiv.css('color', '#5E6D70');
+                replyButton.removeAttr('disabled');
+              }
+
+            });
+
+            // Cancel button click
             cancelButton.on('click', function () {
               formDiv.find('textarea').text('');
               formDiv.slideUp();
             });
 
+            // Reply button click
             replyButton.on('click', function () {
               replyTweet.message = formDiv.find('textarea').val();
               replyTweet.tweetId = formDiv.find('.tweet-id').attr('value');

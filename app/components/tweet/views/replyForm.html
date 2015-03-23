@@ -1,10 +1,10 @@
 <form name="tweetReplyForm" method="post" novalidate ng-submit="sendStatusUpdate(newTweet)">
   <div class="form-group">
     <label>Reply</label>
-    <textarea class="form-control tweet-text" name="newTweet" rows="1" placeholder="What's happening?" ng-model="newTweet.message" required /></textarea>
+    <textarea class="form-control tweet-text" name="newTweet" rows="4" placeholder="What's happening?" ng-model="newTweet.message" required /></textarea>
     <input type="hidden" name="tweetId" value="" class="tweet-id" />
-    <span class="error" ng-show="tweetReplyForm.message.$error.required && tweetReplyForm.message.$dirty">What's happening?</span>
   </div>
+  <div class="char-count"></div>
   <div class="form-group">
     <button type="button" class="btn btn-primary cancel-reply">Cancel</button>
     <button type="button" ng-disabled="tweetReplyForm.$invalid" class="btn btn-primary send-reply">Send reply</button>
