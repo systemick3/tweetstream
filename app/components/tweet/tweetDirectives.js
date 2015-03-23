@@ -54,9 +54,9 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
 
       scope.$on('newTweetInStream', function (event, args) {
         newTweet = scope.streamtweets[0];
-        favouriteIcon = angular.element('<div>').addClass('action-icon').data('id-str', newTweet.id_str).data('is-favourite', false).append(angular.element('<i class="fa fa-star">'));
-        replyIcon = angular.element('<div>').addClass('action-icon').data('id-str', newTweet.id_str).append(angular.element('<i class="fa fa-reply">'));
-        retweetIcon = angular.element('<div>').addClass('action-icon').data('id-str', newTweet.id_str).append(angular.element('<i class="fa fa-retweet">'));
+        favouriteIcon = angular.element('<div>').addClass('action-icon').data('id-str', newTweet.id_str).data('is-favourite', false).append(angular.element('<i title = "Favourite" class="fa fa-star">'));
+        replyIcon = angular.element('<div>').addClass('action-icon').data('id-str', newTweet.id_str).append(angular.element('<i title="Reply" class="fa fa-reply">'));
+        retweetIcon = angular.element('<div>').addClass('action-icon').data('id-str', newTweet.id_str).append(angular.element('<i title="Retweet" class="fa fa-retweet">'));
         replyFormDiv = angular.element('<div class="reply-form" style="display:none;">');
         idDiv = angular.element('<div class="tweet-id" style="display:none;">').text(newTweet.id_str);
         panelDiv = angular.element(document.getElementById(newTweet.id_str));
