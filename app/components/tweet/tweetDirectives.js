@@ -152,6 +152,7 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
             formDiv.slideDown();
 
             cancelButton.on('click', function () {
+              formDiv.find('textarea').text('');
               formDiv.slideUp();
             });
 
@@ -159,12 +160,13 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
               replyTweet.message = formDiv.find('textarea').val();
               replyTweet.tweetId = formDiv.find('.tweet-id').attr('value');
 
-              scope.sendStatusUpdate(replyTweet, function (data) {
-                if (data.msg === 'Success') {
-                  formDiv.find('textarea').text('');
-                  formDiv.slideUp();
-                }
+              scope.sendStatusUpdate(replyTweet);
+
+              scope.$on('replySuccess', function (event, args) {
+                formDiv.find('textarea').text('');
+                formDiv.slideUp();
               });
+
             });
 
           });

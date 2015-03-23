@@ -10,7 +10,9 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
   $rootScope.showRetweet = false;
   $rootScope.retweetedTweet = false;
 
-  $rootScope.sendStatusUpdate = function (tweet, callback) {
+  $rootScope.sendStatusUpdate = function (tweet) {
+    // This function is used for new tweets and replies
+    // If a reply the id of the original tweet is attached to the tweet param
     var isReply = false;
 
     if (angular.isDefined(tweet.message)) {
@@ -34,16 +36,10 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
               $rootScope.addStreamMessage({'type': 'info', 'msg': 'Tweet has been sent.'});
             }
 
-            if (callback) {
-              callback({'msg': 'Success'});
-            }
           }
         })
         .error(function (error) {
           $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to send ' + (isReply) ? 'reply' : 'tweet'});
-          if (callback) {
-            callback({'msg': 'Error'});
-          }
         });
     }
 
