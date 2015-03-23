@@ -17,11 +17,11 @@ app.controller('trendCtrl', ['$scope', '$rootScope', 'trendFactory', 'userFactor
     trendFactory.getTrends()
       .success(function (data) {
         $scope.trends = data.data[0].trends;
-        setTimeout(getTrends, 60000);
+        setTimeout(getTrends, 3600000);
       })
       .error(function (err) {
         $scope.trendsError = 'Unable to get latest trends from Twitter. Please try again later.';
-        setTimeout(getTrends, 2000);
+        setTimeout(getTrends, 60000);
       });
   };
 
