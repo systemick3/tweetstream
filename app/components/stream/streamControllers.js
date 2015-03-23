@@ -22,23 +22,21 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
     };
 
     var getFilteredTweets = function (tweets, filters, results) {
-      var i,
-        j;
+      var i, filter = filters[0];
 
       for (i = 0; i < filters.length; i++) {
-        for (j = 0; j < tweets.length; j++) {
-          if (tweets[j].text.indexOf(filters[i]) > -1) {
-            results.push(tweets[j]);
-            return results;
-          }
+        if (tweets[i].text.indexOf(filter) > -1) {
+          results.push(tweets[i]);
+          return results;
         }
       }
 
-      return results;
+      $rootScope.addStreamMessage({'type': 'info', 'msg': 'Unable to find tweets tagged ' + filter});
+
+      return false;
     };
 
     socket.on('tweets', function (data) {
-      var shuffled;
 
       if (!$rootScope.streamPaused) {
 
@@ -50,17 +48,17 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
           oldTweets = $scope.streamtweets;
         }
 
-        if ($rootScope.streamFilters.length) {
-          shuffled = shuffle($rootScope.streamFilters.slice());
-          newTweets = getFilteredTweets(data, shuffled, []);
-
+        if ($rootScope.streamFilters.length > 0) {
+          newTweets = getFilteredTweets(data, $rootScope.streamFilters, []);
         } else {
           newTweets = data.slice(0, 1);
         }
 
-        // Make the new tweet the 1st item in the array
-        $scope.streamtweets = streamFactory.processTweets(newTweets.concat(oldTweets));
-        $rootScope.streamtweets = $scope.streamtweets;
+        if (newTweets) {
+          // Make the new tweet the 1st item in the array
+          $scope.streamtweets = streamFactory.processTweets(newTweets.concat(oldTweets));
+          $rootScope.streamtweets = $scope.streamtweets;
+        }
       }
 
     });

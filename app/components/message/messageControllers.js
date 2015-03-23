@@ -4,9 +4,12 @@ app.controller('messageCtrl', ['$scope', '$rootScope', function ($scope, $rootSc
   $rootScope.streamMessages = [];
 
   $rootScope.addStreamMessage = function (message) {
-    $rootScope.streamMessages.push(message);
-    $rootScope.$broadcast('newStreamMessage', {'msg': message});
-    console.log($rootScope.streamMessages);
+    // Some messages in the stream get inserted twice
+    // Hence this check to ensure no duplicate messages
+    if ($rootScope.streamMessages.indexOf(message) === -1) {
+      $rootScope.streamMessages.push(message);
+      $rootScope.$broadcast('newStreamMessage', {'msg': message});
+    }
   };
 
 }]);

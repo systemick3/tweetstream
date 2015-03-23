@@ -19,9 +19,13 @@ app.directive('messages', ['$rootScope', function ($rootScope) {
 
         if ($rootScope.streamMessages.length > 0) {
           message = $rootScope.streamMessages.shift();
-          messageDiv = angular.element('<div class="message ' + message.type + '">' + message.msg + '</div>');
-          element.append(messageDiv);
-          element.slideDown();
+          // Some messages in the stream get inserted twice
+          // Hence this check to ensure no duplicate messages
+          if (element.html().indexOf(message.msg) === -1) {
+            messageDiv = angular.element('<div class="message ' + message.type + '">' + message.msg + '</div>');
+            element.append(messageDiv);
+            element.slideDown();
+          }
 
           setTimeout(hideMessage, INTERVAL);
         }
@@ -33,5 +37,6 @@ app.directive('messages', ['$rootScope', function ($rootScope) {
         }
       });
     }
-  }
+  };
+
 }]);
