@@ -5,6 +5,8 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
   $scope.formSubmitError = false;
   $scope.origin = location.hostname;
 
+  $rootScope.userTweets = [];
+  $rootScope.useTweetsExist = false;
   $rootScope.favouriteTweets = [];
   $rootScope.favouritesExist = false;
   $rootScope.showRetweet = false;
@@ -26,6 +28,7 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
       tweetFactory.sendStatusUpdate(tweet)
         .success(function (data) {
           var statusType = (isReply) ? 'Reply' : 'Tweet';
+
           if (data.msg === 'Success') {
 
             if (isReply) {
@@ -35,6 +38,9 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
               $rootScope.$broadcast('tweetSuccess', { tweetId: data.tweet.id_str });
               $rootScope.addStreamMessage({'type': 'info', 'msg': 'Tweet has been sent.'});
             }
+
+            $rootScope.userTweets = $rootScope.userTweets.concat(tweetFactory.processTweets([data.tweet]));
+            $rootScope.userTweetsExist = $scope.userTweets.length > 0;
 
           }
         })

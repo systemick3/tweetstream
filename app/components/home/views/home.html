@@ -59,6 +59,23 @@
 				<filter-change></filter-change>
 			</div>
 
+			<div ng-show="userTweetsExist">
+				<h3>Your tweets</h3>
+				<div class="panel user-tweets">
+					<div class="error" ng-show="userTweetError">{{ userTweetError }}</div>
+					<div class="user-tweet panel tweet ngFade" ng-repeat="userTweet in userTweets">
+						<div class="name">
+							<a href="http://twitter.com/{{ userTweet.user.screen_name }}">
+								<span>{{ userTweet.user.name }}</span>
+								<span>{{ userTweet.user.screen_name }}</span>
+								{{ userTweet.short_date }}
+							</a>
+						</div>
+						<div class="text" ng-bind-html="userTweet.display_text"></div>
+					</div>
+				</div>
+			</div>
+
 			<div ng-show="favouritesExist">
 				<h3>Favourites</h3>
 				<div class="panel favourites">
