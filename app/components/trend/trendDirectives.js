@@ -10,10 +10,12 @@ app.directive('filterChange', ['$rootScope', function ($rootScope) {
           element.parent().find('a').each(function (index) {
             if ($(this).text() === scope.streamFilters[0]) {
               $(this).addClass('selected-filter');
+              $(this).attr('title', 'Remove ' + $(this).text() + ' filter');
             }
           })
         } else {
           element.parent().find('a').removeClass('selected-filter');
+          $(this).attr('title', 'Filter by ' + $(this).text());
         }
       });
       

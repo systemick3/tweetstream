@@ -71,7 +71,7 @@
             Click on a trend to only see tweets tagged with that hastag.
             {{ streamFilterText }}
             <div ng-repeat="streamFilter in streamFilters">
-              <a href="" ng-click="setStreamFilter(streamFilter)">{{ streamFilter }}</a>
+              <a href="" title="Remove {{ streamFilter }} filter" ng-click="setStreamFilter(streamFilter)">{{ streamFilter }}</a>
             </div>
           </div>
           <div class="colour-panel orange" ng-controller="tweetCtrl">

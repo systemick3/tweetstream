@@ -54,7 +54,7 @@
 			<div class="panel trends" ng-controller="trendCtrl">
 				<div class="error" ng-show="trendsError">{{ trendsError }}</div>
 				<div class="trend" ng-repeat="trend in trends | filter: selectTrends">
-					<a href="" ng-click="setStreamFilter(trend.name)">{{ trend.name }}</a>
+					<a href="" title="Filter by {{ trend.name }}" ng-click="setStreamFilter(trend.name)">{{ trend.name }}</a>
 				</div>
 				<filter-change></filter-change>
 			</div>
