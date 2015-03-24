@@ -77,6 +77,7 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
         replyIcon = angular.element('<div>').addClass('action-icon').data('id-str', newTweet.id_str).append(angular.element('<i title="Reply" class="fa fa-reply">'));
         retweetIcon = angular.element('<div>').addClass('action-icon').data('id-str', newTweet.id_str).append(angular.element('<i title="Retweet" class="fa fa-retweet">'));
         replyFormDiv = angular.element('<div class="reply-form" style="display:none;">');
+        retweetFormDiv = angular.element('<div class="retweet-form" style="display:none;">');
         idDiv = angular.element('<div class="tweet-id" style="display:none;">').text(newTweet.id_str);
         panelDiv = angular.element(document.getElementById(newTweet.id_str));
         panelDiv.append(idDiv);
@@ -87,6 +88,7 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
         panelDiv.append(iconsDiv);
         panelDiv.append(angular.element('<div class="clearfix">'))
         panelDiv.append(replyFormDiv);
+        panelDiv.append(retweetFormDiv);
 
         favouriteIcon.on('click', function () {
           var div = $(this),
@@ -96,8 +98,7 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
           id_str = div.data('id-str');
           $rootScope.favouriteTweet(id_str, destroy, function (err, data) {
             if (err) {
-              console.log('FAVOURITE ERROR');
-              console.log(err);
+              $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to reach Twitter'});
             }
 
             if (!destroy) {
@@ -204,6 +205,7 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
           var div = $(this),
             i,
             selectedTweet,
+            retweet = {},
             destroy = div.data('is-retweeted'),
             tweetId = $(this).data('id-str');
 
@@ -211,26 +213,54 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
             if (scope.streamtweets[i].id_str === tweetId) {
               selectedTweet = scope.streamtweets[i];
               $rootScope.retweetedTweet = selectedTweet;
-
-              if (destroy) {
-                scope.removeStatus(div.data('retweet-id'));
-              } else {
-                scope.toggleRetweet();
-              }
+              break;
             }
           }
 
-          scope.$on('retweetSuccess', function (event, args) {
-            if (!destroy) {
-              div.css('color', 'yellow');
-              div.data('is-retweeted', true);
-              div.data('retweet-id', args.tweetId);
-            } else {
+          if (destroy) {
+
+            scope.removeStatus(div.data('retweet-id'));
+
+            scope.$on('removeSuccess', function (event, args) {
               div.css('color', '#5E6D70');
               div.data('is-retweeted', false);
               div.data('retweet-id', false);
-            }
-          });
+            });
+
+          } else {
+
+            tweetFactory.getRetweetForm().then(function (promise) {
+              parentDiv = div.parents('.tweet');
+              tweetId = parentDiv.find('.tweet-id').text();
+              formDiv = parentDiv.children('.retweet-form');
+              formDiv.html(promise.data);
+              formDiv.find('.tweet-id').attr('value', selectedTweet.id_str);
+              cancelButton = formDiv.find('.cancel-retweet');
+              retweetButton = formDiv.find('.send-retweet');
+              formDiv.slideDown();
+
+              // Cancel button click
+              cancelButton.on('click', function () {
+                formDiv.find('textarea').text('');
+                formDiv.slideUp();
+              });
+
+              // Retweet button click
+              retweetButton.on('click', function () {
+
+                scope.sendStatusRetweet(tweetId);
+
+                scope.$on('retweetSuccess', function (event, args) {
+                  div.css('color', 'yellow');
+                  div.data('is-retweeted', true);
+                  div.data('retweet-id', args.tweetId);
+                  formDiv.slideUp();
+                });
+
+              });
+
+            });
+          }
 
         });
 
@@ -238,12 +268,4 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
     }
   };
 
-}]);
-
-app.directive('retweetModal', [function () {
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: "components/tweet/views/retweet.html"
-  };
 }]);

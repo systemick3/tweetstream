@@ -82,7 +82,7 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
 
       tweetFactory.removeStatus(statusData)
         .success(function (data) {
-          $rootScope.$broadcast('retweetSuccess', { tweetId: tweetId });
+          $rootScope.$broadcast('removeSuccess', { tweetId: tweetId });
         })
         .error(function (err) {
           console.log('ERROR');

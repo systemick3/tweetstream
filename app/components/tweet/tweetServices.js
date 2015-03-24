@@ -2,6 +2,7 @@ var app = angular.module('twitterapp');
 
 app.factory('tweetFactory', ['$http', 'tConfig', function ($http, tConfig) {
   var favouritePromise,
+    retweetFormPromise,
     replyFormPromise;
 
   return {
@@ -45,6 +46,18 @@ app.factory('tweetFactory', ['$http', 'tConfig', function ($http, tConfig) {
       }
 
       return replyFormPromise;
+    },
+
+    getRetweetForm: function () {
+      var formUrl = 'components/tweet/views/retweetForm.html';
+
+      if (!retweetFormPromise) {
+        retweetFormPromise = $http.get(formUrl).then(function (response) {
+          return response;
+        });
+      }
+
+      return retweetFormPromise;
     },
 
     postStatusFavourite: function (params, destroy) {
