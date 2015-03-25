@@ -1,5 +1,48 @@
 var app = angular.module('twitterapp');
 
+var syncFavourites = function (tweetId, isFavourite) {
+
+  $('#stream .tweet').each(function (index) {
+    var tweet = $(this),
+      colour = (isFavourite) ? 'yellow' : '#5E6D70',
+      favouriteDiv;
+
+    if (tweet.find('.tweet-id').text() === tweetId) {
+      favouriteDiv = tweet.find('.favourite-icon');
+      favouriteDiv.css('color', colour);
+      favouriteDiv.data('is-favourite', isFavourite);
+      return false;
+    }
+  });
+
+  $('#favouriteTweets .tweet').each(function (index) {
+    var tweet = $(this),
+      colour = (isFavourite) ? 'yellow' : '#5E6D70',
+      favouriteDiv;
+
+    if (tweet.find('.tweet-id').text() === tweetId) {
+      favouriteDiv = tweet.find('.favourite-icon');
+      favouriteDiv.css('color', colour);
+      favouriteDiv.data('is-favourite', isFavourite);
+      return false;
+    }
+  });
+
+  $('#userTweets .tweet').each(function (index) {
+    var tweet = $(this),
+      colour = (isFavourite) ? 'yellow' : '#5E6D70',
+      favouriteDiv;
+
+    if (tweet.find('.tweet-id').text() === tweetId) {
+      favouriteDiv = tweet.find('.favourite-icon');
+      favouriteDiv.css('color', colour);
+      favouriteDiv.data('is-favourite', isFavourite);
+      return false;
+    }
+  });
+
+};
+
 app.directive('tweetForm', [function () {
 
   return {
@@ -56,7 +99,7 @@ app.directive('tweetForm', [function () {
 
 }]);
 
-app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootScope, tweetFactory) {
+app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', '$compile', function ($rootScope, tweetFactory, $compile) {
 
   return {
     restrict: 'E',
@@ -68,19 +111,18 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
         replyIcon,
         retweetIcon,
         replyFormDiv,
+        retweetFormDiv,
         idDiv,
         newTweet;
 
       scope.$on('newTweetInStream', function (event, args) {
         newTweet = scope.streamtweets[0];
-        favouriteIcon = angular.element('<div>').addClass('action-icon').data('id-str', newTweet.id_str).data('is-favourite', false).append(angular.element('<i title = "Favourite" class="fa fa-star">'));
-        replyIcon = angular.element('<div>').addClass('action-icon').data('id-str', newTweet.id_str).append(angular.element('<i title="Reply" class="fa fa-reply">'));
-        retweetIcon = angular.element('<div>').addClass('action-icon').data('id-str', newTweet.id_str).append(angular.element('<i title="Retweet" class="fa fa-retweet">'));
+        favouriteIcon = angular.element('<div>').addClass('action-icon').addClass('favourite-icon').data('id-str', newTweet.id_str).data('is-favourite', false).append(angular.element('<i title = "Favourite" class="fa fa-star">'));
+        replyIcon = angular.element('<div>').addClass('action-icon').addClass('reply-icon').data('id-str', newTweet.id_str).append(angular.element('<i title="Reply" class="fa fa-reply">'));
+        retweetIcon = angular.element('<div>').addClass('action-icon').addClass('retweet-icon').data('id-str', newTweet.id_str).append(angular.element('<i title="Retweet" class="fa fa-retweet">'));
         replyFormDiv = angular.element('<div class="reply-form" style="display:none;">');
         retweetFormDiv = angular.element('<div class="retweet-form" style="display:none;">');
-        idDiv = angular.element('<div class="tweet-id" style="display:none;">').text(newTweet.id_str);
         panelDiv = angular.element(document.getElementById(newTweet.id_str));
-        panelDiv.append(idDiv);
         iconsDiv = angular.element('<div class="icons">');
         iconsDiv.append(replyIcon);
         iconsDiv.append(retweetIcon);
@@ -104,9 +146,11 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
             if (!destroy) {
               div.css('color', 'yellow');
               div.data('is-favourite', true);
+              syncFavourites(id_str, true);
             } else {
               div.css('color', '#5E6D70');
               div.data('is-favourite', false);
+              syncFavourites(id_str, false);
             }
           });
         });
@@ -148,7 +192,7 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
               }
             }
 
-            formDiv = parentDiv.children('.reply-form');
+            formDiv = parentDiv.find('.reply-form');
             formDiv.html(promise.data);
             textarea = formDiv.find('textarea');
             textarea.text(screenNames.join(' '));
@@ -233,7 +277,7 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
               parentDiv = div.parents('.tweet');
               tweetId = parentDiv.find('.tweet-id').text();
               formDiv = parentDiv.children('.retweet-form');
-              formDiv.html(promise.data);
+              formDiv.html($compile(promise.data)(scope));
               formDiv.find('.tweet-id').attr('value', selectedTweet.id_str);
               cancelButton = formDiv.find('.cancel-retweet');
               retweetButton = formDiv.find('.send-retweet');
@@ -268,4 +312,148 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', function ($rootSc
     }
   };
 
+}]);
+
+app.directive('iconPanel', ['$rootScope', 'tweetFactory', function ($rootScope, tweetFactory) {
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: "components/tweet/views/tweetIconPanel.html",
+    link: function (scope, element, attrs) {
+      var favouriteDiv = element.find('.favourite-icon'),
+        retweetDiv = element.find('.retweet'),
+        replyDiv = element.find('.reply'),
+        tweetList;
+
+      if (attrs.context === 'userTweets') {
+        retweetDiv.hide();
+        favouriteDiv.data('is-favourite', false);
+        tweetList = $rootScope.userTweets;
+      } else if (attrs.context == 'favouriteTweets') {
+        favouriteDiv.data('is-favourite', true);
+        favouriteDiv.css('color', 'yellow');
+        tweetList = $rootScope.favouriteTweets;
+      }
+
+      favouriteDiv.on('click', function () {
+        var div = $(this),
+          id_str,
+          destroy = div.data('is-favourite');
+
+        id_str = div.parents('.panel').find('.tweet-id').text();
+
+        alert(attrs.context);
+
+        $rootScope.favouriteTweet(id_str, destroy, function (err, data) {
+          if (err) {
+            $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to reach Twitter to favourite tweet'});
+          }
+
+          if (!destroy) {
+            div.css('color', 'yellow');
+            div.data('is-favourite', true);
+            syncFavourites(id_str, true);
+          } else {
+            div.css('color', '#5E6D70');
+            div.data('is-favourite', false);
+            syncFavourites(id_str, false);
+          }
+        });
+      });
+
+      replyDiv.on('click', function () {
+        var formDiv,
+          textarea,
+          charCountDiv,
+          charsRemaining,
+          MAX_CHARS = 140,
+          parentDiv,
+          screenName,
+          tweetId,
+          replyButton,
+          replyTweet = {},
+          selectedTweet,
+          screenNames = [],
+          clicked = $(this);
+
+        tweetFactory.getReplyForm().then(function (promise) {
+          var originalMessage,
+            i;
+
+          parentDiv = clicked.parents('.tweet');
+          screenName = parentDiv.find('.screen-name').text();
+          tweetId = parentDiv.find('.tweet-id').text();
+          originalMessage = parentDiv.find('.text');
+          screenNames.push(screenName);
+
+          for (i = 0; i < tweetList.length; i++) {
+            if (tweetList[i].id_str === tweetId) {
+              selectedTweet = tweetList[i];
+            }
+          }
+
+          if (selectedTweet && selectedTweet.user_mentions && selectedTweet.user_mentions.length > 0) {
+            for (i = 0; i < selectedTweet.user_mentions.length; i++) {
+              screenNames.push('@' + selectedTweet.user_mentions[i].screen_name);
+            }
+          }
+
+          formDiv = parentDiv.find('.reply-form');
+          formDiv.html(promise.data);
+          textarea = formDiv.find('textarea');
+          textarea.text(screenNames.join(' '));
+          charCountDiv = formDiv.find('.char-count');
+          charsRemaining = MAX_CHARS - textarea.val().length;
+          charCountDiv.text(charsRemaining);
+          formDiv.find('.tweet-id').attr('value', selectedTweet.id_str);
+          cancelButton = formDiv.find('.cancel-reply');
+          replyButton = formDiv.find('.send-reply');
+          formDiv.slideDown();
+
+          // Increment/decrement the char count
+          // when new chars are entered into the textarea
+          textarea.keyup(function () {
+
+            charsRemaining = MAX_CHARS - textarea.val().length;
+            charCountDiv.text(charsRemaining);
+
+            if (charsRemaining < 0) {
+              charCountDiv.css('color', 'red');
+              replyButton.attr('disabled', 'true');
+            } else {
+              charCountDiv.css('color', '#5E6D70');
+              replyButton.removeAttr('disabled');
+            }
+
+          });
+
+          // Cancel button click
+          cancelButton.on('click', function () {
+            formDiv.find('textarea').text('');
+            formDiv.slideUp();
+          });
+
+          // Reply button click
+          replyButton.on('click', function () {
+            replyTweet.message = formDiv.find('textarea').val();
+            replyTweet.tweetId = formDiv.find('.tweet-id').attr('value');
+
+            scope.sendStatusUpdate(replyTweet);
+
+            scope.$on('replySuccess', function (event, args) {
+              formDiv.find('textarea').text('');
+              formDiv.slideUp();
+            });
+
+          });
+
+        });
+
+      });
+
+      retweetDiv.on('click', function () {
+        //mikeTest();
+      });
+    }
+  };
 }]);

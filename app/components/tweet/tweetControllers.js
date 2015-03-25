@@ -12,6 +12,11 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
   $rootScope.showRetweet = false;
   $rootScope.retweetedTweet = false;
 
+  $scope.$on('testingTweet', function (event, args) {
+    $rootScope.userTweets.push(args.tweet);
+    $rootScope.userTweetsExist = true;
+  });
+
   $rootScope.sendStatusUpdate = function (tweet) {
     // This function is used for new tweets and replies
     // If a reply the id of the original tweet is attached to the tweet param
@@ -85,14 +90,14 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
           $rootScope.$broadcast('removeSuccess', { tweetId: tweetId });
         })
         .error(function (err) {
-          console.log('ERROR');
-          console.log(err);
+          $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to remove status.'});
         });
     }
   };
 
   $rootScope.favouriteTweet = function (id_str, destroy, callback) {
     var userId = $scope.user.id_str,
+      found = false,
       i,
       removeIndex = -1,
       params = {};
@@ -103,6 +108,7 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
     tweetFactory.postStatusFavourite(params, destroy).then(function (data) {
 
       if (destroy) {
+        // Find the tweet to be removed
         for (i = 0; i < $rootScope.favouriteTweets.length; i++) {
           if ($rootScope.favouriteTweets[i].id_str === id_str) {
             removeIndex = i;
@@ -111,25 +117,39 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
         }
 
         if (removeIndex > -1) {
+          // If found - remove it
           $rootScope.favouriteTweets.splice(removeIndex, 1);
+          $rootScope.favouritesExist = $scope.favouriteTweets.length > 0;
           callback(null, data);
         }
 
       } else {
+        // Attempt to find the tweet in the stream
         for (i = 0; i < $scope.streamtweets.length; i++) {
           if ($scope.streamtweets[i].id_str === id_str) {
             $rootScope.favouriteTweets = $rootScope.favouriteTweets.concat(tweetFactory.processTweets([$scope.streamtweets[i]]));
+            $rootScope.favouritesExist = true;
+            found = true;
             callback(null, data);
             break;
           }
         }
+
+        // If the tweet wasn't in the stream it will be in the user's tweets
+        if (!found) {
+          for (i = 0; i < $rootScope.userTweets.length; i++) {
+            if ($rootScope.userTweets[i].id_str === id_str) {
+              $rootScope.favouriteTweets = $rootScope.favouriteTweets.concat(tweetFactory.processTweets([$rootScope.userTweets[i]]));
+              $rootScope.favouritesExist = true;
+              callback(null, data);
+              break;
+            }
+          }
+        }
       }
 
-      $rootScope.favouritesExist = $scope.favouriteTweets.length > 0;
-
     }, function (err) {
-      callback(err);
-      console.log('FAVOURITE ERROR')
+      $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to contact Twitter.'});
     });
 
   };

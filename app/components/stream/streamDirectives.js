@@ -14,13 +14,15 @@ app.directive('streamTweetList', ['$rootScope', 'userFactory', function ($rootSc
             link = angular.element('<a>').attr('href', 'https://twitter.com/' + newTweet.user.screen_name),
             nameSpan = angular.element('<span>').text(newTweet.user.name),
             screenNameSpan = angular.element('<span class="screen-name">').text('@' + newTweet.user.screen_name),
-            textDiv = angular.element('<div>').attr('class', 'text').html(newTweet.display_text);
+            textDiv = angular.element('<div>').attr('class', 'text').html(newTweet.display_text),
+            idDiv = angular.element('<div class="tweet-id" style="display:none;">').text(newTweet.id_str);
 
           link.append(nameSpan).append(screenNameSpan);
           nameDiv.append(link);
           link.after(newTweet.short_date);
           panelDiv.append(nameDiv);
           panelDiv.append(textDiv);
+          panelDiv.append(idDiv);
           panelDiv.hide();
           panelDiv.css('opacity', 0);
           element.prepend(panelDiv);

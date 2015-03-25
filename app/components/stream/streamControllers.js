@@ -8,18 +8,17 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
     defaultStreamFilterText = 'No filter set.',
     MAX_TWEETS = 20;
 
+  var testingTweet = {
+    created_at: 'Tue Mar 24 15:51:16 +0000 2015',
+    display_text: 'Testing, testing 1 2 3',
+    id_str: '123456789',
+    short_date: 'Tue Mar 24 15:51'
+  };
+  //$rootScope.$broadcast('testingTweet', {tweet: testingTweet});
+
   $scope.streamtweets = [];
 
   userFactory.userSessionData().then(function (response) {
-
-    var shuffle = function (o) {
-      var j,
-        x,
-        i;
-
-      for (j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-      return o;
-    };
 
     var getFilteredTweets = function (tweets, filters, results) {
       var i, filter = filters[0];

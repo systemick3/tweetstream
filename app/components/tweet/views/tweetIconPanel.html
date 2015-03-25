@@ -1,5 +1,11 @@
 <div class="icon-panel">
-  <div class="action-icon"><i class="fa fa-reply"></i></div>
-  <div class="action-icon"><i class="fa fa-retweet"></i></div>
-  <div class="action-icon"><i class="fa fa-star"></i></div>
+  <div class="icons">
+    <div class="action-icon reply-icon"><i title="Reply" class="fa fa-reply"></i></div>
+    <div class="action-icon retweet-icon"><i title="Retweet" class="fa fa-retweet"></i></div>
+    <div class="action-icon favourite-icon"><i title="Favourite" class="fa fa-star"></i></div>
+    <div>{{ tweet.id_str }}</div>
+  </div>
+  <div class="clearfix>"></div>
+  <div class="reply-form" style="display:none;"></div>
+  <div class="retweet-form" style="display:none;"></div>
 </div>

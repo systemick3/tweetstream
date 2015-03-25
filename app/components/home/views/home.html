@@ -42,7 +42,7 @@
 
 			<div class="stream-state" ng-hide="streamPaused"><img src="/assets/images/loading.gif" /> <span>Loading tweets ... </span></div>
 			<div class="stream-state" ng-show="streamPaused">Stream is currently paused</span></div>
-			<div class="stream" style="min-height: 500px" data-stream-tweet-list="streamTweets" class="ngFade"></div>
+			<div id="stream" class="stream" style="min-height: 500px" data-stream-tweet-list="streamTweets" class="ngFade"></div>
 
 		</div>
 
@@ -59,34 +59,38 @@
 
 			<div ng-show="userTweetsExist">
 				<h3>Your tweets</h3>
-				<div class="panel user-tweets">
-					<div class="error" ng-show="userTweetError">{{ userTweetError }}</div>
-					<div class="user-tweet panel tweet ngFade" ng-repeat="userTweet in userTweets">
+				<div id="userTweets" class="panel user-tweets">
+					<div class="user-tweet panel tweet ngFade" data-tweet-id="{{ tweet.id_str }}" ng-repeat="tweet in userTweets">
 						<div class="name">
-							<a href="http://twitter.com/{{ userTweet.user.screen_name }}">
-								<span>{{ userTweet.user.name }}</span>
-								<span>{{ userTweet.user.screen_name }}</span>
-								{{ userTweet.short_date }}
+							<a href="http://twitter.com/{{ tweet.user.screen_name }}">
+								<span>{{ tweet.user.name }}</span>
+								<span class="screen-name">@{{ tweet.user.screen_name }}</span>
+								{{ tweet.short_date }}
 							</a>
 						</div>
-						<div class="text" ng-bind-html="userTweet.display_text"></div>
+						<div class="text" ng-bind-html="tweet.display_text"></div>
+						<div class="tweet-id" style="display:none;">{{ tweet.id_str }}</div>
+						<icon-panel context="userTweets"></icon-panel>
+						<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>
 
 			<div ng-show="favouritesExist">
 				<h3>Favourites</h3>
-				<div class="panel favourites">
-					<div class="error" ng-show="favouriteError">{{ favouriteError }}</div>
-					<div class="favourite panel tweet ngFade" ng-repeat="favourite in favouriteTweets">
+				<div id="favouriteTweets" class="panel favourites">
+					<div class="favourite panel tweet ngFade" ng-repeat="tweet in favouriteTweets">
 						<div class="name">
-							<a href="http://twitter.com/{{ favourite.user.screen_name }}">
-								<span>{{ favourite.user.name }}</span>
-								<span>{{ favourite.user.screen_name }}</span>
-								{{ favourite.short_date }}
+							<a href="http://twitter.com/{{ tweet.user.screen_name }}">
+								<span>{{ tweet.user.name }}</span>
+								<span class="screen-name">@{{ tweet.user.screen_name }}</span>
+								{{ tweet.short_date }}
 							</a>
 						</div>
-						<div class="text" ng-bind-html="favourite.display_text"></div>
+						<div class="text" ng-bind-html="tweet.display_text"></div>
+						<div class="tweet-id" style="display:none;">{{ tweet.id_str }}</div>
+						<icon-panel context="favouriteTweets"></icon-panel>
+						<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>
