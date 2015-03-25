@@ -1,8 +1,7 @@
 var app = angular.module('twitterapp');
 
 app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', 'streamFactory', 'tweetFactory', function ($scope, $rootScope, socket, userFactory, streamFactory, tweetFactory) {
-  var oldTweets = [],
-    newTweets,
+  var start = new Date().getTime(),
     defaultStreamState = 'not paused',
     defaultButtonText = 'Pause stream',
     defaultStreamFilterText = 'No filter set.',
@@ -36,21 +35,39 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
     };
 
     socket.on('tweets', function (data) {
+      var oldTweets = [],
+        now,
+        INTERVAL = 10000,
+        newTweets;
 
       if (!$rootScope.streamPaused) {
 
-        if ($scope.streamtweets.length >= MAX_TWEETS) {
-          // If we already have max tweets lose the oldest
-          $scope.streamtweets.pop();
-          oldTweets = $scope.streamtweets;
-        } else {
-          oldTweets = $scope.streamtweets;
-        }
+        now = new Date().getTime();
 
-        if ($rootScope.streamFilters.length > 0) {
-          newTweets = getFilteredTweets(data, $rootScope.streamFilters, []);
+        // If we don't yet have any tweets then add one immediately
+        if ($scope.streamtweets.length === 0) {
+          if ($rootScope.streamFilters.length > 0) {
+            newTweets = getFilteredTweets(data, $rootScope.streamFilters, []);
+          } else {
+            newTweets = data.slice(0, 1);
+          }
         } else {
-          newTweets = data.slice(0, 1);
+          if (now - start > INTERVAL) {
+            if ($scope.streamtweets.length >= MAX_TWEETS) {
+              // If we already have max tweets lose the oldest
+              $scope.streamtweets.pop();
+            }
+
+            oldTweets = $scope.streamtweets;
+
+            if ($rootScope.streamFilters.length > 0) {
+              newTweets = getFilteredTweets(data, $rootScope.streamFilters, []);
+            } else {
+              newTweets = data.slice(0, 1);
+            }
+
+            start = new Date().getTime();
+          }
         }
 
         if (newTweets) {
