@@ -342,8 +342,6 @@ app.directive('iconPanel', ['$rootScope', 'tweetFactory', function ($rootScope, 
 
         id_str = div.parents('.panel').find('.tweet-id').text();
 
-        alert(attrs.context);
-
         $rootScope.favouriteTweet(id_str, destroy, function (err, data) {
           if (err) {
             $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to reach Twitter to favourite tweet'});
