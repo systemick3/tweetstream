@@ -1,45 +1,53 @@
 var app = angular.module('twitterapp');
 
+var favouriteTweet = function (div, $rootScope) {
+  var id_str,
+    destroy = div.data('is-favourite');
+
+  id_str = div.data('id-str');
+  $rootScope.favouriteTweet(id_str, destroy, function (err, data) {
+    if (err) {
+      $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to reach Twitter'});
+    }
+
+    if (!destroy) {
+      div.css('color', 'yellow');
+      div.data('is-favourite', true);
+      syncFavourites(id_str, true);
+      $rootScope.addStreamMessage({'type': 'info', 'msg': 'Tweet favourited'});
+    } else {
+      div.css('color', '#5E6D70');
+      div.data('is-favourite', false);
+      syncFavourites(id_str, false);
+      $rootScope.addStreamMessage({'type': 'info', 'msg': 'Favourite cancelled'});
+    }
+
+  });
+};
+
 var syncFavourites = function (tweetId, isFavourite) {
+  var i, str, list, ids = ['#stream', '#favouriteTweets', '#userTweets'];
 
-  $('#stream .tweet').each(function (index) {
-    var tweet = $(this),
-      colour = (isFavourite) ? 'yellow' : '#5E6D70',
-      favouriteDiv;
+  for (i = 0; i < ids.length; i++) {
+    str = '' + ids[i] + ' .tweet';
+    list = $(str);
 
-    if (tweet.find('.tweet-id').text() === tweetId) {
-      favouriteDiv = tweet.find('.favourite-icon');
-      favouriteDiv.css('color', colour);
-      favouriteDiv.data('is-favourite', isFavourite);
-      return false;
+    if (angular.isDefined(list)) {
+      list.each(function (index) {
+        var tweet = $(this),
+          colour = (isFavourite) ? 'yellow' : '#5E6D70',
+          favouriteDiv;
+
+        if (tweet.find('.tweet-id').text() === tweetId) {
+          favouriteDiv = tweet.find('.favourite-icon');
+          favouriteDiv.css('color', colour);
+          favouriteDiv.data('is-favourite', isFavourite);
+          return false;
+        }
+      });
     }
-  });
 
-  $('#favouriteTweets .tweet').each(function (index) {
-    var tweet = $(this),
-      colour = (isFavourite) ? 'yellow' : '#5E6D70',
-      favouriteDiv;
-
-    if (tweet.find('.tweet-id').text() === tweetId) {
-      favouriteDiv = tweet.find('.favourite-icon');
-      favouriteDiv.css('color', colour);
-      favouriteDiv.data('is-favourite', isFavourite);
-      return false;
-    }
-  });
-
-  $('#userTweets .tweet').each(function (index) {
-    var tweet = $(this),
-      colour = (isFavourite) ? 'yellow' : '#5E6D70',
-      favouriteDiv;
-
-    if (tweet.find('.tweet-id').text() === tweetId) {
-      favouriteDiv = tweet.find('.favourite-icon');
-      favouriteDiv.css('color', colour);
-      favouriteDiv.data('is-favourite', isFavourite);
-      return false;
-    }
-  });
+  }
 
 };
 
@@ -133,26 +141,7 @@ app.directive('tweetIconPanel', ['$rootScope', 'tweetFactory', '$compile', funct
         panelDiv.append(retweetFormDiv);
 
         favouriteIcon.on('click', function () {
-          var div = $(this),
-            id_str,
-            destroy = div.data('is-favourite');
-
-          id_str = div.data('id-str');
-          $rootScope.favouriteTweet(id_str, destroy, function (err, data) {
-            if (err) {
-              $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to reach Twitter'});
-            }
-
-            if (!destroy) {
-              div.css('color', 'yellow');
-              div.data('is-favourite', true);
-              syncFavourites(id_str, true);
-            } else {
-              div.css('color', '#5E6D70');
-              div.data('is-favourite', false);
-              syncFavourites(id_str, false);
-            }
-          });
+          favouriteTweet($(this), $rootScope);
         });
 
         replyIcon.on('click', function () {
@@ -321,8 +310,8 @@ app.directive('iconPanel', ['$rootScope', 'tweetFactory', function ($rootScope, 
     templateUrl: "components/tweet/views/tweetIconPanel.html",
     link: function (scope, element, attrs) {
       var favouriteDiv = element.find('.favourite-icon'),
-        retweetDiv = element.find('.retweet'),
-        replyDiv = element.find('.reply'),
+        retweetDiv = element.find('.retweet-icon'),
+        replyDiv = element.find('.reply-icon'),
         tweetList;
 
       if (attrs.context === 'userTweets') {
@@ -336,27 +325,7 @@ app.directive('iconPanel', ['$rootScope', 'tweetFactory', function ($rootScope, 
       }
 
       favouriteDiv.on('click', function () {
-        var div = $(this),
-          id_str,
-          destroy = div.data('is-favourite');
-
-        id_str = div.parents('.panel').find('.tweet-id').text();
-
-        $rootScope.favouriteTweet(id_str, destroy, function (err, data) {
-          if (err) {
-            $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to reach Twitter to favourite tweet'});
-          }
-
-          if (!destroy) {
-            div.css('color', 'yellow');
-            div.data('is-favourite', true);
-            syncFavourites(id_str, true);
-          } else {
-            div.css('color', '#5E6D70');
-            div.data('is-favourite', false);
-            syncFavourites(id_str, false);
-          }
-        });
+        favouriteTweet($(this), $rootScope);
       });
 
       replyDiv.on('click', function () {
