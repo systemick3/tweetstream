@@ -71,6 +71,8 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
         .success(function (data) {
           $rootScope.toggleRetweet();
           $rootScope.$broadcast('retweetSuccess', { tweetId: data.tweet.id_str });
+          $rootScope.userTweets = $rootScope.userTweets.concat(tweetFactory.processTweets([data.tweet]));
+          $rootScope.userTweetsExist = $scope.userTweets.length > 0;
         })
         .error(function (err) {
           $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to send retweet'});
@@ -79,7 +81,10 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
   };
 
   $rootScope.removeStatus = function (tweetId) {
-    var statusData = {};
+    var i,
+      removeIndex,
+      list,
+      statusData = {};
 
     if (angular.isDefined(tweetId)) {
       statusData.tweetId = tweetId;
@@ -88,6 +93,20 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
       tweetFactory.removeStatus(statusData)
         .success(function (data) {
           $rootScope.$broadcast('removeSuccess', { tweetId: tweetId });
+
+          for (i = 0; i < $rootScope.userTweets.length; i++) {
+            if ($rootScope.userTweets[i].id_str === tweetId) {
+              removeIndex = i;
+              break;
+            }
+          }
+
+          if (removeIndex > -1) {
+            // If found - remove it
+            $rootScope.userTweets.splice(removeIndex, 1);
+            $rootScope.userTweetsExist = $scope.userTweets.length > 0;
+          }
+
         })
         .error(function (err) {
           $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to remove status.'});

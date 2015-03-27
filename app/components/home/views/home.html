@@ -32,9 +32,7 @@
 
 		<div class="error" ng-show="twitterDataError">{{ twitterDataError }}</div>
 
-		<div class="column left" ng-controller="streamCtrl">
-
-			<tweet-icon-panel></tweet-icon-panel>
+		<div class="column left" data-tweet-icon-panel="streamTweets" ng-controller="streamCtrl">
 
 			<h3>Tweets</h3>
 
