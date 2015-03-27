@@ -107,13 +107,79 @@ var replyToTweet = function (clicked, scope, tweetFactory, tweetList) {
       scope.$on('replySuccess', function (event, args) {
         formDiv.find('textarea').text('');
         formDiv.slideUp();
-        $rootScope.addStreamMessage({'type': 'info', 'msg': 'Reply sent'});
+        scope.addStreamMessage({'type': 'info', 'msg': 'Reply sent'});
       });
 
     });
 
   });
 
+};
+
+var retweetTweet = function (div, scope, tweetFactory, tweetList) {
+  var i,
+    selectedTweet,
+    retweet = {},
+    destroy = div.data('is-retweeted'),
+    tweetId = div.data('id-str');
+
+    for (i = 0; i < tweetList.length; i++) {
+      if (tweetList[i].id_str === tweetId) {
+        selectedTweet = tweetList[i];
+        break;
+      }
+    }
+
+    if (destroy) {
+      scope.removeStatus(div.data('retweet-id'));
+
+      scope.$on('removeSuccess', function (event, args) {
+        div.css('color', '#5E6D70');
+        div.data('is-retweeted', false);
+        div.data('retweet-id', false);
+        syncRetweets(tweetId, false, false);
+        scope.addStreamMessage({'type': 'info', 'msg': 'Tweet removed.'});
+      });
+
+    } else {
+      tweetFactory.getRetweetForm().then(function (promise) {
+        parentDiv = div.parents('.tweet');
+        tweetId = parentDiv.find('.tweet-id').text();
+        formDiv = parentDiv.find('.retweet-form');
+        formDiv.html(promise.data);
+        formDiv.find('.tweet-id').attr('value', selectedTweet.id_str);
+        cancelButton = formDiv.find('.cancel-retweet');
+        retweetButton = formDiv.find('.send-retweet');
+        formDiv.slideDown();
+
+        // Cancel button click
+        cancelButton.on('click', function () {
+          formDiv.find('textarea').text('');
+          formDiv.slideUp();
+        });
+
+        // Retweet button click
+        retweetButton.on('click', function () {
+
+          scope.sendStatusRetweet(tweetId);
+
+          scope.$on('retweetSuccess', function (event, args) {
+            if (args.originalTweetId === tweetId) {
+              div.css('color', 'yellow');
+              div.data('is-retweeted', true);
+              div.data('retweet-id', args.retweetId);
+              syncRetweets(tweetId, true, args.retweetId);
+              scope.addStreamMessage({'type': 'info', 'msg': 'Retweet sent'});
+              formDiv.slideUp();
+            }
+          });
+
+        });
+
+      }, function (err) {
+        scope.addStreamMessage({'type': 'error', 'msg': 'Failed to send retweet.'});
+      });
+    }
 };
 
 var syncFavourites = function (tweetId, isFavourite) {
@@ -142,7 +208,7 @@ var syncFavourites = function (tweetId, isFavourite) {
 
 };
 
-var syncRetweets = function (tweetId, isRetweeted) {
+var syncRetweets = function (tweetId, isRetweeted, retweetId) {
   var i, str, list, ids = ['#stream', '#favouriteTweets'];
 
   for (i = 0; i < ids.length; i++) {
@@ -159,6 +225,7 @@ var syncRetweets = function (tweetId, isRetweeted) {
           retweetDiv = tweet.find('.retweet-icon');
           retweetDiv.css('color', colour);
           retweetDiv.data('is-retweeted', isRetweeted);
+          retweetDiv.data('retweet-id', retweetId);
           return false;
         }
       });
@@ -294,80 +361,9 @@ app.directive('iconPanel', ['$rootScope', 'tweetFactory', function ($rootScope, 
       });
 
       retweetDiv.on('click', function () {
-        var div = $(this),
-          i,
-          selectedTweet,
-          retweet = {},
-          destroy = div.data('is-retweeted'),
-          tweetId = $(this).data('id-str');
-
-        for (i = 0; i < tweetList.length; i++) {
-          if (tweetList[i].id_str === tweetId) {
-            selectedTweet = tweetList[i];
-            $rootScope.retweetedTweet = selectedTweet;
-            break;
-          }
-        }
-
-
-
-        // We will also need to check the favourites
-
-        if (destroy) {
-          scope.removeStatus(div.data('retweet-id'));
-
-          scope.$on('removeSuccess', function (event, args) {
-            div.css('color', '#5E6D70');
-            div.data('is-retweeted', false);
-            div.data('retweet-id', false);
-            syncRetweets(tweetId, false);
-            $rootScope.addStreamMessage({'type': 'info', 'msg': 'Tweet removed.'});
-          });
-
-        } else {
-          tweetFactory.getRetweetForm().then(function (promise) {
-            parentDiv = div.parents('.tweet');
-            tweetId = parentDiv.find('.tweet-id').text();
-            formDiv = parentDiv.find('.retweet-form');
-            formDiv.html(promise.data);
-            formDiv.find('.tweet-id').attr('value', selectedTweet.id_str);
-            cancelButton = formDiv.find('.cancel-retweet');
-            retweetButton = formDiv.find('.send-retweet');
-            formDiv.slideDown();
-
-            // Cancel button click
-            cancelButton.on('click', function () {
-              formDiv.find('textarea').text('');
-              formDiv.slideUp();
-            });
-
-            // Retweet button click
-            retweetButton.on('click', function () {
-
-              scope.sendStatusRetweet(tweetId);
-
-              scope.$on('retweetSuccess', function (event, args) {
-                div.css('color', 'yellow');
-                div.data('is-retweeted', true);
-                div.data('retweet-id', args.tweetId);
-                syncRetweets(tweetId, true);
-                $rootScope.addStreamMessage({'type': 'info', 'msg': 'Retweet sent'});
-                formDiv.slideUp();
-              });
-
-            });
-
-          }, function (err) {
-            console.log('ERROR');
-            console.log(err);
-          });
-        }
-
+        retweetTweet($(this), scope, tweetFactory, tweetList);
       });
 
-      // retweetDiv.on('click', function () {
-      //   alert('retweet');
-      // });
     }
   };
 }]);

@@ -56,10 +56,6 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
 
   };
 
-  $rootScope.toggleRetweet = function () {
-    $rootScope.showRetweet = !$rootScope.showRetweet;
-  };
-
   $rootScope.sendStatusRetweet = function (tweetId) {
     var retweetData = {};
 
@@ -69,8 +65,7 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
 
       tweetFactory.sendStatusRetweet(retweetData)
         .success(function (data) {
-          $rootScope.toggleRetweet();
-          $rootScope.$broadcast('retweetSuccess', { tweetId: data.tweet.id_str });
+          $rootScope.$broadcast('retweetSuccess', { retweetId: data.tweet.id_str, originalTweetId: tweetId });
           $rootScope.userTweets = $rootScope.userTweets.concat(tweetFactory.processTweets([data.tweet]));
           $rootScope.userTweetsExist = $scope.userTweets.length > 0;
         })
