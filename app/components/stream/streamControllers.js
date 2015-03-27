@@ -5,6 +5,7 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
     defaultStreamState = 'not paused',
     defaultButtonText = 'Pause stream',
     defaultStreamFilterText = 'No filter set.',
+    tweetBuffer = [],
     MAX_TWEETS = 20;
 
   var testingTweet = {
@@ -20,9 +21,9 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
   userFactory.userSessionData().then(function (response) {
 
     var getFilteredTweets = function (tweets, filters, results) {
-      var i, filter = filters[0];
+      var i, j, filter = filters[0];
 
-      for (i = 0; i < filters.length; i++) {
+      for (i = 0; i < tweets.length; i++) {
         if (tweets[i].text.indexOf(filter) > -1) {
           results.push(tweets[i]);
           return results;
@@ -52,6 +53,8 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
             newTweets = data.slice(0, 1);
           }
         } else {
+          tweetBuffer = tweetBuffer.concat(data);
+
           if (now - start > INTERVAL) {
             if ($scope.streamtweets.length >= MAX_TWEETS) {
               // If we already have max tweets lose the oldest
@@ -61,12 +64,13 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
             oldTweets = $scope.streamtweets;
 
             if ($rootScope.streamFilters.length > 0) {
-              newTweets = getFilteredTweets(data, $rootScope.streamFilters, []);
+              newTweets = getFilteredTweets(tweetBuffer, $rootScope.streamFilters, []);
             } else {
               newTweets = data.slice(0, 1);
             }
 
             start = new Date().getTime();
+            tweetBuffer = [];
           }
         }
 
