@@ -4,7 +4,7 @@ app.directive('streamTweetList', ['$rootScope', 'userFactory', function ($rootSc
   return {
     replace: true,
     link: function (scope, element, attrs) {
-      var MAX_TWEETS = 20;
+      var lastTweet;
 
       scope.$watch('streamtweets', function () {
         if (scope.streamtweets.length > 0) {
@@ -29,10 +29,6 @@ app.directive('streamTweetList', ['$rootScope', 'userFactory', function ($rootSc
           panelDiv.slideDown('fast');
           $rootScope.$broadcast('newTweetInStream', {tweetId: newTweet.id_str});
 
-          if (scope.streamtweets.length > MAX_TWEETS) {
-            element.find('.tweet:last-child').fadeOut().remove();
-          }
-
           panelDiv.animate({
             opacity: 1,
           }, 600);
@@ -40,6 +36,14 @@ app.directive('streamTweetList', ['$rootScope', 'userFactory', function ($rootSc
 
       });
 
+      // Current limit is 20.
+      // Remove last tweet when we exceed that limit
+      scope.$on('tweetRemovedFromStream', function (event, args) {
+        lastTweet = element.find('.tweet:last-child');
+        lastTweet.fadeOut().remove();
+      });
+
+      // Unable to find any tweets for the current filter
       scope.$on('noFilteredTweets', function (event, args) {
         scope.addStreamMessage({'type': 'info', 'msg': 'No tweets in the last few seconds tagged ' + args.filter});
       });

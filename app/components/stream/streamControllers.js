@@ -59,6 +59,7 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
             if ($scope.streamtweets.length >= MAX_TWEETS) {
               // If we already have max tweets lose the oldest
               $scope.streamtweets.pop();
+              $rootScope.$broadcast('tweetRemovedFromStream');
             }
 
             oldTweets = $scope.streamtweets;
