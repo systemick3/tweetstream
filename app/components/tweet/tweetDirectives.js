@@ -46,7 +46,6 @@ var replyToTweet = function (clicked, scope, tweetFactory, tweetList) {
 
     parentDiv = clicked.parents('.tweet');
     screenName = parentDiv.find('.screen-name').text();
-    //tweetId = parentDiv.find('.tweet-id').text();
     tweetId = clicked.data('id-str');
     screenNames.push(screenName);
 
@@ -74,22 +73,7 @@ var replyToTweet = function (clicked, scope, tweetFactory, tweetList) {
     replyButton = formDiv.find('.send-reply');
     formDiv.slideDown();
 
-    // Increment/decrement the char count
-    // when new chars are entered into the textarea
-    textarea.keyup(function () {
-
-      charsRemaining = MAX_CHARS - textarea.val().length;
-      charCountDiv.text(charsRemaining);
-
-      if (charsRemaining < 0) {
-        charCountDiv.css('color', 'red');
-        replyButton.attr('disabled', 'true');
-      } else {
-        charCountDiv.css('color', '#5E6D70');
-        replyButton.removeAttr('disabled');
-      }
-
-    });
+    textarea.on('keyup', handleTextarea);
 
     // Cancel button click
     cancelButton.on('click', function () {
@@ -247,6 +231,26 @@ var syncRetweets = function (tweetId, isRetweeted, retweetId) {
 
 };
 
+var handleTextarea = function (event) {
+  var MAX_CHARS = 140,
+    charsRemaining,
+    formDiv = $(this).parents('.tweet-form'),
+    charCountDiv = formDiv.find('.char-count'),
+    tweetButton = formDiv.find('.send-tweet'),
+    charCount = $(this).val().length,
+    charsRemaining = MAX_CHARS - charCount;
+
+  charCountDiv.text(charsRemaining);
+
+  if (charsRemaining < 0) {
+    charCountDiv.css('color', 'red');
+    tweetButton.attr('disabled', 'true');
+  } else {
+    charCountDiv.css('color', '#5E6D70');
+    tweetButton.removeAttr('disabled');
+  }
+};
+
 app.directive('tweetForm', [function () {
 
   return {
@@ -277,23 +281,7 @@ app.directive('tweetForm', [function () {
         }
       });
 
-      // Can we refactor this as we use this code in 2 different places
-      textarea.keyup(function () {
-        var charsRemaining,
-          charCount = textarea.val().length;
-
-        charsRemaining = MAX_CHARS - charCount;
-        charCountDiv.text(charsRemaining);
-
-        if (charsRemaining < 0) {
-          charCountDiv.css('color', 'red');
-          tweetButton.attr('disabled', 'true');
-        } else {
-          charCountDiv.css('color', '#5E6D70');
-          tweetButton.removeAttr('disabled');
-        }
-
-      });
+      textarea.on('keyup', handleTextarea);
 
       scope.$on('tweetSuccess', function (event, args) {
         scope.addStreamMessage({'type': 'info', 'msg': 'Your tweet has been sent.'});

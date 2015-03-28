@@ -1,4 +1,4 @@
-<form name="newTweetForm" method="post" novalidate ng-submit="sendStatusUpdate(newTweet)">
+<form name="newTweetForm" class="tweet-form" method="post" novalidate ng-submit="sendStatusUpdate(newTweet)">
   <div class="form-group">
     <label>Tweet</label>
     <textarea class="form-control tweet-text" name="newTweet" rows="1" placeholder="What's happening?" ng-model="newTweet.message" required /></textarea>
