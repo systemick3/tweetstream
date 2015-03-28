@@ -63,10 +63,10 @@
         </div>
 
         <div class="dashboard" ng-show="tweetapp.authorised">
-          <div class="colour-panel blue">
+          <!--<div class="colour-panel blue">
             Stream is currently {{ streamState }}
             <button ng-click="toggleStreamPaused()">{{ buttonText }}</button>
-          </div>
+          </div>-->
           <div class="colour-panel green">
             Click on a trend to only see tweets tagged with that hastag.
             {{ streamFilterText }}
@@ -76,16 +76,6 @@
           </div>
           <div class="colour-panel orange" ng-controller="tweetCtrl">
             <tweet-form></tweet-form>
-            <!--<form name="newTweetForm" method="post" novalidate ng-submit="sendNewTweet(newTweet)">
-              <div class="form-group">
-                <label>Tweet</label>
-                <textarea class="form-control" name="newTweet" ng-model="newTweet.message" required /></textarea>
-                <span class="error" ng-show="newTweetForm.message.$error.required && newTweetForm.message.$dirty">What's happening?</span>
-              </div>
-              <div class="form-group">
-                <button type="submit" ng-disabled="newTweetForm.$invalid" class="btn btn-primary">Send tweet</button>
-              </div>
-            </form>-->
           </div>
           <div class="colour-panel red"></div>
         </div>

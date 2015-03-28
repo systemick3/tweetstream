@@ -1,8 +1,7 @@
 <form name="newTweetForm" class="tweet-form" method="post" novalidate ng-submit="sendStatusUpdate(newTweet)">
   <div class="form-group">
     <label>Tweet</label>
-    <textarea class="form-control tweet-text" name="newTweet" rows="1" placeholder="What's happening?" ng-model="newTweet.message" required /></textarea>
-    <span class="error" ng-show="newTweetForm.message.$error.required && newTweetForm.message.$dirty">What's happening?</span>
+    <textarea class="form-control tweet-text" name="newTweet" rows="1" placeholder="Send a tweet?" ng-model="newTweet.message" required /></textarea>
   </div>
   <div class="char-count">140</div>
   <div class="form-group">

@@ -8602,12 +8602,12 @@ footer {
     border-right: solid 2px #dddddd;
     padding-left: 0;
     padding-right: 2%;
-    width: 75%;
+    width: 65%;
   }
   /* line 447, ../sass/_systemick.scss */
   #page .column.right {
     padding-left: 2%;
-    width: 25%;
+    width: 35%;
   }
   /* line 451, ../sass/_systemick.scss */
   #page .column.right h3 {
