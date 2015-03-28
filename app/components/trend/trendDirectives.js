@@ -18,7 +18,16 @@ app.directive('filterChange', ['$rootScope', function ($rootScope) {
           $(this).attr('title', 'Filter by ' + $(this).text());
         }
       });
-      
+
+      scope.$on('trendsSuccess', function (event, args) {
+        var msg = 'New trends loaded.';
+
+        $rootScope.addStreamMessage({'type': 'info', 'msg': msg});
+      });
+
+      scope.$on('trendsError', function (event, args) {
+        $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to get latest trends from Twitter. Please try again later.'});
+      });
     }
   }
 

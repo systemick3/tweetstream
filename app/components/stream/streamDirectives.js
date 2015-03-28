@@ -40,6 +40,10 @@ app.directive('streamTweetList', ['$rootScope', 'userFactory', function ($rootSc
 
       });
 
+      scope.$on('noFilteredTweets', function (event, args) {
+        scope.addStreamMessage({'type': 'info', 'msg': 'No tweets in the last few seconds tagged ' + args.filter});
+      });
+
     }
   };
 

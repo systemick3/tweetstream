@@ -8,7 +8,7 @@ var favouriteTweet = function (div, $rootScope) {
 
   $rootScope.favouriteTweet(id_str, destroy, function (err, data) {
     if (err) {
-      $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to reach Twitter'});
+      $rootScope.addStreamMessage({'type': 'error', 'msg': 'Error. Unable to favourite tweet.'});
     }
 
     if (!destroy) {
@@ -20,7 +20,7 @@ var favouriteTweet = function (div, $rootScope) {
       div.css('color', '#5E6D70');
       div.data('is-favourite', false);
       syncFavourites(id_str, false);
-      $rootScope.addStreamMessage({'type': 'info', 'msg': 'Favourite cancelled'});
+      $rootScope.addStreamMessage({'type': 'info', 'msg': 'Favourite removed'});
     }
 
   });
@@ -107,7 +107,11 @@ var replyToTweet = function (clicked, scope, tweetFactory, tweetList) {
       scope.$on('replySuccess', function (event, args) {
         formDiv.find('textarea').text('');
         formDiv.slideUp();
-        scope.addStreamMessage({'type': 'info', 'msg': 'Reply sent'});
+        scope.addStreamMessage({'type': 'info', 'msg': 'Your reply has been sent'});
+      });
+
+      scope.$on('replyFailure', function (event, args) {
+        scope.addStreamMessage({'type': 'error', 'msg': 'Error. Failed to send reply.'});
       });
 
     });
@@ -141,6 +145,10 @@ var retweetTweet = function (div, scope, tweetFactory, tweetList) {
         scope.addStreamMessage({'type': 'info', 'msg': 'Tweet removed.'});
       });
 
+      scope.$on('removeFailure', function (event, args) {
+        scope.addStreamMessage({'type': 'error', 'msg': 'Error. Unable to remove status.'});
+      });
+
     } else {
       tweetFactory.getRetweetForm().then(function (promise) {
         parentDiv = div.parents('.tweet');
@@ -169,9 +177,13 @@ var retweetTweet = function (div, scope, tweetFactory, tweetList) {
               div.data('is-retweeted', true);
               div.data('retweet-id', args.retweetId);
               syncRetweets(tweetId, true, args.retweetId);
-              scope.addStreamMessage({'type': 'info', 'msg': 'Retweet sent'});
+              scope.addStreamMessage({'type': 'info', 'msg': 'Your retweet has been sent'});
               formDiv.slideUp();
             }
+          });
+
+          scope.$on('retweetFailure', function (event, args) {
+            scope.addStreamMessage({'type': 'error', 'msg': 'Failed to send retweet'});
           });
 
         });
@@ -284,8 +296,14 @@ app.directive('tweetForm', [function () {
       });
 
       scope.$on('tweetSuccess', function (event, args) {
+        scope.addStreamMessage({'type': 'info', 'msg': 'Your tweet has been sent.'});
         resetForm();
-      })
+      });
+
+      scope.$on('tweetFailure', function (event, args) {
+        scope.addStreamMessage({'type': 'error', 'msg': 'Failed to send tweet.'});
+        resetForm();
+      });
 
     }
   };

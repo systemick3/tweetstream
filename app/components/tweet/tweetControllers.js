@@ -38,10 +38,8 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
 
             if (isReply) {
               $rootScope.$broadcast('replySuccess', { tweetId: data.tweet.id_str });
-              $rootScope.addStreamMessage({'type': 'info', 'msg': 'Reply has been sent.'});
             } else {
               $rootScope.$broadcast('tweetSuccess', { tweetId: data.tweet.id_str });
-              $rootScope.addStreamMessage({'type': 'info', 'msg': 'Tweet has been sent.'});
             }
 
             $rootScope.userTweets = $rootScope.userTweets.concat(tweetFactory.processTweets([data.tweet]));
@@ -50,7 +48,11 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
           }
         })
         .error(function (error) {
-          $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to send ' + (isReply) ? 'reply' : 'tweet'});
+          if (isReply) {
+            $rootScope.$broadcast('replyFailure');
+          } else {
+            $rootScope.$broadcast('tweetFailure');
+          }
         });
     }
 
@@ -70,7 +72,7 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
           $rootScope.userTweetsExist = $scope.userTweets.length > 0;
         })
         .error(function (err) {
-          $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to send retweet'});
+          $rootScope.$broadcast('retweetFailure');
         });
     }
   };
@@ -104,7 +106,7 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
 
         })
         .error(function (err) {
-          $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to remove status.'});
+          $rootScope.$broadcast('removeFailure');
         });
     }
   };
@@ -161,9 +163,8 @@ app.controller('tweetCtrl', ['$scope', '$rootScope', 'tweetFactory', function ($
           }
         }
       }
-
     }, function (err) {
-      $rootScope.addStreamMessage({'type': 'error', 'msg': 'Unable to contact Twitter.'});
+      callback(err);
     });
 
   };

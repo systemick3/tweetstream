@@ -30,7 +30,7 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
         }
       }
 
-      $rootScope.addStreamMessage({'type': 'info', 'msg': 'No tweets in the last few seconds tagged ' + filter});
+      $rootScope.$broadcast('noFilteredTweets', {'filter': filter});
 
       return false;
     };
