@@ -20,10 +20,14 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
     }
   }
 
+  $rootScope.bodyClass = 'login';
+
   // Fetch the session data from the API
   if (angular.isDefined($rootScope.tweetapp) && $rootScope.tweetapp.authorised) {
 
     userFactory.userSessionData().then(function (data) {
+
+      $rootScope.bodyClass = 'home';
 
       data = data.data;
 

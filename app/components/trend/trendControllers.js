@@ -4,9 +4,6 @@ app.controller('trendCtrl', ['$scope', '$rootScope', 'trendFactory', 'userFactor
 
   var getTrends = function () {
 
-    $rootScope.streamFilters = [];
-    $rootScope.streamFilterText = 'No filter set.'
-
     trendFactory.getTrends()
       .success(function (data) {
         $rootScope.$broadcast('trendsSuccess');

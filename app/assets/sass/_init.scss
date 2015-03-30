@@ -3,20 +3,28 @@ $grey: #aaa;
 $light-grey: #ddd;
 $dark-grey: #5E6D70;
 $navy-blue: #0F2D38;
-$blue: #3498BB;
-$dark-blue: #2980B9;
-$purple: #BB3399;
-$black: #1B1D1E;
-$green: #86935B;
+$light-blue: #A6F4FF;
+//$blue: #2A76A8;
+//$dark-blue: #053969;
+//$purple: #BB3399;
+//$black: #1B1D1E;
+//$green: #86935B;
 $dark-green: #143c4a;
 $light-blue: #40BFEB;
 
 $off-white: #F7F7F7;
 $pale-grey: #EEE;
 $black: #323232;
-$green: #5EB75A;
-$orange: #F0AA4F;
-$red: #D7534A;
+//$green: #5EB75A;
+$orange: #FF9B00;
+//$red: #D7534A;
+$purple: #663368;
+
+$blue: #0099B9;
+$dark-blue: #0B5C6C;
+$pink: #C5145B;
+$green: #867B0D;
+$dark-green: #6C6305;
 
 $base-font-size:   24px; // The font size set on the root html element.
 $base-line-height: 34px; // This line-height determines the basic unit of vertical rhythm.
@@ -47,7 +55,7 @@ $small-logo-font-size: 1.5 * $base-font-size;
 
 $logo-font: Piron, Arial, Helvetica, "Nimbus Sans L", sans-serif;
 
-$page-width: 900px;
+$page-width: 960px;
 
 $raleway: Raleway, Arial, Helvetica, "Nimbus Sans L", sans-serif;
 $ubuntu: Ubuntu, Arial, Helvetica, "Nimbus Sans L", sans-serif;
@@ -64,9 +72,21 @@ $border: solid 1px $light-grey;
           border-radius: $radius;
 }
 
+@mixin bottom-radius($radius) {
+  -webkit-border-bottom-right-radius: $radius;
+     -moz-border-bottom-right-radius: $radius;
+      -ms-border-bottom-right-radius: $radius;
+          border-bottom-right-radius: $radius;
+
+  -webkit-border-bottom-left-radius: $radius;
+     -moz-border-bottom-left-radius: $radius;
+      -ms-border-bottom-left-radius: $radius;
+          border-bottom-left-radius: $radius;
+}
+
 @mixin header-background() {
-  background: -webkit-linear-gradient($off-white, $pale-grey); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient($off-white, $pale-grey); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient($off-white, $pale-grey); /* For Firefox 3.6 to 15 */
-  background: linear-gradient($off-white, $pale-grey); /* Standard syntax */
+  background: -webkit-linear-gradient($blue, $dark-blue); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient($blue, $dark-blue); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient($blue, $dark-blue); /* For Firefox 3.6 to 15 */
+  background: linear-gradient($blue, $dark-blue); /* Standard syntax */
 }

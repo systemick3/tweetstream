@@ -19,7 +19,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: $navy-blue;
+  color: $dark-grey;
   font-family: $heading-font-family;
   font-weight:bold;
 }
@@ -65,23 +65,32 @@ iframe {
 
 button.btn-primary {
   background-color: $blue;
-  border-color: $blue;
-  font-size: 100%;
+  border-color: $dark-blue;
+  float: right;
+  font-size: 80%;
   font-weight: bold;
+  margin-left: 1%;
+  padding: 0.5%;
+}
+
+#container {
+  position: relative;
 }
 
 header {
   //@include header-background();
 
-  background-color: white;
-  //border-bottom: 3px solid $pale-grey;
+  background-color: $blue;
+  border-bottom: 2px solid $dark-blue;
   color: $dark-grey;
-  font-size: 80%;
+  font-size: 90%;
   font-weight: bold;
-  //padding-top: 1%;
+  //height: 0.4em;
+  position: relative;
 
   a, a:hover, a:visited {
     color: white;
+    text-decoration: none;
   }
 
   .logo {
@@ -94,31 +103,6 @@ header {
   i {
     bottom: 5px;
     position: relative;
-  }
-
-  .colour-panel {
-    @include panel-border-radius(5px);
-
-    float: left;
-    margin-right: 1%;
-    padding: 1%;
-    width: 20%;
-
-    &.blue {
-      background-color: $blue;
-    }
-
-    &.green {
-      background-color: $green;
-    }
-
-    &.orange {
-      background-color: $orange;
-    }
-
-    &.red {
-      background-color: $red;
-    }
   }
 
   .hamburger {
@@ -143,10 +127,11 @@ header {
   }
 
   .user-heading {
-    @include header-background();
+    //@include header-background();
 
-    background-color: $off-white;
-    border-bottom: 3px solid $pale-grey;
+    background-color: $blue;
+    color: white;
+    padding: 1%;
 
     .profile-image {
       float: right;
@@ -168,40 +153,30 @@ header {
     }
   }
 
-  .dashboard {
-    background-color: white;
-  }
-
   .left {
     padding-right: 2%;
   }
 
-  .navigation {
+}
+
+.messages {
+  background-color: white;
+  position: absolute;
+  top: -2.33em;
+  width: 100%;
+
+  .message {
+    @include bottom-radius(20px);
+
     background-color: white;
-    border: 2px solid $grey;
-    border-radius: 2px;
-    font-size: 130%;
-    line-height: 2em;
-    padding: 0.5em 0 0.5em 1.5em;
-    position: absolute;
-    right: 0.5em;
-    top: 3em;
-
-    ul {
-      list-style-type: none;
-      margin: 0;
-      left: -2.5em;
-      position: relative;
-
-      li {
-
-        a {
-          color: $blue;
-        }
-      }
-    }
+    border-bottom: solid 2px $grey;
+    border-left: solid 2px $grey;
+    border-right: solid 2px $grey;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5% 2%;
+    width: $page-width;
   }
-
 }
 
 .column {
@@ -209,10 +184,80 @@ header {
   .left {
     width: 100%;
   }
+
+  .colour-panel {
+    @include panel-border-radius(5px);
+
+    color: white;
+    font-size: 90%;
+    margin: 0 0 5% 0;
+    padding: 3%;
+
+    &.blue {
+      background-color: $blue;
+    }
+
+    &.green {
+      background-color: $green;
+    }
+
+    &.dark-green {
+      background-color: $dark-green;
+    }
+
+    &.pink {
+      background-color: $pink;
+    }
+
+    &.orange {
+      background-color: $orange;
+    }
+
+    &.purple {
+      background-color: $purple;
+    }
+
+    &#userTweets, &#favouriteTweets {
+      padding-bottom: 1%;
+    }
+
+    &#trends {
+
+      a {
+        line-height: 1.5em;
+      }
+    }
+
+    a {
+      color: white;
+      font-size: 100%;
+    }
+
+    .tweet {
+      margin-bottom: 3%;
+
+      a {
+        color: $dark-blue;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .stream-state {
+    padding: 3% 0 2% 0;
+  }
+}
+
+.main-content {
+  //background-color: yellow;
+  padding-top: 2.5em;
+  position: relative;
+  top: -2.5em;
 }
 
 #page {
   margin-top: 2%;
+  position: relative;
 
   .column {
 
@@ -243,7 +288,7 @@ header {
   @include panel-border-radius(5px);
 
   background-color: white;
-  border: solid 1px $light-grey;
+  border: solid 1px $dark-grey;
   padding: 1%;
 
   &.analysis {
@@ -253,10 +298,6 @@ header {
       margin-bottom: 1%;
     }
   }
-}
-
-.chart-link {
-  margin: 5% 0;
 }
 
 .site-info {
@@ -284,7 +325,7 @@ header {
   }
 }
 
-.modal-chart, .modal-contact, .modal-about, .modal-retweet {
+.modal-contact, .modal-about {
   position:absolute;
   z-index:9999;
   top:0;
@@ -292,7 +333,7 @@ header {
   width:100%;
   height:100%;
   background-color:#000000;
-  opacity: 0.9;
+  opacity: 1.0;
 
   .dialog {
     background-color: #eee;
@@ -308,33 +349,8 @@ header {
     -moz-transform: translate(-50%, 0);
     width: 90%;
     z-index:10000;
-
-    #analysisChartContainer, #followersChartContainer {
-
-      ul {
-        list-style-type: none;
-
-        li {
-          display: inline;
-          float: left;
-          margin-right: 2%;
-
-          span {
-            display: block;
-            float: left;
-            height: 1em;
-            margin-right: 0.3em;
-            margin-top: 0.2em;
-            width: 1em;
-          }
-
-        }
-
-      }
-
-    }
-
   }
+
 }
 
 footer {
@@ -346,7 +362,7 @@ footer {
   footer {
     background-color: whitesmoke;
     border-top: solid 2px $grey;
-    bottom: 2px;
+    bottom: 0;
     display: block;
     padding: 1%;
     position: fixed;
@@ -361,6 +377,12 @@ footer {
 }
 
 .tweet {
+  color: $dark-grey;
+
+  a {
+    color: $dark-blue;
+    font-weight: bold;
+  }
 
   .icons {
 
@@ -377,6 +399,42 @@ footer {
 
   .reply-form, .retweet-form {
     clear: left;
+
+    .action {
+      float: left;
+      font-size: 120%;
+      font-weight: bold;
+    }
+  }
+}
+
+.tweet-form {
+
+  .form-group {
+    margin-bottom: 1%;
+
+    &.top {
+      margin-bottom: 0;
+    }
+  }
+
+  .char-count {
+    float:left;
+  }
+}
+
+.login-container {
+  background: url(/assets/images/wormhole.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 800px;
+  padding: 5%;
+  position: relative;
+  top: -2.5em;
+
+  #page {
+    background-color: white;
+    padding: 2%;
   }
 }
 

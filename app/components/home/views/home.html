@@ -1,13 +1,12 @@
 <p></p>
 
-<div ng-hide="tweetapp.authorised">
+<div class="login-container" ng-hide="tweetapp.authorised">
 
-	<div id="page" class="login" ng-controller="loginCtrl">
+	<div id="page" class="login panel" ng-controller="loginCtrl">
 
-		<h2>Login</h2>
-	  <div class="error" ng-show="formSubmitError">{{ formSubmitError }}</div>
-	  <div class="error" ng-show="loginError">{{ loginError }}</div>
+		<h2>This is TweetPop</h2>
 		<div class="form" ng-hide="formSuccess">
+			<p>Here you can view the most popular tweets in the UK. Tweets appear on your page only a few seconds after they are posted on Twitter. All tweets are tagged with the current most popular hashtags. You can keep your finger on the pulse of the beating heart that is the Twitter stream and interact with the tweets in the stream by posting your own tweets, favouriting, replying and retweeting in real time.</p>
 			<form name="twitterLoginForm" method="post" action="http://localhost:3001/tweetapp/login/twitter">
 				<div class="well">
 			  	<input type="hidden" value="123456789" />
@@ -26,6 +25,8 @@
 
 	<div id="page" class="home" ng-hide="authorised">
 
+		<messages></messages>
+
 		<contact-modal></contact-modal>
 
 		<about-modal></about-modal>
@@ -36,10 +37,14 @@
 
 			<h3>Tweets</h3>
 
-			<messages></messages>
+			<div ng-controller="tweetCtrl">
+        <tweet-form></tweet-form>
+      </div>
+
+      <div class="clearfix"></div>
 
 			<div class="stream-state" ng-hide="streamPaused">
-				<img src="/assets/images/loading.gif" /> 
+				<img src="/assets/images/loading-small.gif" /> 
 				<span>Loading tweets ... </span>
 				<button type="button" class="btn btn-primary send-tweet" ng-click="toggleStreamPaused()">{{ buttonText }}</button>
 			</div>
@@ -47,7 +52,7 @@
 				<span>Stream is currently paused</span>
 				<button type="button" class="btn btn-primary send-tweet" ng-click="toggleStreamPaused()">{{ buttonText }}</button>
 			</div>
-			
+
 			<div id="stream" class="stream" style="min-height: 500px" data-stream-tweet-list="streamTweets" class="ngFade"></div>
 
 		</div>
@@ -55,8 +60,9 @@
 		<div class="column right hidden-xs">
 
 			<h3>Trending</h3>
-			<div class="panel trends" ng-controller="trendCtrl">
-				<div class="error" ng-show="trendsError">{{ trendsError }}</div>
+			<div id="trends" class="colour-panel blue trends" ng-controller="trendCtrl">
+				<p>Click on a trend to only see tweets tagged with that hastag.</p>
+				<p>{{ streamFilterText }}</p>
 				<div class="trend" ng-repeat="trend in trends | filter: selectTrends">
 					<a href="" title="Filter by {{ trend.name }}" ng-click="setStreamFilter(trend.name)">{{ trend.name }}</a>
 				</div>
@@ -65,7 +71,7 @@
 
 			<div ng-show="userTweetsExist">
 				<h3>Your tweets</h3>
-				<div id="userTweets" class="panel user-tweets">
+				<div id="userTweets" class="colour-panel blue user-tweets">
 					<div class="user-tweet panel tweet ngFade" data-tweet-id="{{ tweet.id_str }}" ng-repeat="tweet in userTweets">
 						<div class="name">
 							<a href="http://twitter.com/{{ tweet.user.screen_name }}">
@@ -84,7 +90,7 @@
 
 			<div ng-show="favouritesExist">
 				<h3>Favourites</h3>
-				<div id="favouriteTweets" class="panel favourites">
+				<div id="favouriteTweets" class="colour-panel blue favourites">
 					<div class="favourite panel tweet ngFade" ng-repeat="tweet in favouriteTweets">
 						<div class="name">
 							<a href="http://twitter.com/{{ tweet.user.screen_name }}">
@@ -101,7 +107,7 @@
 				</div>
 			</div>
 
-			<div class="panel site-info hidden-xs">
+			<div class="colour-panel blue site-info hidden-xs">
 				<span><a href="http://js.systemick-web-development.co.uk" target="_blank">&copy; Systemick {{ currentYear }}</a></span>
 				<span><a href="" ng-click="toggleContact()">Contact</a></span>
 				<span><a href="" ng-click="toggleAbout()">About</a></span>

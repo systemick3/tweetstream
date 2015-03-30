@@ -1,10 +1,13 @@
 <form name="newTweetForm" class="tweet-form" method="post" novalidate ng-submit="sendStatusUpdate(newTweet)">
-  <div class="form-group">
-    <label>Tweet</label>
+  <div class="form-group top">
     <textarea class="form-control tweet-text" name="newTweet" rows="1" placeholder="Send a tweet?" ng-model="newTweet.message" required /></textarea>
   </div>
-  <div class="char-count">140</div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-primary send-tweet">Send tweet</button>
+  <div class="controls" style="display:none;">
+    <div class="char-count">140</div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary send-tweet">Send tweet</button>
+    </div>
+    <div clss="clearfix"></div>
   </div>
+
 </form>

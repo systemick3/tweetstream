@@ -62,6 +62,8 @@ var replyToTweet = function (clicked, scope, tweetFactory, tweetList) {
     }
 
     formDiv = parentDiv.find('.reply-form');
+    retweetDiv = parentDiv.find('.retweet-form');
+    retweetDiv.slideUp();
     formDiv.html(promise.data);
     textarea = formDiv.find('textarea');
     textarea.text(screenNames.join(' '));
@@ -138,6 +140,8 @@ var retweetTweet = function (div, scope, tweetFactory, tweetList) {
         parentDiv = div.parents('.tweet');
         tweetId = parentDiv.find('.tweet-id').text();
         formDiv = parentDiv.find('.retweet-form');
+        replyDiv = parentDiv.find('.reply-form');
+        replyDiv.slideUp();
         formDiv.html(promise.data);
         formDiv.find('.tweet-id').attr('value', selectedTweet.id_str);
         cancelButton = formDiv.find('.cancel-retweet');
@@ -262,22 +266,32 @@ app.directive('tweetForm', [function () {
         parentElement = element.parent(),
         charCountDiv = parentElement.find('.char-count'),
         tweetButton = parentElement.find('.send-tweet'),
+        controlDiv = parentElement.find('.controls'),
         textarea = parentElement.find('textarea');
 
       var resetForm = function () {
         scope.newTweet.message = '';
         scope.newTweetForm.$setPristine();
+        controlDiv.slideUp();
         textarea.attr('rows', '1');
         charCountDiv.text(MAX_CHARS);
       };
 
       textarea.focus(function () {
         textarea.attr('rows', '4');
+        controlDiv.slideDown();
+
+        if (textarea.val().length < 1) {
+          tweetButton.attr('disabled', true);
+        }
       });
 
       textarea.blur(function () {
         if (!angular.isDefined(scope.newTweet) || !angular.isDefined(scope.newTweet.message) || scope.newTweet.message === '') {
           textarea.attr('rows', '1');
+          if (textarea.val().length < 1) {
+            controlDiv.slideUp();
+          }
         }
       });
 

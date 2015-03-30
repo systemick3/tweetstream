@@ -1,11 +1,11 @@
-<h4>Retweet this to your followers</h4>
+<div class="action">Retweet this to your followers</div>
 <div class="retweet">
   <div class="form">
     <form name="retweetForm" method="post" novalidate ng-submit="sendStatusRetweet(retweetedTweet.id_str)">
       <div class="form-group">
         <input type="hidden" name="tweetId" value="" class="tweet-id" />
-        <button type="button" class="btn btn-primary cancel-retweet">Cancel</button>
         <button type="button" class="btn btn-primary send-retweet">Retweet</button>
+        <button type="button" class="btn btn-primary cancel-retweet">Cancel</button>
       </div>
     </form>
   </div>

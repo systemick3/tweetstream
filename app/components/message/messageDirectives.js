@@ -10,8 +10,9 @@ app.directive('messages', ['$rootScope', function ($rootScope) {
         INTERVAL = 3000;
 
       var hideMessage = function () {
-        element.slideUp();
-        element.html('');
+        element.slideUp(400, function () {
+          element.html('');
+        });
       };
 
       var showMessage = function () {

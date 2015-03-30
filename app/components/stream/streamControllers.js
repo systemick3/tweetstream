@@ -123,13 +123,13 @@ app.controller('streamCtrl', ['$scope', '$rootScope', 'socket', 'userFactory', '
           alert('Only one filter allowed. Please remove the current filter before adding another one.')
         } else {
           $rootScope.streamFilters = [filter];
-          $rootScope.setFilterText();
+          $rootScope.setFilterText(filter);
         }
       }
     };
 
-    $rootScope.setFilterText = function() {
-      $rootScope.streamFilterText = $rootScope.streamFilters.length > 0 ? 'Current filters:' : defaultStreamFilterText;
+    $rootScope.setFilterText = function(currentFilter) {
+      $rootScope.streamFilterText = $rootScope.streamFilters.length > 0 ? 'Current filter: ' + currentFilter : defaultStreamFilterText;
     };
 
   });

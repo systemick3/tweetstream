@@ -39,19 +39,17 @@
 
         <div class="user-heading">
           <div class="user-info last hidden-xs" ng-show="tweetapp.authorised">
-            <div class="top">{{ user.screen_name }}</div>
-            <!--<div class="bottom">Followers: {{ user.followers_count }}</div>-->
+            <div class="top">@{{ user.screen_name }}</div>
           </div>
           <div class="user-info hidden-xs" ng-show="tweetapp.authorised">
             <div class="top">{{ user.name }}</div>
-            <!--<div class="bottom">{{ user.location }}</div>-->
           </div>
-          <!--<div class="logo">
-            <span>Tweet Pop<span>
+          <div class="logo">
+            <span>TweetPop<span>
             <i class="fa fa-comment "></i>
-          </div>-->
+          </div>
           <div class="profile-image hidden-xs" ng-show="tweetapp.authorised">
-            <img src="{{ user.profile_image_url_https }}" width="30" height="30" />
+            <img src="{{ user.profile_image_url_https }}" width="50" height="50" />
           </div>
           <div class="hamburger visible-xs-block" ng-show="tweetapp.authorised" ng-click="toggleMenu()">
             <div></div>
@@ -62,34 +60,6 @@
           <div class="clearfix"></div>
         </div>
 
-        <div class="dashboard" ng-show="tweetapp.authorised">
-          <!--<div class="colour-panel blue">
-            Stream is currently {{ streamState }}
-            <button ng-click="toggleStreamPaused()">{{ buttonText }}</button>
-          </div>-->
-          <div class="colour-panel green">
-            Click on a trend to only see tweets tagged with that hastag.
-            {{ streamFilterText }}
-            <div ng-repeat="streamFilter in streamFilters">
-              <a href="" title="Remove {{ streamFilter }} filter" ng-click="setStreamFilter(streamFilter)">{{ streamFilter }}</a>
-            </div>
-          </div>
-          <div class="colour-panel orange" ng-controller="tweetCtrl">
-            <tweet-form></tweet-form>
-          </div>
-          <div class="colour-panel red"></div>
-        </div>
-
-      </div>
-
-      <div class="navigation" ng-show="menuVisible">
-        <ul class="nav-items">
-          <li><a href="" ng-click="toggleContact()">{{ user.name }}</a></li>
-          <li><a href="" ng-click="toggleAnalysis()">{{ menuText }}</a></li>
-          <li><a href="" ng-click="toggleContact()">Contact</a></li>
-          <li><a href="" ng-click="toggleAbout()">About</a></li>
-          <li><a href="#/logout">Logout</a></li>
-        </ul>
       </div>
 
       <div class="clearfix"></div>
@@ -98,7 +68,7 @@
 
     <div class="clearfix"></div>
 
-    <div style="width:100%;" class="ngFade" ng-view></div>
+    <div style="width:100%;" class="ngFade main-content" ng-view></div>
 
     <div class="clearfix"></div>
 
