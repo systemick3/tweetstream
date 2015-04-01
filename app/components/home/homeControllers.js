@@ -21,6 +21,48 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
   }
 
   $rootScope.bodyClass = 'login';
+  $rootScope.mobileMenuVisible = false;
+  $rootScope.mobileTrendsVisible = false;
+  $rootScope.mobileUserTweetsVisible = false;
+  $rootScope.mobileFavouriteTweetsVisible = false;
+
+  $rootScope.toggleMenu = function () {
+    $rootScope.mobileMenuVisible = !$rootScope.mobileMenuVisible;
+  };
+
+  $rootScope.hideAll = function () {
+    alert('hideAll');
+    $rootScope.mobileTrendsVisible = false;
+    $rootScope.mobileUserTweetsVisible = false;
+    $rootScope.mobileFavouriteTweetsVisible = false;
+    $rootScope.mobileMenuVisible = false;
+  };
+
+  $rootScope.toggleMobileTrends = function () {
+    alert('toggleMobileTrends');
+    $rootScope.mobileTrendsVisible = !$rootScope.mobileTrendsVisible;
+    $rootScope.mobileMenuVisible = false;
+  };
+
+  $rootScope.toggleMobileUserTweets = function () {
+    alert('toggleMobileUserTweets');
+    if (!$rootScope.mobileUserTweetsVisible && $rootScope.userTweets.length === 0) {
+      alert('You have not yet posted any tweets');
+    } else {
+      $rootScope.mobileUserTweetsVisible = !$rootScope.mobileUserTweetsVisible;
+      $rootScope.mobileMenuVisible = false;
+    }
+  };
+
+  $rootScope.toggleMobileFavouriteTweets = function () {
+    alert('toggleMobileFavouriteTweets');
+    if (!$rootScope.mobileUserTweetsVisible && $rootScope.userTweets.length === 0) {
+      alert('You don\'t have any favourites')
+    } else {
+      $rootScope.mobileFavouriteTweetsVisible = !$rootScope.mobileFavouriteTweetsVisible;
+      $rootScope.mobileMenuVisible = false;
+    }
+  };
 
   // Fetch the session data from the API
   if (angular.isDefined($rootScope.tweetapp) && $rootScope.tweetapp.authorised) {

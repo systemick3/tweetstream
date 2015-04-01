@@ -6,8 +6,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Tweet Report - View data about your tweets</title>
-  <meta name="description" content="">
+  <title>TweetPop - View and post tweets in real time</title>
+  <meta name="description" content="View tweets only a few seconds after they are posted on Twitter. View tweets post your own tweets, favourite, reply and retweet in real time">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
@@ -44,10 +44,12 @@
           <div class="user-info hidden-xs" ng-show="tweetapp.authorised">
             <div class="top">{{ user.name }}</div>
           </div>
-          <div class="logo">
-            <span>TweetPop<span>
-            <i class="fa fa-comment "></i>
-          </div>
+          <a href="http://tweetpop.co.uk">
+            <div class="logo">
+              <span>TweetPop<span>
+              <i class="fa fa-comment "></i>
+            </div>
+          </a>
           <div class="profile-image hidden-xs" ng-show="tweetapp.authorised">
             <img src="{{ user.profile_image_url_https }}" width="50" height="50" />
           </div>
@@ -62,11 +64,76 @@
 
       </div>
 
+      <div class="navigation" ng-show="mobileMenuVisible">
+        <ul class="nav-items">
+          <li><a href="" ng-click="hideAll()">Tweets</a></li>
+          <li><a href="" ng-click="toggleMobileTrends()">Filters</a></li>
+          <li><a href="" ng-click="toggleMobileUserTweets()">Your tweets</a></li>
+          <li><a href="" ng-click="toggleMobileFavouriteTweets()">Your favourites</a></li>
+          <li><a href="" ng-click="toggleContact()">Contact</a></li>
+          <li><a href="" ng-click="toggleAbout()">About</a></li>
+          <li><a href="#/logout">Logout</a></li>
+        </ul>
+      </div>
+
       <div class="clearfix"></div>
 
     </header>
 
     <div class="clearfix"></div>
+
+    <div class="visible-xs-block mobile-trends" ng-show="mobileTrendsVisible">
+      <h3>Trending</h3>
+      <div id="trends" class="colour-panel blue trends" ng-controller="trendCtrl">
+        <p>Click on a trend to only see tweets tagged with that hastag.</p>
+        <p>{{ streamFilterText }}</p>
+        <div class="trend" ng-repeat="trend in trends | filter: selectTrends">
+          <a href="" title="Filter by {{ trend.name }}" ng-click="setStreamFilter(trend.name)">{{ trend.name }}</a>
+        </div>
+        <div class="hide-div"><a href="" ng-click="toggleMobileTrends()">Hide</a></div>
+        <filter-change></filter-change>
+      </div>
+    </div>
+
+    <div class="visible-xs-block mobile-favourite-tweets" ng-show="userTweetsExist && mobileUserTweetsVisible">
+      <h3>Your tweets</h3>
+      <div id="userTweets" class="colour-panel blue user-tweets">
+        <div class="user-tweet panel tweet ngFade" data-tweet-id="{{ tweet.id_str }}" ng-repeat="tweet in userTweets">
+          <div class="name">
+            <a href="http://twitter.com/{{ tweet.user.screen_name }}">
+              <span>{{ tweet.user.name }}</span>
+              <span class="screen-name">@{{ tweet.user.screen_name }}</span>
+              {{ tweet.short_date }}
+            </a>
+          </div>
+          <div class="text" ng-bind-html="tweet.display_text"></div>
+          <div class="tweet-id" style="display:none;">{{ tweet.id_str }}</div>
+          <icon-panel context="userTweets"></icon-panel>
+          <div class="clearfix"></div>
+        </div>
+        <div class="hide-div"><a href="" ng-click="toggleMobileUserTweets()">Hide</a></div>
+      </div>
+    </div>
+
+    <div class="visible-xs-block mobile-user-tweets" ng-show="favouritesExist && mobileFavouriteTweetsVisible">
+      <h3>Favourites</h3>
+      <div id="favouriteTweets" class="colour-panel blue favourites">
+        <div class="favourite panel tweet ngFade" ng-repeat="tweet in favouriteTweets">
+          <div class="name">
+            <a href="http://twitter.com/{{ tweet.user.screen_name }}">
+              <span>{{ tweet.user.name }}</span>
+              <span class="screen-name">@{{ tweet.user.screen_name }}</span>
+              {{ tweet.short_date }}
+            </a>
+          </div>
+          <div class="text" ng-bind-html="tweet.display_text"></div>
+          <div class="tweet-id" style="display:none;">{{ tweet.id_str }}</div>
+          <icon-panel context="favouriteTweets"></icon-panel>
+          <div class="clearfix"></div>
+        </div>
+        <div class="hide-div"><a href="" ng-click="toggleMobileFavouriteTweets()">Hide</a></div>
+      </div>
+    </div>
 
     <div style="width:100%;" class="ngFade main-content" ng-view></div>
 

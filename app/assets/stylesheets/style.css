@@ -8265,7 +8265,7 @@ button.btn-primary {
 /* line 80, ../sass/_systemick.scss */
 header {
   background-color: #0099b9;
-  border-bottom: 2px solid #0b5c6c;
+  border-bottom: 2px solid #5e6d70;
   color: #5e6d70;
   font-size: 90%;
   font-weight: bold;
@@ -8338,15 +8338,39 @@ header .user-heading .user-info .bottom {
 header .left {
   padding-right: 2%;
 }
+/* line 160, ../sass/_systemick.scss */
+header .navigation {
+  background-color: white;
+  border: 2px solid #aaaaaa;
+  border-radius: 2px;
+  font-size: 130%;
+  line-height: 2em;
+  padding: 0.5em 0 0.5em 1.5em;
+  position: absolute;
+  right: 0.5em;
+  top: 3em;
+  z-index: 1000;
+}
+/* line 172, ../sass/_systemick.scss */
+header .navigation ul {
+  list-style-type: none;
+  margin: 0;
+  left: -2.5em;
+  position: relative;
+}
+/* line 180, ../sass/_systemick.scss */
+header .navigation ul li a {
+  color: #0099b9;
+}
 
-/* line 162, ../sass/_systemick.scss */
+/* line 189, ../sass/_systemick.scss */
 .messages {
   background-color: white;
   position: absolute;
   top: -2.33em;
   width: 100%;
 }
-/* line 168, ../sass/_systemick.scss */
+/* line 195, ../sass/_systemick.scss */
 .messages .message {
   -webkit-border-bottom-right-radius: 20px;
   -moz-border-bottom-right-radius: 20px;
@@ -8366,11 +8390,11 @@ header .left {
   width: 960px;
 }
 
-/* line 184, ../sass/_systemick.scss */
+/* line 211, ../sass/_systemick.scss */
 .column .left {
   width: 100%;
 }
-/* line 188, ../sass/_systemick.scss */
+/* line 215, ../sass/_systemick.scss */
 .column .colour-panel {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -8381,132 +8405,131 @@ header .left {
   margin: 0 0 5% 0;
   padding: 3%;
 }
-/* line 196, ../sass/_systemick.scss */
+/* line 223, ../sass/_systemick.scss */
 .column .colour-panel.blue {
   background-color: #0099b9;
 }
-/* line 200, ../sass/_systemick.scss */
+/* line 227, ../sass/_systemick.scss */
 .column .colour-panel.green {
   background-color: #867b0d;
 }
-/* line 204, ../sass/_systemick.scss */
+/* line 231, ../sass/_systemick.scss */
 .column .colour-panel.dark-green {
   background-color: #6c6305;
 }
-/* line 208, ../sass/_systemick.scss */
+/* line 235, ../sass/_systemick.scss */
 .column .colour-panel.pink {
   background-color: #c5145b;
 }
-/* line 212, ../sass/_systemick.scss */
+/* line 239, ../sass/_systemick.scss */
 .column .colour-panel.orange {
   background-color: #ff9b00;
 }
-/* line 216, ../sass/_systemick.scss */
+/* line 243, ../sass/_systemick.scss */
 .column .colour-panel.purple {
   background-color: #663368;
 }
-/* line 220, ../sass/_systemick.scss */
+/* line 247, ../sass/_systemick.scss */
 .column .colour-panel#userTweets, .column .colour-panel#favouriteTweets {
   padding-bottom: 1%;
 }
-/* line 226, ../sass/_systemick.scss */
+/* line 253, ../sass/_systemick.scss */
 .column .colour-panel#trends a {
   line-height: 1.5em;
 }
-/* line 231, ../sass/_systemick.scss */
+/* line 258, ../sass/_systemick.scss */
 .column .colour-panel a {
   color: white;
   font-size: 100%;
 }
-/* line 236, ../sass/_systemick.scss */
+/* line 263, ../sass/_systemick.scss */
 .column .colour-panel .tweet {
   margin-bottom: 3%;
 }
-/* line 239, ../sass/_systemick.scss */
+/* line 266, ../sass/_systemick.scss */
 .column .colour-panel .tweet a {
   color: #0b5c6c;
   font-weight: bold;
 }
-/* line 246, ../sass/_systemick.scss */
+/* line 273, ../sass/_systemick.scss */
 .column .stream-state {
   padding: 3% 0 2% 0;
 }
 
-/* line 251, ../sass/_systemick.scss */
+/* line 278, ../sass/_systemick.scss */
 .main-content {
   padding-top: 2.5em;
   position: relative;
-  top: -2.5em;
 }
 
-/* line 258, ../sass/_systemick.scss */
+/* line 285, ../sass/_systemick.scss */
 #page {
   margin-top: 2%;
   position: relative;
 }
-/* line 264, ../sass/_systemick.scss */
+/* line 291, ../sass/_systemick.scss */
 #page .column h3 {
   margin-top: 0;
 }
-/* line 268, ../sass/_systemick.scss */
+/* line 295, ../sass/_systemick.scss */
 #page .column.left {
   padding: 0 2%;
 }
-/* line 274, ../sass/_systemick.scss */
+/* line 301, ../sass/_systemick.scss */
 #page .column.right h3 {
   margin-left: 3%;
 }
-/* line 278, ../sass/_systemick.scss */
+/* line 305, ../sass/_systemick.scss */
 #page .column.right div.user-info {
   padding-left: 3%;
 }
 
-/* line 287, ../sass/_systemick.scss */
+/* line 314, ../sass/_systemick.scss */
 .panel {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   border-radius: 5px;
   background-color: white;
-  border: solid 1px #5e6d70;
+  border: solid 1px #cccccc;
   padding: 1%;
 }
-/* line 294, ../sass/_systemick.scss */
+/* line 321, ../sass/_systemick.scss */
 .panel.analysis {
   padding-left: 3%;
 }
-/* line 297, ../sass/_systemick.scss */
+/* line 324, ../sass/_systemick.scss */
 .panel.analysis h4 {
   margin-bottom: 1%;
 }
 
-/* line 303, ../sass/_systemick.scss */
+/* line 330, ../sass/_systemick.scss */
 .site-info {
   font-size: 70%;
   line-height: 170%;
 }
-/* line 307, ../sass/_systemick.scss */
+/* line 334, ../sass/_systemick.scss */
 .site-info span {
   margin-right: 0.5em;
 }
 
-/* line 312, ../sass/_systemick.scss */
+/* line 339, ../sass/_systemick.scss */
 .ngFade.ng-enter {
   transition: 2s linear all;
   opacity: 0;
 }
 
-/* line 317, ../sass/_systemick.scss */
+/* line 344, ../sass/_systemick.scss */
 .ngFade.ng-enter-active {
   opacity: 1;
 }
 
-/* line 323, ../sass/_systemick.scss */
+/* line 350, ../sass/_systemick.scss */
 .sentiment .fa-times, .replies .fa-times, .retweeters .fa-times {
   float: right;
 }
 
-/* line 328, ../sass/_systemick.scss */
+/* line 355, ../sass/_systemick.scss */
 .modal-contact, .modal-about {
   position: absolute;
   z-index: 9999;
@@ -8517,7 +8540,7 @@ header .left {
   background-color: #000000;
   opacity: 1.0;
 }
-/* line 338, ../sass/_systemick.scss */
+/* line 365, ../sass/_systemick.scss */
 .modal-contact .dialog, .modal-about .dialog {
   background-color: #eee;
   box-shadow: 4px 4px 80px #000;
@@ -8534,12 +8557,12 @@ header .left {
   z-index: 10000;
 }
 
-/* line 356, ../sass/_systemick.scss */
+/* line 383, ../sass/_systemick.scss */
 footer {
   display: none;
 }
 
-/* line 362, ../sass/_systemick.scss */
+/* line 389, ../sass/_systemick.scss */
 .login footer {
   background-color: whitesmoke;
   border-top: solid 2px #aaaaaa;
@@ -8549,59 +8572,59 @@ footer {
   position: fixed;
   width: 100%;
 }
-/* line 371, ../sass/_systemick.scss */
+/* line 398, ../sass/_systemick.scss */
 .login footer .inner {
   margin-left: auto;
   margin-right: auto;
   width: 960px;
 }
 
-/* line 379, ../sass/_systemick.scss */
+/* line 406, ../sass/_systemick.scss */
 .tweet {
   color: #5e6d70;
 }
-/* line 382, ../sass/_systemick.scss */
+/* line 409, ../sass/_systemick.scss */
 .tweet a {
   color: #0b5c6c;
   font-weight: bold;
 }
-/* line 389, ../sass/_systemick.scss */
+/* line 416, ../sass/_systemick.scss */
 .tweet .icons .fa {
   cursor: pointer;
   margin-right: 8%;
 }
-/* line 395, ../sass/_systemick.scss */
+/* line 422, ../sass/_systemick.scss */
 .tweet .action-icon {
   float: left;
   margin-right: 2%;
 }
-/* line 400, ../sass/_systemick.scss */
+/* line 427, ../sass/_systemick.scss */
 .tweet .reply-form, .tweet .retweet-form {
   clear: left;
 }
-/* line 403, ../sass/_systemick.scss */
+/* line 430, ../sass/_systemick.scss */
 .tweet .reply-form .action, .tweet .retweet-form .action {
   float: left;
   font-size: 120%;
   font-weight: bold;
 }
 
-/* line 413, ../sass/_systemick.scss */
+/* line 440, ../sass/_systemick.scss */
 .tweet-form .form-group {
   margin-bottom: 1%;
 }
-/* line 416, ../sass/_systemick.scss */
+/* line 443, ../sass/_systemick.scss */
 .tweet-form .form-group.top {
   margin-bottom: 0;
 }
-/* line 421, ../sass/_systemick.scss */
+/* line 448, ../sass/_systemick.scss */
 .tweet-form .char-count {
   float: left;
 }
 
-/* line 426, ../sass/_systemick.scss */
+/* line 453, ../sass/_systemick.scss */
 .login-container {
-  background: url(/assets/images/wormhole.jpg);
+  background: url(/assets/images/Planning-for-Cloud-Computing-2013-Final.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 800px;
@@ -8609,25 +8632,26 @@ footer {
   position: relative;
   top: -2.5em;
 }
-/* line 435, ../sass/_systemick.scss */
+/* line 462, ../sass/_systemick.scss */
 .login-container #page {
   background-color: white;
+  max-width: 760px;
   padding: 2%;
 }
 
 @media all and (min-width: 480px) {
-  /* line 444, ../sass/_systemick.scss */
+  /* line 472, ../sass/_systemick.scss */
   header {
     width: 100%;
   }
-  /* line 447, ../sass/_systemick.scss */
+  /* line 475, ../sass/_systemick.scss */
   header .inner {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
   }
 
-  /* line 454, ../sass/_systemick.scss */
+  /* line 482, ../sass/_systemick.scss */
   #page {
     margin-left: auto;
     margin-right: auto;
@@ -8635,23 +8659,23 @@ footer {
     max-width: 960px;
   }
 
-  /* line 463, ../sass/_systemick.scss */
+  /* line 491, ../sass/_systemick.scss */
   .modal-chart .dialog {
     padding: 1% 1%;
   }
 }
 @media all and (min-width: 767px) {
-  /* line 474, ../sass/_systemick.scss */
+  /* line 502, ../sass/_systemick.scss */
   header .inner {
     margin-left: auto;
     margin-right: auto;
     width: 960px;
   }
-  /* line 479, ../sass/_systemick.scss */
+  /* line 507, ../sass/_systemick.scss */
   header .inner .left {
     padding-right: 0;
   }
-  /* line 484, ../sass/_systemick.scss */
+  /* line 512, ../sass/_systemick.scss */
   header .logo {
     padding-left: 0;
     left: -1%;
@@ -8659,46 +8683,51 @@ footer {
     font-size: 48px;
   }
 
-  /* line 494, ../sass/_systemick.scss */
+  /* line 522, ../sass/_systemick.scss */
   #page .column {
     float: left;
   }
-  /* line 498, ../sass/_systemick.scss */
+  /* line 526, ../sass/_systemick.scss */
   #page .column.left {
-    border-right: solid 2px #dddddd;
+    border-right: solid 2px #cccccc;
     padding-left: 0;
     padding-right: 2%;
     width: 65%;
   }
-  /* line 505, ../sass/_systemick.scss */
+  /* line 533, ../sass/_systemick.scss */
   #page .column.right {
     padding-left: 2%;
     width: 35%;
   }
-  /* line 509, ../sass/_systemick.scss */
+  /* line 537, ../sass/_systemick.scss */
   #page .column.right h3 {
     margin-left: 0;
   }
-  /* line 516, ../sass/_systemick.scss */
+  /* line 544, ../sass/_systemick.scss */
   #page .column .tweet span {
     margin-right: 1%;
   }
-  /* line 519, ../sass/_systemick.scss */
+  /* line 547, ../sass/_systemick.scss */
   #page .column .tweet span.name {
     font-weight: bold;
   }
 
-  /* line 530, ../sass/_systemick.scss */
+  /* line 558, ../sass/_systemick.scss */
   .modal-about .dialog, modal-retweet .dialog {
     width: 60%;
   }
+
+  /* line 567, ../sass/_systemick.scss */
+  .main-content {
+    top: -2.5em;
+  }
 }
 @media all and (min-width: 768px) and (max-width: 959px) {
-  /* line 543, ../sass/_systemick.scss */
+  /* line 579, ../sass/_systemick.scss */
   #page .column.left {
     padding-left: 2%;
   }
-  /* line 547, ../sass/_systemick.scss */
+  /* line 583, ../sass/_systemick.scss */
   #page .column.right {
     padding-right: 2%;
   }
