@@ -1,6 +1,6 @@
 var app = angular.module('twitterapp');
 
-app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'userFactory', 'tConfig', function ($scope, $window, $rootScope, ipCookie, userFactory, tConfig) {
+app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'userFactory', 'tConfig', '$sce', function ($scope, $window, $rootScope, ipCookie, userFactory, tConfig, $sce) {
 
   var userId;
 
@@ -25,6 +25,8 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
   $rootScope.mobileTrendsVisible = false;
   $rootScope.mobileUserTweetsVisible = false;
   $rootScope.mobileFavouriteTweetsVisible = false;
+  $rootScope.serverUrl = $sce.trustAsResourceUrl(tConfig.apiData.server + tConfig.apiData.twitterLoginUrl);
+  $rootScope.siteUrl = $sce.trustAsResourceUrl(tConfig.apiData.siteUrl);
 
   $rootScope.toggleMenu = function () {
     $rootScope.mobileMenuVisible = !$rootScope.mobileMenuVisible;
