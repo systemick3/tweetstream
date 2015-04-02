@@ -78,14 +78,11 @@ button.btn-primary {
 }
 
 header {
-  //@include header-background();
-
   background-color: $blue;
   border-bottom: 2px solid $dark-grey;
   color: $dark-grey;
   font-size: 90%;
   font-weight: bold;
-  //height: 0.4em;
   position: relative;
 
   a, a:hover, a:visited {
@@ -186,87 +183,13 @@ header {
 
 }
 
-.messages {
-  background-color: white;
-  position: absolute;
-  top: -2.33em;
-  width: 100%;
-
-  .message {
-    @include bottom-radius(20px);
-
-    background-color: white;
-    border-bottom: solid 2px $grey;
-    border-left: solid 2px $grey;
-    border-right: solid 2px $grey;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0.5% 2%;
-    width: $page-width;
-  }
-}
-
 .column {
 
-  .left {
-    width: 100%;
-  }
+  &.left {
+    //width: 100%;
 
-  .colour-panel {
-    @include panel-border-radius(5px);
-
-    color: white;
-    font-size: 90%;
-    margin: 0 0 5% 0;
-    padding: 3%;
-
-    &.blue {
-      background-color: $blue;
-    }
-
-    &.green {
-      background-color: $green;
-    }
-
-    &.dark-green {
-      background-color: $dark-green;
-    }
-
-    &.pink {
-      background-color: $pink;
-    }
-
-    &.orange {
-      background-color: $orange;
-    }
-
-    &.purple {
-      background-color: $purple;
-    }
-
-    &#userTweets, &#favouriteTweets {
-      padding-bottom: 1%;
-    }
-
-    &#trends {
-
-      a {
-        line-height: 1.5em;
-      }
-    }
-
-    a {
-      color: white;
-      font-size: 100%;
-    }
-
-    .tweet {
-      margin-bottom: 3%;
-
-      a {
-        color: $dark-blue;
-        font-weight: bold;
-      }
+    .stream {
+      padding-top: 2%;
     }
   }
 
@@ -275,16 +198,71 @@ header {
   }
 }
 
+.colour-panel {
+  @include panel-border-radius(5px);
+
+  color: white;
+  font-size: 90%;
+  padding: 3%;
+
+  &.blue {
+    background-color: $blue;
+  }
+
+  &#userTweets, &#favouriteTweets {
+    padding-bottom: 1%;
+  }
+
+  &#trends {
+
+    a {
+      line-height: 1.5em;
+    }
+  }
+
+  a {
+    color: white;
+    font-size: 100%;
+  }
+
+  .tweet {
+    margin-bottom: 3%;
+
+    a {
+      color: $dark-blue;
+      font-weight: bold;
+    }
+  }
+}
+
 .main-content {
-  //background-color: yellow;
-  padding-top: 2.5em;
+  padding-top: 1.5em;
   position: relative;
-  //top: -2.5em;
 }
 
 #page {
-  margin-top: 2%;
+  //margin-top: -2%;
   position: relative;
+
+  .messages {
+    background-color: white;
+    position: absolute;
+    top: -2.7em;
+    width: 100%;
+
+    .message {
+      @include bottom-radius(20px);
+
+      background-color: white;
+      border-bottom: solid 2px $grey;
+      border-left: solid 2px $grey;
+      border-right: solid 2px $grey;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0.5% 2%;
+      width: $page-width;
+    }
+  }
 
   .column {
 
@@ -451,13 +429,11 @@ footer {
 }
 
 .login-container {
-  background: url(/assets/images/Planning-for-Cloud-Computing-2013-Final.jpg);
+  background: url(/assets/images/Planning-for-Cloud-Computing-2013-Light.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 800px;
   padding: 5%;
-  position: relative;
-  top: -2.5em;
 
   #page {
     background-color: white;
@@ -518,6 +494,7 @@ footer {
   }
 
   #page {
+    margin-top: 2%;
 
     .column {
 
@@ -553,6 +530,10 @@ footer {
     }
   }
 
+  .colour-panel {
+    margin: 0 0 5% 0;
+  }
+
   .modal-about, modal-retweet {
 
     .dialog {
@@ -565,7 +546,8 @@ footer {
   }
 
   .main-content {
-    top: -2.5em;
+    padding-top: 2.5em;
+    //top: -2.5em;
   }
 
 }

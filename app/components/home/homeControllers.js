@@ -41,7 +41,6 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
   };
 
   $rootScope.toggleMobileTrends = function () {
-    alert('toggleMobileTrends');
     $rootScope.mobileTrendsVisible = !$rootScope.mobileTrendsVisible;
     $rootScope.mobileMenuVisible = false;
   };
