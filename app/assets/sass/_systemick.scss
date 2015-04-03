@@ -125,8 +125,6 @@ header {
   }
 
   .user-heading {
-    //@include header-background();
-
     background-color: $blue;
     color: white;
     padding: 1%;
@@ -217,7 +215,7 @@ header {
   &#trends {
 
     a {
-      line-height: 1.5em;
+      line-height: 2em;
     }
   }
 
@@ -237,6 +235,11 @@ header {
 
   .hide-div {
     float: right;
+  }
+
+  .current-filter {
+    font-size: 100%;
+    font-weight: bold;
   }
 }
 
@@ -301,11 +304,15 @@ header {
   border: solid 1px $light-grey;
   padding: 1%;
 
-  &.analysis {
-    padding-left: 3%;
+  .image {
+    float: left;
+    margin-right: 2%;
+    padding-top: 1%;
 
-    h4 {
-      margin-bottom: 1%;
+    img {
+      margin-top: auto;
+      margin-bottom: auto;
+      vertical-align: middle;
     }
   }
 }
@@ -388,6 +395,7 @@ footer {
 
 .tweet {
   color: $dark-grey;
+  word-wrap: break-word;
 
   a {
     color: $dark-blue;
@@ -496,6 +504,7 @@ footer {
       position: relative;
       font-size: $logo-font-size;
     }
+
   }
 
   #page {
@@ -547,12 +556,11 @@ footer {
   }
 
   .messages {
-    //top: -2.33em;
+    top: 5.6em;
   }
 
   .main-content {
-    padding-top: 2.5em;
-    //top: -2.5em;
+    padding-top: 0;
   }
 
   .tweet {
@@ -583,4 +591,18 @@ footer {
     }
   }
 
+}
+
+@media all and (min-width: 960px) {
+
+  .colour-panel {
+    margin: 0 0 5% 0;
+
+    &#trends {
+
+      a {
+        line-height: 1.5em;
+      }
+    }
+  }
 }

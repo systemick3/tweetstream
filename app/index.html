@@ -88,7 +88,7 @@
       <h3>Trending</h3>
       <div id="trends" class="colour-panel blue trends" ng-controller="trendCtrl">
         <p>Click on a trend to only see tweets tagged with that hastag.</p>
-        <p>{{ streamFilterText }}</p>
+        <p class="current-filter">{{ streamFilterText }}</p>
         <div class="trend" ng-repeat="trend in trends | filter: selectTrends">
           <a href="" title="Filter by {{ trend.name }}" ng-click="setStreamFilter(trend.name)">{{ trend.name }}</a>
         </div>

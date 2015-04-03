@@ -330,8 +330,9 @@ app.directive('tweetIconPanel', ['$compile', function ($compile) {
       scope.$on('newTweetInStream', function (event, args) {
         newTweet = scope.streamtweets[0];
         panelDiv = angular.element(document.getElementById(newTweet.id_str));
-        panelDiv.append($compile('<icon-panel context="stream"></icon-panel>')(scope));
-        panelDiv.append(angular.element('<div class="clearfix">'));
+        contentDiv = panelDiv.find('.tweet-content');
+        contentDiv.append($compile('<icon-panel context="stream"></icon-panel>')(scope));
+        contentDiv.append(angular.element('<div class="clearfix">'));
       });
     }
   };
