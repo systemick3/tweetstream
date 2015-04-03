@@ -8,7 +8,7 @@ app.controller('trendCtrl', ['$scope', '$rootScope', 'trendFactory', 'userFactor
       .success(function (data) {
         $rootScope.$broadcast('trendsSuccess');
 
-        $scope.trends = data.data[0].trends;
+        $rootScope.trends = data.data[0].trends;
 
         setTimeout(getTrends, 3600000);
       })
@@ -18,8 +18,10 @@ app.controller('trendCtrl', ['$scope', '$rootScope', 'trendFactory', 'userFactor
       });
   };
 
-  userFactory.userSessionData().then(function () {
-    getTrends();
-  })
+  $scope.$on('tweetAppAuthorised', function () {
+    userFactory.userSessionData().then(function () {
+      getTrends();
+    });
+  });
 
 }]);

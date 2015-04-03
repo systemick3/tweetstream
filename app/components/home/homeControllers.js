@@ -9,6 +9,7 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
     $rootScope.tweetapp = {};
     $rootScope.tweetapp.authorised = true;
     ipCookie(tConfig.sessionCookieName, $window.sessionStorage.token, { expires:365 });
+    $rootScope.$broadcast('tweetAppAuthorised');
   }
   // If sessionStorage isn't available try the cookie
   else {
@@ -17,6 +18,7 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
       $window.sessionStorage.token = token;
       $rootScope.tweetapp = {};
       $rootScope.tweetapp.authorised = true;
+      $rootScope.$broadcast('tweetAppAuthorised');
     }
   }
 

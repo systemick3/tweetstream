@@ -31,18 +31,21 @@ angular.module("twitterapp")
   // loginCallback: handle the twitter callback
   // set the session token that will be used in all further requests
   // redirect to error page if twitter login unsuccessful
-  .controller('loginCallbackCtrl', ['$scope', '$location', '$window', '$rootScope', '$routeParams', 'ipCookie', 'tConfig', function($scope, $location, $window, $rootScope, $routeParams, ipCookie, tConfig) {
+  .controller('loginCallbackCtrl', ['$scope', '$location', '$window', '$rootScope', '$routeParams', 'ipCookie', 'tConfig', 'userFactory', function($scope, $location, $window, $rootScope, $routeParams, ipCookie, tConfig, userFactory) {
     if (!angular.isDefined($routeParams['id'])) {
       $rootScope.tweetapp = {};
       $rootScope.tweetapp.authorised = false;
       $location.path('/error');
     }
     else {
-      $window.sessionStorage.token = $routeParams['id'];
-      $rootScope.tweetapp = {};
-      $rootScope.tweetapp.authorised = true;
-      ipCookie(tConfig.sessionCookieName, $routeParams['id'], { expires:365 });
-      $location.path('/home');
+      // Using callback function to prevent redirect occurring before token is set.
+      userFactory.setStorageToken($routeParams['id'], function () {
+        $rootScope.$broadcast('tweetAppAuthorised');
+        $rootScope.tweetapp = {};
+        $rootScope.tweetapp.authorised = true;
+        ipCookie(tConfig.sessionCookieName, $routeParams['id'], { expires:365 });
+        $location.path('/home');
+      });
     }
 
   }])
