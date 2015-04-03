@@ -38,30 +38,15 @@ $h6-font-size: 0.67 * $base-font-size;
 $logo-font-size: 2 * $base-font-size;
 $small-logo-font-size: 1.5 * $base-font-size;
 
-@font-face {
-  font-family: Quadranta;
-  src: url("/assets/images/Quadranta-Regular.otf") format("opentype");
-}
-
-@font-face {
-  font-family: Juice;
-  src: url("/assets/fonts/JUICE_Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: Piron;
-  src: url("/assets/fonts/TFPironv2-stencil.otf") format("opentype");
-}
-
-$logo-font: Piron, Arial, Helvetica, "Nimbus Sans L", sans-serif;
-
 $page-width: 960px;
 
 $raleway: Raleway, Arial, Helvetica, "Nimbus Sans L", sans-serif;
 $ubuntu: Ubuntu, Arial, Helvetica, "Nimbus Sans L", sans-serif;
+$josefin: "Josefin Sans" "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
 
 $base-font-family: $raleway; // The font family set on the html element.
 $heading-font-family: $raleway;
+$logo-font: $josefin;
 
 $border: solid 1px $light-grey;
 

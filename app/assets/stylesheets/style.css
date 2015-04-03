@@ -8153,21 +8153,6 @@ button.close {
     display: none !important;
   }
 }
-@font-face {
-  font-family: Quadranta;
-  src: url("/assets/images/Quadranta-Regular.otf") format("opentype");
-}
-
-@font-face {
-  font-family: Juice;
-  src: url("/assets/fonts/JUICE_Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: Piron;
-  src: url("/assets/fonts/TFPironv2-stencil.otf") format("opentype");
-}
-
 /* line 3, ../sass/_systemick.scss */
 html, body {
   background-color: white;
@@ -8280,7 +8265,7 @@ header a, header a:hover, header a:visited {
 /* line 94, ../sass/_systemick.scss */
 header .logo {
   float: left;
-  font-family: Piron, Arial, Helvetica, "Nimbus Sans L", sans-serif;
+  font-family: "Josefin Sans" "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
   font-size: 36px;
   padding-left: 1%;
 }
