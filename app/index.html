@@ -82,6 +82,8 @@
 
     <div class="clearfix"></div>
 
+    <messages></messages>
+
     <div class="visible-xs-block mobile-trends" ng-show="mobileTrendsVisible">
       <h3>Trending</h3>
       <div id="trends" class="colour-panel blue trends" ng-controller="trendCtrl">
@@ -91,6 +93,7 @@
           <a href="" title="Filter by {{ trend.name }}" ng-click="setStreamFilter(trend.name)">{{ trend.name }}</a>
         </div>
         <div class="hide-div"><a href="" ng-click="toggleMobileTrends()">Hide</a></div>
+        <div class="clearfix"></div>
         <filter-change></filter-change>
       </div>
     </div>
@@ -112,6 +115,7 @@
           <div class="clearfix"></div>
         </div>
         <div class="hide-div"><a href="" ng-click="toggleMobileUserTweets()">Hide</a></div>
+        <div class="clearfix"></div>
       </div>
     </div>
 
@@ -132,6 +136,7 @@
           <div class="clearfix"></div>
         </div>
         <div class="hide-div"><a href="" ng-click="toggleMobileFavouriteTweets()">Hide</a></div>
+        <div class="clearfix"></div>
       </div>
     </div>
 

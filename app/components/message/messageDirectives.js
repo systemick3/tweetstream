@@ -33,7 +33,7 @@ app.directive('messages', ['$rootScope', function ($rootScope) {
       };
 
       scope.$on('newStreamMessage', function () {
-        if ($rootScope.streamMessages.length > 0) {
+        if ($rootScope.bodyClass === 'home' && $rootScope.streamMessages.length > 0) {
           showMessage();
         }
       });

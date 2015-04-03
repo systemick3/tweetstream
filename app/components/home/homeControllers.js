@@ -33,7 +33,6 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
   };
 
   $rootScope.hideAll = function () {
-    alert('hideAll');
     $rootScope.mobileTrendsVisible = false;
     $rootScope.mobileUserTweetsVisible = false;
     $rootScope.mobileFavouriteTweetsVisible = false;
@@ -46,23 +45,21 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
   };
 
   $rootScope.toggleMobileUserTweets = function () {
-    alert('toggleMobileUserTweets');
     if (!$rootScope.mobileUserTweetsVisible && $rootScope.userTweets.length === 0) {
       alert('You have not yet posted any tweets');
     } else {
       $rootScope.mobileUserTweetsVisible = !$rootScope.mobileUserTweetsVisible;
-      $rootScope.mobileMenuVisible = false;
     }
+    $rootScope.mobileMenuVisible = false;
   };
 
   $rootScope.toggleMobileFavouriteTweets = function () {
-    alert('toggleMobileFavouriteTweets');
-    if (!$rootScope.mobileUserTweetsVisible && $rootScope.userTweets.length === 0) {
+    if (!$rootScope.mobileFavouriteTweetsVisible && $rootScope.favouriteTweets.length === 0) {
       alert('You don\'t have any favourites')
     } else {
       $rootScope.mobileFavouriteTweetsVisible = !$rootScope.mobileFavouriteTweetsVisible;
-      $rootScope.mobileMenuVisible = false;
     }
+    $rootScope.mobileMenuVisible = false;
   };
 
   // Fetch the session data from the API

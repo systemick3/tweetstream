@@ -83,6 +83,7 @@ header {
   color: $dark-grey;
   font-size: 90%;
   font-weight: bold;
+  margin-bottom: 1.5em;
   position: relative;
 
   a, a:hover, a:visited {
@@ -233,36 +234,40 @@ header {
       font-weight: bold;
     }
   }
+
+  .hide-div {
+    float: right;
+  }
+}
+
+.messages {
+  background-color: white;
+  position: absolute;
+  top: 4em;
+  width: 100%;
+
+  .message {
+    @include bottom-radius(20px);
+
+    background-color: white;
+    border-bottom: solid 2px $grey;
+    border-left: solid 2px $grey;
+    border-right: solid 2px $grey;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5% 2%;
+    width: $page-width;
+  }
 }
 
 .main-content {
-  padding-top: 1.5em;
+  padding-top: 1em;
   position: relative;
 }
 
 #page {
   //margin-top: -2%;
   position: relative;
-
-  .messages {
-    background-color: white;
-    position: absolute;
-    top: -2.7em;
-    width: 100%;
-
-    .message {
-      @include bottom-radius(20px);
-
-      background-color: white;
-      border-bottom: solid 2px $grey;
-      border-left: solid 2px $grey;
-      border-right: solid 2px $grey;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 0.5% 2%;
-      width: $page-width;
-    }
-  }
 
   .column {
 
@@ -407,7 +412,7 @@ footer {
 
     .action {
       float: left;
-      font-size: 120%;
+      font-size: 80%;
       font-weight: bold;
     }
   }
@@ -548,6 +553,16 @@ footer {
   .main-content {
     padding-top: 2.5em;
     //top: -2.5em;
+  }
+
+  .tweet {
+
+    .reply-form, .retweet-form {
+
+      .action {
+        font-size: 120%;
+      }
+    }
   }
 
 }
