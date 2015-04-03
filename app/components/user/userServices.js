@@ -30,7 +30,6 @@ app.factory('userFactory', ['$http', '$window', 'tConfig', function ($http, $win
 
     setStorageToken: function (token, callback) {
       $window.sessionStorage.token = token;
-      console.log('token = ' + $window.sessionStorage.token);
       callback();
     }
 
