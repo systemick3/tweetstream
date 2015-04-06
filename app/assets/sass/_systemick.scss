@@ -258,8 +258,8 @@ header {
     border-right: solid 2px $grey;
     margin-left: auto;
     margin-right: auto;
+    min-width: 100%;
     padding: 0.5% 2%;
-    width: $page-width;
   }
 }
 
