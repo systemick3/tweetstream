@@ -8427,8 +8427,8 @@ header .navigation ul li a {
   border-right: solid 2px #aaaaaa;
   margin-left: auto;
   margin-right: auto;
+  min-width: 100%;
   padding: 0.5% 2%;
-  width: 960px;
 }
 
 /* line 266, ../sass/_systemick.scss */
@@ -8515,7 +8515,7 @@ header .navigation ul li a {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #000000;
+  background-color: #FFF;
   opacity: 1.0;
 }
 /* line 355, ../sass/_systemick.scss */
