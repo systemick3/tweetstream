@@ -81,18 +81,14 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
       $rootScope.user = $scope.user;
       $scope.tweets_for = 'user ' + $scope.user.screen_name;
 
-
-      // Get the full user data from Twitter
-      userFactory.userTwitterData(data.data.user_id)
-        .success(function (data) {
-          var mongo_id = $scope.user._id;
-          $scope.user = data;
-          $rootScope.user = $scope.user;
-          $scope.user._id = mongo_id;
-        })
-        .error(function (err) {
-          $scope.twitterDataError = 'Unable to retrieve data from Twitter. Please try again later.';
-        });
+      userFactory.userTwitterData(data.data.user_id).then(function (response) {
+        var mongo_id = $scope.user._id;
+        $scope.user = response.data;
+        $rootScope.user = $scope.user;
+        $scope.user._id = mongo_id;
+      }, function (err) {
+        $scope.twitterDataError = 'Unable to retrieve data from Twitter. Please try again later.';
+      });
 
     }, function (err) {
       $scope.loginError = 'Unable to log in. There is possibly a problem with Twitter. Please try again later.';

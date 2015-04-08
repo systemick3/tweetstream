@@ -7,6 +7,7 @@ app.factory('userFactory', ['$http', '$window', 'tConfig', function ($http, $win
     userUrl = tConfig.apiData.server + tConfig.apiData.userDataUrl,
     userObject = {},
     userSessionPromise,
+    userTwitterPromise,
     tokenPromise;
 
   return {
@@ -25,7 +26,12 @@ app.factory('userFactory', ['$http', '$window', 'tConfig', function ($http, $win
     },
 
     userTwitterData: function (user_id) {
-      return $http.get(userUrl +'/' + user_id);
+      if (!userTwitterPromise) {
+        userTwitterPromise = $http.get(userUrl +'/' + user_id).then(function (response) {
+          return response;
+        })
+      }
+      return userTwitterPromise;
     },
 
     setStorageToken: function (token, callback) {

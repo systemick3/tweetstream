@@ -255,7 +255,7 @@ var handleTextarea = function (event) {
   }
 };
 
-app.directive('tweetForm', [function () {
+app.directive('tweetForm', ['userFactory', function (userFactory) {
 
   return {
     restrict: 'E',
@@ -269,42 +269,49 @@ app.directive('tweetForm', [function () {
         controlDiv = parentElement.find('.controls'),
         textarea = parentElement.find('textarea');
 
-      var resetForm = function () {
-        scope.newTweet.message = '';
-        scope.newTweetForm.$setPristine();
-        controlDiv.slideUp();
-        textarea.attr('rows', '1');
-        charCountDiv.text(MAX_CHARS);
-      };
+      userFactory.userSessionData().then(function (data) {
 
-      textarea.focus(function () {
-        textarea.attr('rows', '4');
-        controlDiv.slideDown();
+        data = data.data;
 
-        if (textarea.val().length < 1) {
-          tweetButton.attr('disabled', true);
-        }
-      });
-
-      textarea.blur(function () {
-        if (!angular.isDefined(scope.newTweet) || !angular.isDefined(scope.newTweet.message) || scope.newTweet.message === '') {
-          textarea.attr('rows', '1');
-          if (textarea.val().length < 1) {
+        userFactory.userTwitterData(data.data.user_id).then(function (response) {
+          var resetForm = function () {
+            scope.newTweet.message = '';
+            scope.newTweetForm.$setPristine();
             controlDiv.slideUp();
-          }
-        }
-      });
+            textarea.attr('rows', '1');
+            charCountDiv.text(MAX_CHARS);
+          };
 
-      textarea.on('keyup', handleTextarea);
+          textarea.focus(function () {
+            textarea.attr('rows', '4');
+            controlDiv.slideDown();
 
-      scope.$on('tweetSuccess', function (event, args) {
-        scope.addStreamMessage({'type': 'info', 'msg': 'Your tweet has been sent.'});
-        resetForm();
-      });
+            if (textarea.val().length < 1) {
+              tweetButton.attr('disabled', true);
+            }
+          });
 
-      scope.$on('tweetFailure', function (event, args) {
-        scope.addStreamMessage({'type': 'error', 'msg': 'Failed to send tweet.'});
-        resetForm();
+          textarea.blur(function () {
+            if (!angular.isDefined(scope.newTweet) || !angular.isDefined(scope.newTweet.message) || scope.newTweet.message === '') {
+              textarea.attr('rows', '1');
+              if (textarea.val().length < 1) {
+                controlDiv.slideUp();
+              }
+            }
+          });
+
+          textarea.on('keyup', handleTextarea);
+
+          scope.$on('tweetSuccess', function (event, args) {
+            scope.addStreamMessage({'type': 'info', 'msg': 'Your tweet has been sent.'});
+            resetForm();
+          });
+
+          scope.$on('tweetFailure', function (event, args) {
+            scope.addStreamMessage({'type': 'error', 'msg': 'Failed to send tweet.'});
+            resetForm();
+          });
+        });
       });
 
     }
@@ -312,7 +319,7 @@ app.directive('tweetForm', [function () {
 
 }]);
 
-app.directive('tweetIconPanel', ['$compile', function ($compile) {
+app.directive('tweetIconPanel', ['$compile', 'userFactory', function ($compile, userFactory) {
 
   return {
     replace: false,
@@ -327,19 +334,28 @@ app.directive('tweetIconPanel', ['$compile', function ($compile) {
         idDiv,
         newTweet;
 
-      scope.$on('newTweetInStream', function (event, args) {
-        newTweet = scope.streamtweets[0];
-        panelDiv = angular.element(document.getElementById(newTweet.id_str));
-        contentDiv = panelDiv.find('.tweet-content');
-        contentDiv.append($compile('<icon-panel context="stream"></icon-panel>')(scope));
-        contentDiv.append(angular.element('<div class="clearfix">'));
+      userFactory.userSessionData().then(function (data) {
+
+        data = data.data;
+
+        userFactory.userTwitterData(data.data.user_id).then(function (response) {
+          scope.$on('newTweetInStream', function (event, args) {
+            newTweet = scope.streamtweets[0];
+            panelDiv = angular.element(document.getElementById(newTweet.id_str));
+            contentDiv = panelDiv.find('.tweet-content');
+            contentDiv.append($compile('<icon-panel context="stream"></icon-panel>')(scope));
+            contentDiv.append(angular.element('<div class="clearfix">'));
+          });
+        });
+
       });
+
     }
   };
 
 }]);
 
-app.directive('iconPanel', ['$rootScope', 'tweetFactory', function ($rootScope, tweetFactory) {
+app.directive('iconPanel', ['$rootScope', 'tweetFactory', 'userFactory', function ($rootScope, tweetFactory, userFactory) {
   return {
     restrict: 'E',
     replace: true,
@@ -352,37 +368,45 @@ app.directive('iconPanel', ['$rootScope', 'tweetFactory', function ($rootScope, 
         tweetId = parentDiv.attr('id'),
         tweetList;
 
-      favouriteDiv.data('id-str', tweetId);
-      retweetDiv.data('id-str', tweetId);
-      replyDiv.data('id-str', tweetId);
+      userFactory.userSessionData().then(function (data) {
 
-      switch (attrs.context) {
-        case 'userTweets':
-          retweetDiv.hide();
-          favouriteDiv.data('is-favourite', false);
-          tweetList = $rootScope.userTweets;
-          break;
-        case 'favouriteTweets':
-          favouriteDiv.data('is-favourite', true);
-          favouriteDiv.css('color', 'yellow');
-          tweetList = $rootScope.favouriteTweets;
-          break;
-        default:
-          favouriteDiv.data('is-favourite', false);
-          tweetList = scope.streamtweets;
-          break;
-      }
+        data = data.data;
 
-      favouriteDiv.on('click', function () {
-        favouriteTweet($(this), $rootScope);
-      });
+        userFactory.userTwitterData(data.data.user_id).then(function (response) {
+          favouriteDiv.data('id-str', tweetId);
+          retweetDiv.data('id-str', tweetId);
+          replyDiv.data('id-str', tweetId);
 
-      replyDiv.on('click', function () {
-        replyToTweet($(this), scope, tweetFactory, tweetList);
-      });
+          switch (attrs.context) {
+            case 'userTweets':
+              retweetDiv.hide();
+              favouriteDiv.data('is-favourite', false);
+              tweetList = $rootScope.userTweets;
+              break;
+            case 'favouriteTweets':
+              favouriteDiv.data('is-favourite', true);
+              favouriteDiv.css('color', 'yellow');
+              tweetList = $rootScope.favouriteTweets;
+              break;
+            default:
+              favouriteDiv.data('is-favourite', false);
+              tweetList = scope.streamtweets;
+              break;
+          }
 
-      retweetDiv.on('click', function () {
-        retweetTweet($(this), scope, tweetFactory, tweetList);
+          favouriteDiv.on('click', function () {
+            favouriteTweet($(this), $rootScope);
+          });
+
+          replyDiv.on('click', function () {
+            replyToTweet($(this), scope, tweetFactory, tweetList);
+          });
+
+          retweetDiv.on('click', function () {
+            retweetTweet($(this), scope, tweetFactory, tweetList);
+          });
+        });
+
       });
 
     }
