@@ -23,10 +23,6 @@
 
 	<div id="page" class="home" ng-hide="authorised">
 
-		<contact-modal></contact-modal>
-
-		<about-modal></about-modal>
-
 		<div class="error" ng-show="twitterDataError">{{ twitterDataError }}</div>
 
 		<div class="column left" data-tweet-icon-panel="streamTweets" ng-controller="streamCtrl">
