@@ -8243,11 +8243,16 @@ button.btn-primary {
 }
 
 /* line 76, ../sass/_systemick.scss */
+.error {
+  color: red;
+}
+
+/* line 80, ../sass/_systemick.scss */
 #container {
   position: relative;
 }
 
-/* line 80, ../sass/_systemick.scss */
+/* line 84, ../sass/_systemick.scss */
 header {
   background-color: #0099b9;
   border-bottom: 2px solid #5e6d70;
@@ -8257,24 +8262,24 @@ header {
   margin-bottom: 1.5em;
   position: relative;
 }
-/* line 89, ../sass/_systemick.scss */
+/* line 93, ../sass/_systemick.scss */
 header a, header a:hover, header a:visited {
   color: white;
   text-decoration: none;
 }
-/* line 94, ../sass/_systemick.scss */
+/* line 98, ../sass/_systemick.scss */
 header .logo {
   float: left;
   font-family: "Josefin Sans" "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
   font-size: 36px;
   padding-left: 1%;
 }
-/* line 101, ../sass/_systemick.scss */
+/* line 105, ../sass/_systemick.scss */
 header i {
   bottom: 5px;
   position: relative;
 }
-/* line 106, ../sass/_systemick.scss */
+/* line 110, ../sass/_systemick.scss */
 header .hamburger {
   background-color: #40bfeb;
   border: solid 2px #0b5c6c;
@@ -8285,7 +8290,7 @@ header .hamburger {
   margin-top: 1%;
   width: 3em;
 }
-/* line 116, ../sass/_systemick.scss */
+/* line 120, ../sass/_systemick.scss */
 header .hamburger div {
   background-color: white;
   border-radius: 4px;
@@ -8295,36 +8300,36 @@ header .hamburger div {
   margin-top: 5px;
   width: 80%;
 }
-/* line 127, ../sass/_systemick.scss */
+/* line 131, ../sass/_systemick.scss */
 header .user-heading {
   background-color: #0099b9;
   color: white;
   padding: 1%;
 }
-/* line 132, ../sass/_systemick.scss */
+/* line 136, ../sass/_systemick.scss */
 header .user-heading .profile-image {
   float: right;
   padding-top: 1%;
 }
-/* line 137, ../sass/_systemick.scss */
+/* line 141, ../sass/_systemick.scss */
 header .user-heading .user-info {
   float: right;
   line-height: 2em;
   margin-left: 3%;
 }
-/* line 142, ../sass/_systemick.scss */
+/* line 146, ../sass/_systemick.scss */
 header .user-heading .user-info.last {
   margin-left: 3%;
 }
-/* line 146, ../sass/_systemick.scss */
+/* line 150, ../sass/_systemick.scss */
 header .user-heading .user-info .bottom {
   padding-top: 8.5%;
 }
-/* line 152, ../sass/_systemick.scss */
+/* line 156, ../sass/_systemick.scss */
 header .left {
   padding-right: 2%;
 }
-/* line 156, ../sass/_systemick.scss */
+/* line 160, ../sass/_systemick.scss */
 header .navigation {
   background-color: white;
   border: 2px solid #aaaaaa;
@@ -8337,28 +8342,28 @@ header .navigation {
   top: 3em;
   z-index: 1000;
 }
-/* line 168, ../sass/_systemick.scss */
+/* line 172, ../sass/_systemick.scss */
 header .navigation ul {
   list-style-type: none;
   margin: 0;
   left: -2.5em;
   position: relative;
 }
-/* line 176, ../sass/_systemick.scss */
+/* line 180, ../sass/_systemick.scss */
 header .navigation ul li a {
   color: #0099b9;
 }
 
-/* line 190, ../sass/_systemick.scss */
+/* line 194, ../sass/_systemick.scss */
 .column.left .stream {
   padding-top: 2%;
 }
-/* line 195, ../sass/_systemick.scss */
+/* line 199, ../sass/_systemick.scss */
 .column .stream-state {
   padding: 3% 0 2% 0;
 }
 
-/* line 200, ../sass/_systemick.scss */
+/* line 204, ../sass/_systemick.scss */
 .colour-panel {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -8368,50 +8373,50 @@ header .navigation ul li a {
   font-size: 90%;
   padding: 3%;
 }
-/* line 207, ../sass/_systemick.scss */
+/* line 211, ../sass/_systemick.scss */
 .colour-panel.blue {
   background-color: #0099b9;
 }
-/* line 211, ../sass/_systemick.scss */
+/* line 215, ../sass/_systemick.scss */
 .colour-panel#userTweets, .colour-panel#favouriteTweets {
   padding-bottom: 1%;
 }
-/* line 217, ../sass/_systemick.scss */
+/* line 221, ../sass/_systemick.scss */
 .colour-panel#trends a {
   line-height: 2em;
 }
-/* line 222, ../sass/_systemick.scss */
+/* line 226, ../sass/_systemick.scss */
 .colour-panel a {
   color: white;
   font-size: 100%;
 }
-/* line 227, ../sass/_systemick.scss */
+/* line 231, ../sass/_systemick.scss */
 .colour-panel .tweet {
   margin-bottom: 3%;
 }
-/* line 230, ../sass/_systemick.scss */
+/* line 234, ../sass/_systemick.scss */
 .colour-panel .tweet a {
   color: #0b5c6c;
   font-weight: bold;
 }
-/* line 236, ../sass/_systemick.scss */
+/* line 240, ../sass/_systemick.scss */
 .colour-panel .hide-div {
   float: right;
 }
-/* line 240, ../sass/_systemick.scss */
+/* line 244, ../sass/_systemick.scss */
 .colour-panel .current-filter {
   font-size: 100%;
   font-weight: bold;
 }
 
-/* line 246, ../sass/_systemick.scss */
+/* line 250, ../sass/_systemick.scss */
 .messages {
   background-color: white;
   position: absolute;
   top: 4em;
   width: 100%;
 }
-/* line 252, ../sass/_systemick.scss */
+/* line 256, ../sass/_systemick.scss */
 .messages .message {
   -webkit-border-bottom-right-radius: 20px;
   -moz-border-bottom-right-radius: 20px;
@@ -8427,38 +8432,38 @@ header .navigation ul li a {
   border-right: solid 2px #aaaaaa;
   margin-left: auto;
   margin-right: auto;
-  min-width: 100%;
+  max-width: 100%;
   padding: 0.5% 2%;
 }
 
-/* line 266, ../sass/_systemick.scss */
+/* line 270, ../sass/_systemick.scss */
 .main-content {
   padding-top: 1em;
   position: relative;
 }
 
-/* line 271, ../sass/_systemick.scss */
+/* line 275, ../sass/_systemick.scss */
 #page {
   position: relative;
 }
-/* line 277, ../sass/_systemick.scss */
+/* line 281, ../sass/_systemick.scss */
 #page .column h3 {
   margin-top: 0;
 }
-/* line 281, ../sass/_systemick.scss */
+/* line 285, ../sass/_systemick.scss */
 #page .column.left {
   padding: 0 2%;
 }
-/* line 287, ../sass/_systemick.scss */
+/* line 291, ../sass/_systemick.scss */
 #page .column.right h3 {
   margin-left: 3%;
 }
-/* line 291, ../sass/_systemick.scss */
+/* line 295, ../sass/_systemick.scss */
 #page .column.right div.user-info {
   padding-left: 3%;
 }
 
-/* line 300, ../sass/_systemick.scss */
+/* line 304, ../sass/_systemick.scss */
 .panel {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -8468,46 +8473,46 @@ header .navigation ul li a {
   border: solid 1px #dddddd;
   padding: 1%;
 }
-/* line 307, ../sass/_systemick.scss */
+/* line 311, ../sass/_systemick.scss */
 .panel .image {
   float: left;
   margin-right: 2%;
   padding-top: 1%;
 }
-/* line 312, ../sass/_systemick.scss */
+/* line 316, ../sass/_systemick.scss */
 .panel .image img {
   margin-top: auto;
   margin-bottom: auto;
   vertical-align: middle;
 }
 
-/* line 320, ../sass/_systemick.scss */
+/* line 324, ../sass/_systemick.scss */
 .site-info {
   font-size: 70%;
   line-height: 170%;
 }
-/* line 324, ../sass/_systemick.scss */
+/* line 328, ../sass/_systemick.scss */
 .site-info span {
   margin-right: 0.5em;
 }
 
-/* line 329, ../sass/_systemick.scss */
+/* line 333, ../sass/_systemick.scss */
 .ngFade.ng-enter {
   transition: 2s linear all;
   opacity: 0;
 }
 
-/* line 334, ../sass/_systemick.scss */
+/* line 338, ../sass/_systemick.scss */
 .ngFade.ng-enter-active {
   opacity: 1;
 }
 
-/* line 340, ../sass/_systemick.scss */
+/* line 344, ../sass/_systemick.scss */
 .sentiment .fa-times, .replies .fa-times, .retweeters .fa-times {
   float: right;
 }
 
-/* line 345, ../sass/_systemick.scss */
+/* line 349, ../sass/_systemick.scss */
 .modal-contact, .modal-about {
   position: absolute;
   z-index: 9999;
@@ -8518,7 +8523,7 @@ header .navigation ul li a {
   background-color: #FFF;
   opacity: 1.0;
 }
-/* line 355, ../sass/_systemick.scss */
+/* line 359, ../sass/_systemick.scss */
 .modal-contact .dialog, .modal-about .dialog {
   background-color: #eee;
   box-shadow: 4px 4px 80px #000;
@@ -8535,12 +8540,12 @@ header .navigation ul li a {
   z-index: 10000;
 }
 
-/* line 373, ../sass/_systemick.scss */
+/* line 377, ../sass/_systemick.scss */
 footer {
   display: none;
 }
 
-/* line 379, ../sass/_systemick.scss */
+/* line 383, ../sass/_systemick.scss */
 .login footer {
   background-color: whitesmoke;
   border-top: solid 2px #aaaaaa;
@@ -8550,58 +8555,58 @@ footer {
   position: fixed;
   width: 100%;
 }
-/* line 388, ../sass/_systemick.scss */
+/* line 392, ../sass/_systemick.scss */
 .login footer .inner {
   margin-left: auto;
   margin-right: auto;
   width: 960px;
 }
 
-/* line 396, ../sass/_systemick.scss */
+/* line 400, ../sass/_systemick.scss */
 .tweet {
   color: #5e6d70;
   word-wrap: break-word;
 }
-/* line 400, ../sass/_systemick.scss */
+/* line 404, ../sass/_systemick.scss */
 .tweet a {
   color: #0b5c6c;
   font-weight: bold;
 }
-/* line 407, ../sass/_systemick.scss */
+/* line 411, ../sass/_systemick.scss */
 .tweet .icons .fa {
   cursor: pointer;
   margin-right: 8%;
 }
-/* line 413, ../sass/_systemick.scss */
+/* line 417, ../sass/_systemick.scss */
 .tweet .action-icon {
   float: left;
   margin-right: 2%;
 }
-/* line 418, ../sass/_systemick.scss */
+/* line 422, ../sass/_systemick.scss */
 .tweet .reply-form, .tweet .retweet-form {
   clear: left;
 }
-/* line 421, ../sass/_systemick.scss */
+/* line 425, ../sass/_systemick.scss */
 .tweet .reply-form .action, .tweet .retweet-form .action {
   float: left;
   font-size: 80%;
   font-weight: bold;
 }
 
-/* line 431, ../sass/_systemick.scss */
+/* line 435, ../sass/_systemick.scss */
 .tweet-form .form-group {
   margin-bottom: 1%;
 }
-/* line 434, ../sass/_systemick.scss */
+/* line 438, ../sass/_systemick.scss */
 .tweet-form .form-group.top {
   margin-bottom: 0;
 }
-/* line 439, ../sass/_systemick.scss */
+/* line 443, ../sass/_systemick.scss */
 .tweet-form .char-count {
   float: left;
 }
 
-/* line 444, ../sass/_systemick.scss */
+/* line 448, ../sass/_systemick.scss */
 .login-container {
   background: url(/assets/images/Planning-for-Cloud-Computing-2013-Light.jpg);
   background-repeat: no-repeat;
@@ -8609,7 +8614,7 @@ footer {
   height: 800px;
   padding: 5%;
 }
-/* line 451, ../sass/_systemick.scss */
+/* line 455, ../sass/_systemick.scss */
 .login-container #page {
   background-color: white;
   max-width: 760px;
@@ -8617,18 +8622,18 @@ footer {
 }
 
 @media all and (min-width: 480px) {
-  /* line 461, ../sass/_systemick.scss */
+  /* line 465, ../sass/_systemick.scss */
   header {
     width: 100%;
   }
-  /* line 464, ../sass/_systemick.scss */
+  /* line 468, ../sass/_systemick.scss */
   header .inner {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
   }
 
-  /* line 471, ../sass/_systemick.scss */
+  /* line 475, ../sass/_systemick.scss */
   #page {
     margin-left: auto;
     margin-right: auto;
@@ -8636,23 +8641,23 @@ footer {
     max-width: 960px;
   }
 
-  /* line 480, ../sass/_systemick.scss */
+  /* line 484, ../sass/_systemick.scss */
   .modal-chart .dialog {
     padding: 1% 1%;
   }
 }
 @media all and (min-width: 767px) {
-  /* line 491, ../sass/_systemick.scss */
+  /* line 495, ../sass/_systemick.scss */
   header .inner {
     margin-left: auto;
     margin-right: auto;
     width: 960px;
   }
-  /* line 496, ../sass/_systemick.scss */
+  /* line 500, ../sass/_systemick.scss */
   header .inner .left {
     padding-right: 0;
   }
-  /* line 501, ../sass/_systemick.scss */
+  /* line 505, ../sass/_systemick.scss */
   header .logo {
     padding-left: 0;
     left: -1%;
@@ -8660,80 +8665,84 @@ footer {
     font-size: 48px;
   }
 
-  /* line 510, ../sass/_systemick.scss */
+  /* line 514, ../sass/_systemick.scss */
   #page {
     margin-top: 2%;
   }
-  /* line 513, ../sass/_systemick.scss */
+  /* line 517, ../sass/_systemick.scss */
   #page .column {
     float: left;
   }
-  /* line 517, ../sass/_systemick.scss */
+  /* line 521, ../sass/_systemick.scss */
   #page .column.left {
     border-right: solid 2px #dddddd;
     padding-left: 0;
     padding-right: 2%;
     width: 65%;
   }
-  /* line 524, ../sass/_systemick.scss */
+  /* line 528, ../sass/_systemick.scss */
   #page .column.right {
     padding-left: 2%;
     width: 35%;
   }
-  /* line 528, ../sass/_systemick.scss */
+  /* line 532, ../sass/_systemick.scss */
   #page .column.right h3 {
     margin-left: 0;
   }
-  /* line 535, ../sass/_systemick.scss */
+  /* line 539, ../sass/_systemick.scss */
   #page .column .tweet span {
     margin-right: 1%;
   }
-  /* line 538, ../sass/_systemick.scss */
+  /* line 542, ../sass/_systemick.scss */
   #page .column .tweet span.name {
     font-weight: bold;
   }
 
-  /* line 547, ../sass/_systemick.scss */
+  /* line 551, ../sass/_systemick.scss */
   .colour-panel {
     margin: 0 0 5% 0;
   }
 
-  /* line 553, ../sass/_systemick.scss */
+  /* line 557, ../sass/_systemick.scss */
   .modal-about .dialog, modal-retweet .dialog {
     width: 60%;
   }
 
-  /* line 558, ../sass/_systemick.scss */
+  /* line 562, ../sass/_systemick.scss */
   .messages {
     top: 5.6em;
   }
+  /* line 565, ../sass/_systemick.scss */
+  .messages .message {
+    max-width: 960px;
+  }
 
-  /* line 562, ../sass/_systemick.scss */
+  /* line 570, ../sass/_systemick.scss */
   .main-content {
     padding-top: 0;
   }
 
-  /* line 570, ../sass/_systemick.scss */
+  /* line 578, ../sass/_systemick.scss */
   .tweet .reply-form .action, .tweet .retweet-form .action {
     font-size: 120%;
   }
 }
 @media all and (min-width: 768px) and (max-width: 959px) {
-  /* line 584, ../sass/_systemick.scss */
+  /* line 592, ../sass/_systemick.scss */
   #page .column.left {
     padding-left: 2%;
   }
-  /* line 588, ../sass/_systemick.scss */
+  /* line 596, ../sass/_systemick.scss */
   #page .column.right {
     padding-right: 2%;
   }
 }
 @media all and (min-width: 960px) {
-  /* line 598, ../sass/_systemick.scss */
+  /* line 606, ../sass/_systemick.scss */
   .colour-panel {
     margin: 0 0 5% 0;
   }
-  /* line 603, ../sass/_systemick.scss */
+  /* line 611, ../sass/_systemick.scss */
   .colour-panel#trends a {
     line-height: 1.5em;
   }
