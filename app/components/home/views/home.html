@@ -5,6 +5,7 @@
 		<h2>This is TweetPop</h2>
 		<div class="form" ng-hide="formSuccess">
 			<p>Here you can view the most popular tweets in the UK as soon as they are tweeted! Tweets appear on your page only a few seconds after they are posted on Twitter. All tweets are tagged with the current most popular hashtags. You can keep your finger on the pulse of the beating heart that is the Twitter stream and interact with the tweets in the stream by posting your own tweets, favouriting, replying and retweeting in real time.</p>
+			<div class="error" bg-show="logoutMsg">{{ logoutMsg }}</div>
 			<form name="twitterLoginForm" method="post" action="{{ serverUrl }}">
 				<div class="well">
 			  	<div class="form-group">
@@ -19,7 +20,7 @@
 
 </div>
 
-<div ng-show="tweetapp.authorised">
+<div ng-if="tweetapp.authorised">
 
 	<div id="page" class="home" ng-hide="authorised">
 

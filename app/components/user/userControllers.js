@@ -40,7 +40,6 @@ angular.module("twitterapp")
     else {
       // Using callback function to prevent redirect occurring before token is set.
       userFactory.setStorageToken($routeParams['id'], function () {
-        $rootScope.$broadcast('tweetAppAuthorised');
         $rootScope.tweetapp = {};
         $rootScope.tweetapp.authorised = true;
         ipCookie(tConfig.sessionCookieName, $routeParams['id'], { expires:365 });
