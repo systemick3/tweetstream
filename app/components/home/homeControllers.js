@@ -87,7 +87,6 @@ app.controller('homeCtrl', ['$scope', '$window', '$rootScope', 'ipCookie', 'user
           $scope.user._id = mongo_id;
           $rootScope.$broadcast('tweetAppAuthorised');
         } else {
-          alert('logout');
           $rootScope.logoutMsg = 'You have been logged out due to inactivity. Please login again.';
           $location.path('/logout');
         }
