@@ -41,7 +41,8 @@ app.directive('streamTweetList', ['$rootScope', 'userFactory', function ($rootSc
               panelDiv.css('opacity', 0);
               element.prepend(panelDiv);
               panelDiv.slideDown('fast', function () {
-                imageDiv.css('min-height', panelDiv.height());
+                var height = panelDiv.height() < 68 ? 68 : panelDiv.height();
+                imageDiv.css('min-height', height);
               });
               $rootScope.$broadcast('newTweetInStream', {tweetId: newTweet.id_str});
 
