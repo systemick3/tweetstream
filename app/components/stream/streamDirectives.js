@@ -10,9 +10,9 @@ app.directive('streamTweetList', ['$rootScope', 'userFactory', function ($rootSc
 
         userFactory.userTwitterData(data.data.user_id).then(function (response) {
 
-          // Mobile menu items are hidded because they flash on the screen when the page loads
+          // Mobile only items are hidded because they flash on the screen when the page loads
           // Unhide them
-          $('.navigation').removeClass('hidden');
+          $('.visible-xs-block').removeClass('hidden');
 
           scope.$watch('streamtweets', function () {
             if (scope.streamtweets.length > 0) {

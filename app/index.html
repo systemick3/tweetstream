@@ -89,7 +89,7 @@
 
     <about-modal></about-modal>
 
-    <div class="visible-xs-block mobile-trends" ng-show="mobileTrendsVisible">
+    <div class="visible-xs-block mobile-trends hidden" ng-show="mobileTrendsVisible">
       <h3>Trending</h3>
       <div id="trends" class="colour-panel blue trends" ng-controller="trendCtrl">
         <p>Click on a trend to only see tweets tagged with that hastag.</p>
@@ -103,7 +103,7 @@
       </div>
     </div>
 
-    <div class="visible-xs-block mobile-favourite-tweets" ng-show="userTweetsExist && mobileUserTweetsVisible">
+    <div class="visible-xs-block mobile-favourite-tweets hidden" ng-show="userTweetsExist && mobileUserTweetsVisible">
       <h3>Your tweets</h3>
       <div id="userTweets" class="colour-panel blue user-tweets">
         <div class="user-tweet panel tweet ngFade" data-tweet-id="{{ tweet.id_str }}" ng-repeat="tweet in userTweets">
@@ -124,7 +124,7 @@
       </div>
     </div>
 
-    <div class="visible-xs-block mobile-user-tweets" ng-show="favouritesExist && mobileFavouriteTweetsVisible">
+    <div class="visible-xs-block mobile-user-tweets hidden" ng-show="favouritesExist && mobileFavouriteTweetsVisible">
       <h3>Favourites</h3>
       <div id="favouriteTweets" class="colour-panel blue favourites">
         <div class="favourite panel tweet ngFade" ng-repeat="tweet in favouriteTweets">
