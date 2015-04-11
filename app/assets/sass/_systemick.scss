@@ -106,6 +106,7 @@ header {
     font-family: $logo-font;
     font-size: $small-logo-font-size;
     padding-left: 1%;
+    padding-top: 1%;
   }
 
   i {
@@ -190,6 +191,13 @@ header {
     }
   }
 
+}
+
+.login {
+
+  header {
+    margin-bottom: 0;
+  }
 }
 
 .column {
@@ -278,8 +286,14 @@ header {
   position: relative;
 }
 
+.login {
+
+  .main-content {
+    padding-top: 0;
+  }
+}
+
 #page {
-  //margin-top: -2%;
   position: relative;
 
   .column {
