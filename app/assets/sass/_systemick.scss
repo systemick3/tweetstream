@@ -149,6 +149,7 @@ header {
       float: right;
       line-height: 2em;
       margin-left: 3%;
+      padding-top: 1.5%;
 
       &.last {
         margin-left: 3%;
@@ -515,7 +516,8 @@ footer {
     .inner {
       margin-left: auto;
       margin-right: auto;
-      width: $page-width;
+      padding: 0 1%;
+      width: 100%;
 
       .left {
         padding-right: 0;
@@ -580,7 +582,7 @@ footer {
   }
 
   .messages {
-    top: 5.6em;
+    top: 6.2em;
 
     .message {
       max-width: $page-width;
@@ -631,6 +633,13 @@ footer {
       a {
         line-height: 1.5em;
       }
+    }
+  }
+
+  header {
+
+    .inner {
+      width: $page-width;
     }
   }
 }

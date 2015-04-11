@@ -8324,20 +8324,21 @@ header .user-heading .user-info {
   float: right;
   line-height: 2em;
   margin-left: 3%;
+  padding-top: 1.5%;
 }
-/* line 153, ../sass/_systemick.scss */
+/* line 154, ../sass/_systemick.scss */
 header .user-heading .user-info.last {
   margin-left: 3%;
 }
-/* line 157, ../sass/_systemick.scss */
+/* line 158, ../sass/_systemick.scss */
 header .user-heading .user-info .bottom {
   padding-top: 8.5%;
 }
-/* line 163, ../sass/_systemick.scss */
+/* line 164, ../sass/_systemick.scss */
 header .left {
   padding-right: 2%;
 }
-/* line 167, ../sass/_systemick.scss */
+/* line 168, ../sass/_systemick.scss */
 header .navigation {
   background-color: white;
   border: 2px solid #aaaaaa;
@@ -8350,33 +8351,33 @@ header .navigation {
   top: 3em;
   z-index: 1000;
 }
-/* line 179, ../sass/_systemick.scss */
+/* line 180, ../sass/_systemick.scss */
 header .navigation ul {
   list-style-type: none;
   margin: 0;
   left: -2.5em;
   position: relative;
 }
-/* line 187, ../sass/_systemick.scss */
+/* line 188, ../sass/_systemick.scss */
 header .navigation ul li a {
   color: #0099b9;
 }
 
-/* line 198, ../sass/_systemick.scss */
+/* line 199, ../sass/_systemick.scss */
 .login header {
   margin-bottom: 0;
 }
 
-/* line 208, ../sass/_systemick.scss */
+/* line 209, ../sass/_systemick.scss */
 .column.left .stream {
   padding-top: 2%;
 }
-/* line 213, ../sass/_systemick.scss */
+/* line 214, ../sass/_systemick.scss */
 .column .stream-state {
   padding: 3% 0 2% 0;
 }
 
-/* line 218, ../sass/_systemick.scss */
+/* line 219, ../sass/_systemick.scss */
 .colour-panel {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -8386,50 +8387,50 @@ header .navigation ul li a {
   font-size: 90%;
   padding: 3%;
 }
-/* line 225, ../sass/_systemick.scss */
+/* line 226, ../sass/_systemick.scss */
 .colour-panel.blue {
   background-color: #0099b9;
 }
-/* line 229, ../sass/_systemick.scss */
+/* line 230, ../sass/_systemick.scss */
 .colour-panel#userTweets, .colour-panel#favouriteTweets {
   padding-bottom: 1%;
 }
-/* line 235, ../sass/_systemick.scss */
+/* line 236, ../sass/_systemick.scss */
 .colour-panel#trends a {
   line-height: 2em;
 }
-/* line 240, ../sass/_systemick.scss */
+/* line 241, ../sass/_systemick.scss */
 .colour-panel a {
   color: white;
   font-size: 100%;
 }
-/* line 245, ../sass/_systemick.scss */
+/* line 246, ../sass/_systemick.scss */
 .colour-panel .tweet {
   margin-bottom: 3%;
 }
-/* line 248, ../sass/_systemick.scss */
+/* line 249, ../sass/_systemick.scss */
 .colour-panel .tweet a {
   color: #0b5c6c;
   font-weight: bold;
 }
-/* line 254, ../sass/_systemick.scss */
+/* line 255, ../sass/_systemick.scss */
 .colour-panel .hide-div {
   float: right;
 }
-/* line 258, ../sass/_systemick.scss */
+/* line 259, ../sass/_systemick.scss */
 .colour-panel .current-filter {
   font-size: 100%;
   font-weight: bold;
 }
 
-/* line 264, ../sass/_systemick.scss */
+/* line 265, ../sass/_systemick.scss */
 .messages {
   background-color: white;
   position: absolute;
   top: 4em;
   width: 100%;
 }
-/* line 270, ../sass/_systemick.scss */
+/* line 271, ../sass/_systemick.scss */
 .messages .message {
   -webkit-border-bottom-right-radius: 20px;
   -moz-border-bottom-right-radius: 20px;
@@ -8449,39 +8450,39 @@ header .navigation ul li a {
   padding: 0.5% 2%;
 }
 
-/* line 284, ../sass/_systemick.scss */
+/* line 285, ../sass/_systemick.scss */
 .main-content {
   padding-top: 1em;
   position: relative;
 }
 
-/* line 291, ../sass/_systemick.scss */
+/* line 292, ../sass/_systemick.scss */
 .login .main-content {
   padding-top: 0;
 }
 
-/* line 296, ../sass/_systemick.scss */
+/* line 297, ../sass/_systemick.scss */
 #page {
   position: relative;
 }
-/* line 301, ../sass/_systemick.scss */
+/* line 302, ../sass/_systemick.scss */
 #page .column h3 {
   margin-top: 0;
 }
-/* line 305, ../sass/_systemick.scss */
+/* line 306, ../sass/_systemick.scss */
 #page .column.left {
   padding: 0 2%;
 }
-/* line 311, ../sass/_systemick.scss */
+/* line 312, ../sass/_systemick.scss */
 #page .column.right h3 {
   margin-left: 3%;
 }
-/* line 315, ../sass/_systemick.scss */
+/* line 316, ../sass/_systemick.scss */
 #page .column.right div.user-info {
   padding-left: 3%;
 }
 
-/* line 324, ../sass/_systemick.scss */
+/* line 325, ../sass/_systemick.scss */
 .panel {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -8491,46 +8492,46 @@ header .navigation ul li a {
   border: solid 1px #dddddd;
   padding: 1%;
 }
-/* line 331, ../sass/_systemick.scss */
+/* line 332, ../sass/_systemick.scss */
 .panel .image {
   float: left;
   margin-right: 2%;
   padding-top: 1%;
 }
-/* line 336, ../sass/_systemick.scss */
+/* line 337, ../sass/_systemick.scss */
 .panel .image img {
   margin-top: auto;
   margin-bottom: auto;
   vertical-align: middle;
 }
 
-/* line 344, ../sass/_systemick.scss */
+/* line 345, ../sass/_systemick.scss */
 .site-info {
   font-size: 70%;
   line-height: 170%;
 }
-/* line 348, ../sass/_systemick.scss */
+/* line 349, ../sass/_systemick.scss */
 .site-info span {
   margin-right: 0.5em;
 }
 
-/* line 353, ../sass/_systemick.scss */
+/* line 354, ../sass/_systemick.scss */
 .ngFade.ng-enter {
   transition: 2s linear all;
   opacity: 0;
 }
 
-/* line 358, ../sass/_systemick.scss */
+/* line 359, ../sass/_systemick.scss */
 .ngFade.ng-enter-active {
   opacity: 1;
 }
 
-/* line 364, ../sass/_systemick.scss */
+/* line 365, ../sass/_systemick.scss */
 .sentiment .fa-times, .replies .fa-times, .retweeters .fa-times {
   float: right;
 }
 
-/* line 369, ../sass/_systemick.scss */
+/* line 370, ../sass/_systemick.scss */
 .modal-contact, .modal-about {
   position: absolute;
   z-index: 9999;
@@ -8541,7 +8542,7 @@ header .navigation ul li a {
   background-color: #FFF;
   opacity: 1.0;
 }
-/* line 379, ../sass/_systemick.scss */
+/* line 380, ../sass/_systemick.scss */
 .modal-contact .dialog, .modal-about .dialog {
   background-color: #eee;
   box-shadow: 4px 4px 80px #000;
@@ -8558,12 +8559,12 @@ header .navigation ul li a {
   z-index: 10000;
 }
 
-/* line 397, ../sass/_systemick.scss */
+/* line 398, ../sass/_systemick.scss */
 footer {
   display: none;
 }
 
-/* line 403, ../sass/_systemick.scss */
+/* line 404, ../sass/_systemick.scss */
 .login footer {
   background-color: whitesmoke;
   border-top: solid 2px #aaaaaa;
@@ -8573,58 +8574,58 @@ footer {
   position: fixed;
   width: 100%;
 }
-/* line 412, ../sass/_systemick.scss */
+/* line 413, ../sass/_systemick.scss */
 .login footer .inner {
   margin-left: auto;
   margin-right: auto;
   width: 960px;
 }
 
-/* line 420, ../sass/_systemick.scss */
+/* line 421, ../sass/_systemick.scss */
 .tweet {
   color: #5e6d70;
   word-wrap: break-word;
 }
-/* line 424, ../sass/_systemick.scss */
+/* line 425, ../sass/_systemick.scss */
 .tweet a {
   color: #0b5c6c;
   font-weight: bold;
 }
-/* line 431, ../sass/_systemick.scss */
+/* line 432, ../sass/_systemick.scss */
 .tweet .icons .fa {
   cursor: pointer;
   margin-right: 8%;
 }
-/* line 437, ../sass/_systemick.scss */
+/* line 438, ../sass/_systemick.scss */
 .tweet .action-icon {
   float: left;
   margin-right: 2%;
 }
-/* line 442, ../sass/_systemick.scss */
+/* line 443, ../sass/_systemick.scss */
 .tweet .reply-form, .tweet .retweet-form {
   clear: left;
 }
-/* line 445, ../sass/_systemick.scss */
+/* line 446, ../sass/_systemick.scss */
 .tweet .reply-form .action, .tweet .retweet-form .action {
   float: left;
   font-size: 80%;
   font-weight: bold;
 }
 
-/* line 455, ../sass/_systemick.scss */
+/* line 456, ../sass/_systemick.scss */
 .tweet-form .form-group {
   margin-bottom: 1%;
 }
-/* line 458, ../sass/_systemick.scss */
+/* line 459, ../sass/_systemick.scss */
 .tweet-form .form-group.top {
   margin-bottom: 0;
 }
-/* line 463, ../sass/_systemick.scss */
+/* line 464, ../sass/_systemick.scss */
 .tweet-form .char-count {
   float: left;
 }
 
-/* line 468, ../sass/_systemick.scss */
+/* line 469, ../sass/_systemick.scss */
 .login-container {
   background: url(/assets/images/Planning-for-Cloud-Computing-2013-Light.jpg);
   background-repeat: no-repeat;
@@ -8632,7 +8633,7 @@ footer {
   height: 800px;
   padding: 5%;
 }
-/* line 475, ../sass/_systemick.scss */
+/* line 476, ../sass/_systemick.scss */
 .login-container #page {
   background-color: white;
   max-width: 760px;
@@ -8640,18 +8641,18 @@ footer {
 }
 
 @media all and (min-width: 480px) {
-  /* line 485, ../sass/_systemick.scss */
+  /* line 486, ../sass/_systemick.scss */
   header {
     width: 100%;
   }
-  /* line 488, ../sass/_systemick.scss */
+  /* line 489, ../sass/_systemick.scss */
   header .inner {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
   }
 
-  /* line 495, ../sass/_systemick.scss */
+  /* line 496, ../sass/_systemick.scss */
   #page {
     margin-left: auto;
     margin-right: auto;
@@ -8659,23 +8660,24 @@ footer {
     max-width: 960px;
   }
 
-  /* line 504, ../sass/_systemick.scss */
+  /* line 505, ../sass/_systemick.scss */
   .modal-chart .dialog {
     padding: 1% 1%;
   }
 }
 @media all and (min-width: 767px) {
-  /* line 515, ../sass/_systemick.scss */
+  /* line 516, ../sass/_systemick.scss */
   header .inner {
     margin-left: auto;
     margin-right: auto;
-    width: 960px;
+    padding: 0 1%;
+    width: 100%;
   }
-  /* line 520, ../sass/_systemick.scss */
+  /* line 522, ../sass/_systemick.scss */
   header .inner .left {
     padding-right: 0;
   }
-  /* line 525, ../sass/_systemick.scss */
+  /* line 527, ../sass/_systemick.scss */
   header .logo {
     padding-left: 0;
     left: -1%;
@@ -8683,85 +8685,90 @@ footer {
     font-size: 48px;
   }
 
-  /* line 534, ../sass/_systemick.scss */
+  /* line 536, ../sass/_systemick.scss */
   #page {
     margin-top: 2%;
   }
-  /* line 537, ../sass/_systemick.scss */
+  /* line 539, ../sass/_systemick.scss */
   #page .column {
     float: left;
   }
-  /* line 541, ../sass/_systemick.scss */
+  /* line 543, ../sass/_systemick.scss */
   #page .column.left {
     border-right: solid 2px #dddddd;
     padding-left: 0;
     padding-right: 2%;
     width: 65%;
   }
-  /* line 548, ../sass/_systemick.scss */
+  /* line 550, ../sass/_systemick.scss */
   #page .column.right {
     padding-left: 2%;
     width: 35%;
   }
-  /* line 552, ../sass/_systemick.scss */
+  /* line 554, ../sass/_systemick.scss */
   #page .column.right h3 {
     margin-left: 0;
   }
-  /* line 559, ../sass/_systemick.scss */
+  /* line 561, ../sass/_systemick.scss */
   #page .column .tweet span {
     margin-right: 1%;
   }
-  /* line 562, ../sass/_systemick.scss */
+  /* line 564, ../sass/_systemick.scss */
   #page .column .tweet span.name {
     font-weight: bold;
   }
 
-  /* line 571, ../sass/_systemick.scss */
+  /* line 573, ../sass/_systemick.scss */
   .colour-panel {
     margin: 0 0 5% 0;
   }
 
-  /* line 577, ../sass/_systemick.scss */
+  /* line 579, ../sass/_systemick.scss */
   .modal-about .dialog, modal-retweet .dialog {
     width: 60%;
   }
 
-  /* line 582, ../sass/_systemick.scss */
+  /* line 584, ../sass/_systemick.scss */
   .messages {
-    top: 5.6em;
+    top: 6.2em;
   }
-  /* line 585, ../sass/_systemick.scss */
+  /* line 587, ../sass/_systemick.scss */
   .messages .message {
     max-width: 960px;
   }
 
-  /* line 590, ../sass/_systemick.scss */
+  /* line 592, ../sass/_systemick.scss */
   .main-content {
     padding-top: 0;
   }
 
-  /* line 598, ../sass/_systemick.scss */
+  /* line 600, ../sass/_systemick.scss */
   .tweet .reply-form .action, .tweet .retweet-form .action {
     font-size: 120%;
   }
 }
 @media all and (min-width: 768px) and (max-width: 959px) {
-  /* line 612, ../sass/_systemick.scss */
+  /* line 614, ../sass/_systemick.scss */
   #page .column.left {
     padding-left: 2%;
   }
-  /* line 616, ../sass/_systemick.scss */
+  /* line 618, ../sass/_systemick.scss */
   #page .column.right {
     padding-right: 2%;
   }
 }
 @media all and (min-width: 960px) {
-  /* line 626, ../sass/_systemick.scss */
+  /* line 628, ../sass/_systemick.scss */
   .colour-panel {
     margin: 0 0 5% 0;
   }
-  /* line 631, ../sass/_systemick.scss */
+  /* line 633, ../sass/_systemick.scss */
   .colour-panel#trends a {
     line-height: 1.5em;
+  }
+
+  /* line 641, ../sass/_systemick.scss */
+  header .inner {
+    width: 960px;
   }
 }
