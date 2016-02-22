@@ -25,9 +25,11 @@ module.exports = function(config) {
       'app/bower_components/angular-socket-io/socket.js',
       'app/app.js',
       'app/components/home/homeControllers.js',
-      'app/components/home/homeDirectives.js',
-      'app/components/home/homeServices.js',
-      //'app/components/stream/streamServices.js
+      'app/components/stream/streamControllers.js',
+      'app/components/contact/contactServices.js',
+      'app/components/contact/contactControllers.js',
+      'app/components/contact/contactDirectives.js',
+      'app/components/contact/views/contact.html',
       'app/components/user/userControllers.js',
       'app/components/user/userServices.js',
       'app/components/vendor/ng-infinite-scroll.min.js',
@@ -43,7 +45,12 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      //'app/components/contact/views/contact.html': ['ng-html2js']
     },
+
+    // ngHtml2JsPreprocessor: {
+    //   moduleName: 'templates'
+    // },
 
 
     // test results reporter to use
